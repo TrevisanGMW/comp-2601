@@ -6,13 +6,16 @@ public class Name
     private final String last;
 
     /**
-     * Create a public constructor that takes first, last as arguments: they must not be null nor blank; must be fewer than 45 characters; must not contain the word "admin" (in any letter casing)
+     * Create a public constructor that takes first, last as arguments:
+     * they must not be null nor blank;
+     * must be fewer than 45 characters;
+     * must not contain the word "admin" (in any letter casing)
      * @param first
      * @param last
      */
     Name(String first, String last)
     {
-        if(first != null && first != "")
+        if(first != null && first != "" && first.toLowerCase() != "admin" && first.length() < 46)
         {
             this.first = first;
         }
@@ -21,7 +24,7 @@ public class Name
             throw new IllegalArgumentException("Invalid first name");
         }
 
-        if(last != null && last != "")
+        if(last != null && last != ""&& first.toLowerCase() != "admin" && first.length() < 46)
         {
             this.last = last;
         }
