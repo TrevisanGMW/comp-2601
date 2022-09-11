@@ -15,7 +15,7 @@ public class Name
      * @param first first name string
      * @param last last name string
      */
-    Name(String first, String last)
+    public Name(String first, String last)
     {
         this.first = validateName(first);
         this.last = validateName(last);
@@ -38,9 +38,14 @@ public class Name
 
     public String getFullName()
     {
-        return first + " " + last;
+        return first.substring(0, 1).toUpperCase() + first.substring(1).toLowerCase()
+                + " " + last.substring(0, 1).toUpperCase() + last.substring(1).toLowerCase();
     }
 
+    /**
+     * @param inputString string to check (first or last)
+     * @return validString
+     */
     private static String validateName(String inputString)
     {
         if(inputString == null)
@@ -53,9 +58,9 @@ public class Name
         }
         else if (inputString.toLowerCase().contains(NAME_INVALID_STRING))
         {
-            throw new IllegalArgumentException("Invalid name. Cannot be \"" + NAME_INVALID_STRING + "\".");
+            throw new IllegalArgumentException("Invalid name. Cannot contain \"" + NAME_INVALID_STRING + "\".");
         }
-        else if ( inputString.length() <= NAME_MAX_LENGTH)
+        else if (inputString.length() >= NAME_MAX_LENGTH)
         {
             throw new IllegalArgumentException("Invalid name. Cannot have more than 45.");
         }
