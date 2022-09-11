@@ -136,8 +136,38 @@ public class Date
         // step 7: sat sun mon tue wed thu fri is 0 1 2 3 4 5 6; our number 2 means October 31, 1977 was monday
         System.out.println(numProcessing);
         return (String)Array.get(WEEK_DAYS, numProcessingMod);
+    }
 
+    public static boolean isisLeapYear(int year)
+    {
+        boolean isLeap = false;
 
+        // if the year is divided by 4
+        if (year % 4 == 0)
+        {
+
+            // if the year is century
+            if (year % 100 == 0)
+            {
+
+                // if year is divided by 400
+                // then it is a isLeap year
+                if (year % 400 == 0)
+                    isLeap = true;
+                else
+                    isLeap = false;
+            }
+
+            // if the year is not century
+            else
+                isLeap = true;
+        }
+
+        else
+        {
+            isLeap = false;
+        }
+        return isLeap;
     }
 
 

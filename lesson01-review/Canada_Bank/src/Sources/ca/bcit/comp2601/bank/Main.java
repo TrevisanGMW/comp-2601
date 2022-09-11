@@ -4,9 +4,6 @@ public class Main {
     public static void main(String[] args)
     {
 
-
-
-
         /**
          *         Date date = new Date(1977, 10, 31);
          *         Date date = new Date(2021, 03, 15);
