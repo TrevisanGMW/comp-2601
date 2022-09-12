@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args)
     {
 
-        Date date = new Date(2021, 03, 15);
-        System.out.println(date.getDayOfTheWeek());
+//        Date date = new Date(2021, 03, 15);
+        System.out.println("Invalid name. It cannot be null.".startsWith("Invalid name"));
 
         /**
          *         Date date = new Date(1977, 10, 31);

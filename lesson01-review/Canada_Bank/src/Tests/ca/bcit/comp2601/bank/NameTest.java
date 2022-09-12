@@ -10,10 +10,12 @@ class NameTest {
 
     @BeforeEach
     void setUp() {
+        // Nothing
     }
 
     @AfterEach
     void tearDown() {
+        // Nothing
     }
 
     @Test
@@ -63,77 +65,74 @@ class NameTest {
             Name name = new Name(null, validLastName);
         });
 
-        String expectedMessage = "Invalid name. It cannot be null.";
+        String expectedMessage = "Invalid name";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
         // Test Null Last
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name(validFirstName, null);
         });
         actualMessage = exception.getMessage();
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
 
         // Test Empty First
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name("", validLastName);
         });
 
-        expectedMessage = "Invalid name. Cannot be empty.";
         actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
         // Test Empty Last
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name(validFirstName, "");
         });
         actualMessage = exception.getMessage();
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
 
         // Test White Spaces First
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name("        ", validLastName);
         });
         actualMessage = exception.getMessage();
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
         // Test White Spaces Last
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name(validFirstName, "        ");
         });
         actualMessage = exception.getMessage();
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
 
         // Test Admin in Name First
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name("tigerAdmin", validLastName);
         });
 
-        expectedMessage = "Invalid name. Cannot contain \"admin\".";
         actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
         // Test Admin in Name First
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name(validFirstName, "adminWooDS");
         });
         actualMessage = exception.getMessage();
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
 
         // Test Max 45 length limit first
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name("ThisIsALongNameWithMoreThanFortyFiveCharacters", validLastName);
         });
 
-        expectedMessage = "Invalid name. Cannot be more than 45 characters.";
         actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
         // Test Max 45 length limit last
         exception = assertThrows(IllegalArgumentException.class, () -> {
             Name name = new Name(validFirstName, "ThisIsALongNameWithMoreThanFortyFiveCharacters");
         });
         actualMessage = exception.getMessage();
-        assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.startsWith(expectedMessage));
     }
 
 }

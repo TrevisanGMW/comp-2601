@@ -8,16 +8,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DateTest {
 
+    Date d1;
+
     @BeforeEach
     void setUp() {
+        Date d1 = new Date(1989, 5, 15);
+        Date d2 = new Date(2022, 1, 8);
     }
 
     @AfterEach
     void tearDown() {
+        d1 = null;
     }
 
     @Test
     void getYear() {
+        assertEquals(1989, d1.getYear());
     }
 
     @Test
