@@ -9,33 +9,42 @@ import static org.junit.jupiter.api.Assertions.*;
 class DateTest {
 
     Date d1;
+    Date d2;
 
     @BeforeEach
     void setUp() {
-        Date d1 = new Date(1989, 5, 15);
-        Date d2 = new Date(2022, 1, 8);
+        d1 = new Date(1989, 5, 15);
+        d2 = new Date(2022, 1, 8);
     }
 
     @AfterEach
     void tearDown() {
         d1 = null;
+        d2 = null;
     }
 
     @Test
     void getYear() {
         assertEquals(1989, d1.getYear());
+        assertEquals(2022, d2.getYear());
     }
 
     @Test
     void getMonth() {
+        assertEquals(5, d1.getMonth());
+        assertEquals(1, d2.getMonth());
     }
 
     @Test
     void getDay() {
+        assertEquals(15, d1.getDay());
+        assertEquals(8, d2.getDay());
     }
 
     @Test
     void getYyyyMmDd() {
+        assertEquals("1989-05-15", d1.getYyyyMmDd());
+        assertEquals("2022-01-08", d2.getYyyyMmDd());
     }
 
     @Test
@@ -72,5 +81,9 @@ class DateTest {
         Date date = new Date(2020, 1, 1);
         boolean actualResult = date.isLeapYear(2020);
         assertTrue(actualResult);
+
+        actualResult = date.isLeapYear(2023);
+        assertFalse(actualResult);
+
     }
 }
