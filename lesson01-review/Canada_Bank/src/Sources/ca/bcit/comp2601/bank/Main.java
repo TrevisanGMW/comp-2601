@@ -1,25 +1,36 @@
 package ca.bcit.comp2601.bank;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args)
     {
-        Name name = new Name("Tiger", "Woods");
-        Name name2 = new Name("Albert", "Einstein");
+        Name tigerName = new Name("Tiger", "Woods");
+        Name albertName = new Name("Albert", "Einstein");
         Date birth = new Date(1975, 12, 30);
         Date birth2 = new Date(1879, 3, 14);
         Date death = new Date(1955, 4, 18);
-        Person person1 = new Person(name, birth, null);
-        Person person2 = new Person(name2, birth2, death);
+        Person person1 = new Person(tigerName, birth, null);
+        Person albert = new Person(albertName, birth2, death);
 //        System.out.println(person1.getDetails());
 //        System.out.println(person2.getDetails());
 
-        BankClient bankClient = new BankClient(name2, birth2, death, death, "12345");
+        BankClient bankClient = new BankClient(albertName, birth2, death, death, "12345");
         BankAccount bankAccount = new BankAccount(bankClient, 200d, 1337,
                                      "1234567", birth, null);
-        System.out.println(bankAccount.deposit(200d));
-        System.out.println(bankAccount.getBalanceUsd());
-        System.out.println(bankAccount.withdraw(150d));
-        System.out.println(bankAccount.getBalanceUsd());
+
+        BankAccount bankAccount2 = new BankAccount(bankClient, 200d, 1337,
+                                     "1234568", birth, null);
+
+//        System.out.println(bankAccount.deposit(200d));
+//        System.out.println(bankAccount.getBalanceUsd());
+//        System.out.println(bankAccount.withdraw(150d));
+//        System.out.println(bankAccount.getBalanceUsd());
+        ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
+        accounts.add(bankAccount);
+        Bank bank = new Bank(albert, accounts);
+        bank.addAccount(bankAccount2);
+
 
 
 
