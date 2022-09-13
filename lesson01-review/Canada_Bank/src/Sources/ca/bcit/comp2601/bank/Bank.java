@@ -25,9 +25,13 @@ import java.util.ArrayList;
 
 public class Bank
 {
-    private Person ceo;
+    private final Person ceo;
     private ArrayList<BankAccount> bankAccounts;
 
+    /**
+     * @param ceo
+     * @param bankAccounts
+     */
     public Bank(Person ceo, ArrayList<BankAccount> bankAccounts) {
         this.ceo = ceo;
 
@@ -41,6 +45,10 @@ public class Bank
         }
     }
 
+    /**
+     * @param newAccount
+     * @throws IllegalArgumentException if an account with the same number is already present in the account collection
+     */
     public void addAccount(BankAccount newAccount)
     {
         for (BankAccount account : bankAccounts)
@@ -54,6 +62,10 @@ public class Bank
     }
 
 
+    /**
+     * @param accountNumber
+     * @thorw IllegalArgumentException if no account in the accounts' collection match the provided accountNumber
+     */
     public void removeAccount(String accountNumber)
     {
         boolean accountFound;
@@ -74,11 +86,67 @@ public class Bank
 
     }
 
+    /**
+     * Gets the account with the highest balance
+     * @return BankAccount with the highest balance
+     * @thorws IllegalArgumentException if bank has no accounts in it
+     */
+    public BankAccount getMaxAccount()
+    {
+        BankAccount maxAccount = null;
+        double currentMaxValue = 0;
+        for (BankAccount account : bankAccounts)
+        {
+            if (currentMaxValue < account.getBalanceUsd())
+            {
+                maxAccount = account;
+                currentMaxValue = account.getBalanceUsd();
+            }
+        }
 
+        if (maxAccount == null)
+        {
+            throw new IllegalArgumentException("Unable to find account. Bank has not accounts");
+        }
+
+        return maxAccount;
+    }
+
+    /**
+     * @param clientID
+     * @return account associated with provided ID
+     * @thorws IllegalArgumentException if no accounts/client matches the provided clientID
+     */
+    public BankAccount getAccountFor(String clientID)
+    {
+        BankAccount foundAccount = null;
+        for (BankAccount account : bankAccounts)
+        {
+            if (clientID.equalsIgnoreCase(account.getClient().getClientID()))
+            {
+                foundAccount = account;
+            }
+        }
+
+        if (foundAccount == null)
+        {
+            throw new IllegalArgumentException("Unable to find account. No account matches the provided clientID");
+        }
+
+        return foundAccount;
+    }
+
+
+    /**
+     * @return Person ceo
+     */
     public Person getCeo() {
         return ceo;
     }
 
+    /**
+     * @return Array allBankAccounts
+     */
     public BankAccount[] getAllAccounts()
     {
         BankAccount[] allBankAccounts;
