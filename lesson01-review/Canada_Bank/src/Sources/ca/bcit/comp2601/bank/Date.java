@@ -3,6 +3,9 @@ package ca.bcit.comp2601.bank;
 import java.lang.reflect.Array;
 import java.util.Calendar;
 
+/**
+ *  Check if month valid
+ */
 //2) implement the code and tests for: getDay(), getMonth(), getYear(), getYYYYMMDD() /* returns date such as 2022-09-30 */, and getDayOfTheWeek()
 public class Date
 {
@@ -16,7 +19,10 @@ public class Date
     private static final int MIN_MONTH = 0;
     private static final int MAX_MONTH = 12;
     private static final int MIN_DAY = 1;
-    private static final int MAX_MAX = 31;
+    private static final int MAX_DAY_JMMJAOD = 31;
+    private static final int MAX_DAY_AJSN = 30;
+    private static final int MAX_DAY_FEB_COMMON = 28;
+    private static final int MAX_DAY_FEB_LEAP = MAX_DAY_FEB_COMMON + 1;
     private static final int NUM_TWELVE = 12;
     private static final int NUM_FOUR = 4;
     private static final int YEAR_RANGE_NO_MOD = 1900;
@@ -32,6 +38,18 @@ public class Date
                                                "Wednesday",
                                                "Thursday",
                                                "Friday"};
+    private static final String[] MONTHS = {"January", // 1
+                                            "February", // 2
+                                            "March", // 3
+                                            "April", // 4
+                                            "May", // 5
+                                            "June", // 6
+                                            "July", // 7
+                                            "August", // 8
+                                            "September", // 9
+                                            "October", // 10
+                                            "November", // 11
+                                            "December"}; // 12
 
     private static final int[] JFMAMJJASOND =  {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
 
@@ -45,11 +63,13 @@ public class Date
      */
     public Date(int year, int month, int day)
     {
+        // Year Validation
         if (year >= MIN_YEAR && year <= CURRENT_YEAR)
         {
             this.year = year;
         }
 
+        // Month Validation
         if(month >= MIN_MONTH && month <= MAX_MONTH)
         {
             this.month = month;
@@ -59,13 +79,40 @@ public class Date
             throw new IllegalArgumentException("Invalid month. Value needs to be between 1 and 12");
         }
 
-        if(day >= MIN_DAY && day <= MAX_MAX)
+        // Day Validation
+        if(day < MIN_DAY || day > MAX_DAY_JMMJAOD)
         {
-            this.day = day;
+            throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
         }
         else
         {
-            throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
+            int maximumFebruary;
+            if (isLeapYear(year) == true)
+            {
+                maximumFebruary = MAX_DAY_FEB_LEAP;
+            }
+            else
+            {
+                maximumFebruary = MAX_DAY_FEB_COMMON;
+            }
+            switch (month) {
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if(day > MAX_DAY_AJSN)
+                    {
+                        throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
+                    };
+                    break;
+                case 2:
+                    if(day > maximumFebruary)
+                    {
+                        throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
+                    };
+                    break;
+            }
+            this.day = day;
         }
 
 
@@ -85,6 +132,10 @@ public class Date
 
     public String getYyyyMmDd() {
         return String.format("%04d", year) + "-"  + String.format("%02d", month)  + "-" + String.format("%02d", day);
+    }
+
+    public String getDateAsText() {
+        return MONTHS[month-1] + " " + Integer.toString(day) + ", " + Integer.toString(year);
     }
 
     public String getDayOfTheWeek()
