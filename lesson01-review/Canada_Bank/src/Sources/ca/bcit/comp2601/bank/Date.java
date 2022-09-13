@@ -13,7 +13,6 @@ public class Date
     private int month;
     private int day;
 
-
     private static final int MIN_YEAR = 1;
     private static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
     private static final int MIN_MONTH = 0;

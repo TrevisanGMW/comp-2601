@@ -10,8 +10,17 @@ public class Main {
         Date death = new Date(1955, 4, 18);
         Person person1 = new Person(name, birth, null);
         Person person2 = new Person(name2, birth2, death);
-        System.out.println(person1.getDetails());
-        System.out.println(person2.getDetails());
+//        System.out.println(person1.getDetails());
+//        System.out.println(person2.getDetails());
+
+        BankClient bankClient = new BankClient(name2, birth2, death, death, "12345");
+        BankAccount bankAccount = new BankAccount(bankClient, 200d, 1337,
+                                     "1234567", birth, null);
+        System.out.println(bankAccount.deposit(200d));
+        System.out.println(bankAccount.getBalanceUsd());
+        System.out.println(bankAccount.withdraw(150d));
+        System.out.println(bankAccount.getBalanceUsd());
+
 
 
 

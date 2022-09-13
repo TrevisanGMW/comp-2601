@@ -15,6 +15,80 @@ package ca.bcit.comp2601.bank;
  *
  */
 
-public class BankClient
+public class BankClient extends Person
 {
+    private final Date dateJoinedBank;
+    private final String clientID; // 5 digits
+    private static final int LENGTH_CLIENT_ID = 5;
+
+    /**
+     * @param name
+     * @param birthDate
+     * @param deathDate (can be null)
+     */
+    public BankClient(Name name, Date birthDate, Date deathDate, Date dateJoinedBank, String clientID) {
+        super(name, birthDate, deathDate);
+
+        if (dateJoinedBank == null)
+        {
+            throw new IllegalArgumentException("Invalid dateJoinedBank. Cannot be null");
+        }
+        else
+        {
+            this.dateJoinedBank = dateJoinedBank;
+        }
+
+        if (clientID == null)
+        {
+            throw new IllegalArgumentException("Invalid clientID. Cannot be null");
+        }
+        else if (clientID.matches("[0-9]+") == false || clientID.length() != LENGTH_CLIENT_ID)
+        {
+            throw new IllegalArgumentException("Invalid clientID. Must be 5 digits");
+        }
+        else
+        {
+            this.clientID = clientID;
+        }
+    }
+
+    /**
+     * @return dateJoinedBank
+     */
+    public Date getDateJoinedBank() {
+        return dateJoinedBank;
+    }
+
+    /**
+     * @return clientID
+     */
+    public String getClientID() {
+        return clientID;
+    }
+
+    /**
+     * "Tiger Woods client #12345 (alive) joined the bank on thursday, September 3, 2020")
+     * [note: or “not alive” as the case may be].
+     * @return String custom sentence showing details and client ID (follows pattern of the sentence above)
+     */
+    @Override
+    public String getDetails()
+    {
+        String result;
+        String livingCondition;
+
+        if (isAlive() == true)
+        {
+            livingCondition = "(alive)";
+        }
+        else
+        {
+            livingCondition = "(died " + this.getDeathDate().getDayOfTheWeek().toLowerCase() +
+                    ", " + this.getDeathDate().getDateAsText() +  ")";
+        }
+
+        result = this.getName().getFullName() + " " + livingCondition + " joined the bank on " +
+                dateJoinedBank.getDayOfTheWeek().toLowerCase() + ", " + dateJoinedBank.getDateAsText() + "!";
+        return result;
+    }
 }
