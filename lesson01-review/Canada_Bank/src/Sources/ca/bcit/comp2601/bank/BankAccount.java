@@ -2,7 +2,6 @@ package ca.bcit.comp2601.bank;
 
 /**
  * BankAccount
- *
  * has overloaded methods for withdraw:
  * withdraw(final double amountUsd);
  * withdraw(final double amountUsd, final int pinToMatch);
@@ -31,16 +30,16 @@ public class BankAccount
     private double balanceUsd;
     private final Date accountOpened;
     private final Date accountClosed;
-    private int pin;
+    private final int pin;
     private static final int LENGTH_ACCOUNT_NUM = 7;
 
     /**
-     * @param client
-     * @param balanceUsd
-     * @param pin
+     * @param client Person a client
+     * @param balanceUsd double initial money amount usd
+     * @param pin int pin (password
      * @param accountNumber (must be 7 letters, length)
-     * @param accountOpened
-     * @param accountClosed can be null (not closed yet)
+     * @param accountOpened Date when it was opened
+     * @param accountClosed Date when it was closed - can be null (not closed yet)
      */
     public BankAccount(BankClient client,
                        double balanceUsd,
@@ -88,7 +87,7 @@ public class BankAccount
     }
 
     /**
-     * @param amountUsd
+     * @param amountUsd how much to withdraw (usd)
      * @return boolean true if successful, false if not enough balance
      */
     public boolean withdraw(final double amountUsd)
@@ -105,8 +104,8 @@ public class BankAccount
     }
 
     /**
-     * @param amountUsd
-     * @param pinToMatch
+     * @param amountUsd how much to withdraw (usd)
+     * @param pinToMatch pin used to withdraw
      * @return boolean true if successful, false if not enough balance or wrong pin
      */
     public boolean withdraw(final double amountUsd, final int pinToMatch) {
@@ -126,7 +125,7 @@ public class BankAccount
 
     /**
      * Can only deposit positive values
-     * @param amountUsd
+     * @param amountUsd how much to deposit (usd)
      * @return boolean, true if success, false if failed.
      */
     public boolean deposit(final double amountUsd)
