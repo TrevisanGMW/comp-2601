@@ -147,18 +147,12 @@ public class BankAccount
      */
     public boolean isClosed()
     {
-        if (accountClosed == null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return (accountClosed != null);
     }
 
 
     /**
+     * Getter client
      * @return client
      */
     public BankClient getClient() {
@@ -166,6 +160,7 @@ public class BankAccount
     }
 
     /**
+     * Getter accountNumber
      * @return accountNumber
      */
     public String getAccountNumber() {
@@ -173,6 +168,7 @@ public class BankAccount
     }
 
     /**
+     * Getter balanceUsd
      * @return balanceUsd
      */
     public double getBalanceUsd() {
@@ -180,6 +176,7 @@ public class BankAccount
     }
 
     /**
+     * Getter accountOpened
      * @return accountOpened
      */
     public Date getAccountOpened() {
@@ -187,6 +184,7 @@ public class BankAccount
     }
 
     /**
+     * Getter accountClosed
      * @return accountClosed
      */
     public Date getAccountClosed() {
@@ -194,6 +192,7 @@ public class BankAccount
     }
 
     /**
+     * Getter pin
      * @return pin
      */
     public int getPin() {
