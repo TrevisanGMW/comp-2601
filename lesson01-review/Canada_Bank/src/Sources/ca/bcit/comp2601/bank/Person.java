@@ -16,16 +16,20 @@ package ca.bcit.comp2601.bank;
  * getDetails()
  * isAlive()
  *
+ *  @author  Guilherme Trevisan
+ *  @version 0.0.1
+ *  @since   2022-09-10
+ *
  */
 public class Person
 {
     private final Name name;
     private final Date birthDate;
-    private final Date deathDate; // can be null
+    private final Date deathDate;
 
     /**
-     * @param name
-     * @param birthDate
+     * @param name Name object
+     * @param birthDate Date object for the birth date
      * @param deathDate (can be null)
      */
     public Person(Name name, Date birthDate, Date deathDate)
@@ -61,7 +65,7 @@ public class Person
         String result;
         String livingCondition;
 
-        if (isAlive() == true)
+        if (isAlive())
         {
             livingCondition = "(alive)";
         }
@@ -81,17 +85,11 @@ public class Person
      */
     public boolean isAlive()
     {
-        if (this.deathDate == null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (this.deathDate == null);
     }
 
     /**
+     * Getter name
      * @return name
      */
     public Name getName() {
@@ -99,6 +97,7 @@ public class Person
     }
 
     /**
+     * Getter birthDate
      * @return birthDate
      */
     public Date getBirthDate() {
@@ -106,6 +105,7 @@ public class Person
     }
 
     /**
+     * Getter deathDate
      * @return deathDate
      */
     public Date getDeathDate() {
