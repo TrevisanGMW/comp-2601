@@ -1,15 +1,12 @@
 package ca.bcit.comp2601.bank;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args)
     {
-
+        // Do Nothing
 
         /**
-         *      Manual Tests:
+         *     Manual Tests:
          *
          *         Name tigerName = new Name("Tiger", "Woods");
          *         Name albertName = new Name("Albert", "Einstein");
@@ -51,7 +48,6 @@ public class Main {
          *         System.out.println(bank.getMaxAccount().getBalanceUsd());
          *         System.out.println(bank.getAccountFor("12346").getBalanceUsd());
          *
-         *
          *         Date date = new Date(1977, 10, 31);
          *         Date date = new Date(2021, 03, 15);
          *         System.out.println(date.getDayOfTheWeek());
@@ -67,6 +63,5 @@ public class Main {
          *         Date date = new Date(2021, 03, 15);
          *         System.out.println("Invalid name. It cannot be null.".startsWith("Invalid name"));
          */
-
     }
 }

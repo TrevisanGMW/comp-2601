@@ -31,6 +31,7 @@ public class Person
      * @param name Name object
      * @param birthDate Date object for the birth date
      * @param deathDate (can be null)
+     * @throws IllegalArgumentException if any arguments are invalid
      */
     public Person(Name name, Date birthDate, Date deathDate)
     {

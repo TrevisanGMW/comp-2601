@@ -44,6 +44,8 @@ public class Date
     private static final int YEAR_RANGE_MOD_TWO = 1800;
     private static final int MONTH_NUM_JANUARY = 1;
     private static final int MONTH_NUM_FEBRUARY = 2;
+    private static final int NUM_SIX = 6;
+    private static final int NUM_TWO = 2;
 
     private static final String[] WEEK_DAYS = {"Saturday",
                                                "Sunday",
@@ -71,9 +73,9 @@ public class Date
      * The constructor allows only years between 1 - CURRENT_YEAR;
      * months 1-12;
      * and days 1-31 (or 30, or 29, or 28: properly)
-     * @param year
-     * @param month
-     * @param day
+     * @param year int year
+     * @param month int month
+     * @param day int day
      */
     public Date(int year, int month, int day)
     {
@@ -134,6 +136,7 @@ public class Date
     }
 
     /**
+     * Getter year
      * @return year
      */
     public int getYear() {
@@ -141,6 +144,7 @@ public class Date
     }
 
     /**
+     * Getter month
      * @return month
      */
     public int getMonth() {
@@ -148,6 +152,7 @@ public class Date
     }
 
     /**
+     * Getter day
      * @return day
      */
     public int getDay() {
@@ -155,7 +160,7 @@ public class Date
     }
 
     /**
-     * @return String date formated as YYYY-MM-DD
+     * @return String date formatted as YYYY-MM-DD
      * e.g. 2022-01-01
      */
     public String getYyyyMmDd() {
@@ -167,9 +172,13 @@ public class Date
      * e.g. "January 01, 2022"
      */
     public String getDateAsText() {
-        return MONTHS[month-1] + " " + Integer.toString(day) + ", " + Integer.toString(year);
+        return MONTHS[month-1] + " " + day + ", " + year;
     }
 
+    /**
+     * @return day of the week as text.
+     * e.g. Monday
+     */
     public String getDayOfTheWeek()
     {
         int numModifier = 0;
@@ -178,11 +187,11 @@ public class Date
         }
         else if (year>= YEAR_RANGE_MOD_SIX)
         {
-            numModifier = 6;
+            numModifier = NUM_SIX;
         }
         else if (year >= YEAR_RANGE_MOD_TWO && year < YEAR_RANGE_NO_MOD)
         {
-            numModifier = 2;
+            numModifier = NUM_TWO;
         }
         else
         {
@@ -191,7 +200,7 @@ public class Date
 
         if (month == MONTH_NUM_JANUARY || month == MONTH_NUM_FEBRUARY)
         {
-            numModifier = numModifier+6;
+            numModifier = numModifier+NUM_SIX;
         }
 
 
@@ -229,12 +238,12 @@ public class Date
     }
 
     /**
-     * @param year
+     * @param year int year to be tested as leap year
      * @return boolean if it's a leap year, it returns true, else false
      */
     public static boolean isLeapYear(int year)
     {
-        boolean isLeap = false;
+        boolean isLeap;
         // if the year is divided by 4
         if (year % 4 == 0)
         {
