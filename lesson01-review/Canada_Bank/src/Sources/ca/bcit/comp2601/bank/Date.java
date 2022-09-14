@@ -4,7 +4,22 @@ import java.lang.reflect.Array;
 import java.util.Calendar;
 
 /**
- *  Check if month valid
+ *
+ * 1) The constructor allows only years between 1 - CURRENT_YEAR;
+ * months 1-12;
+ * and days 1-31 (or 30, or 29, or 28: properly)
+ * 2) implement the code and tests for: getDay(), getMonth(), getYear(), getYYYYMMDD() returns date such as 2022-09-30,
+ * and getDayOfTheWeek()
+ *
+ * Instance variables, constructor arguments, accessor methods for:
+ * year
+ * month
+ * day
+ *
+ * @author Guilherme Trevisan
+ * @version 0.0.1
+ * @since 2022-09-10
+ *
  */
 //2) implement the code and tests for: getDay(), getMonth(), getYear(), getYYYYMMDD() /* returns date such as 2022-09-30 */, and getDayOfTheWeek()
 public class Date
@@ -50,7 +65,7 @@ public class Date
                                             "November", // 11
                                             "December"}; // 12
 
-    private static final int[] JFMAMJJASOND =  {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
+    private static final int[] JFMAMJJASOND =  {0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6}; // Used to determine weekDay
 
     /**
      * The constructor allows only years between 1 - CURRENT_YEAR;
@@ -62,6 +77,7 @@ public class Date
      */
     public Date(int year, int month, int day)
     {
+
         // Year Validation
         if (year >= MIN_YEAR && year <= CURRENT_YEAR)
         {
@@ -79,14 +95,15 @@ public class Date
         }
 
         // Day Validation
+        final String DAY_ERROR_MESSAGE = "Invalid day. Value outside of the month's range.";
         if(day < MIN_DAY || day > MAX_DAY_JMMJAOD)
         {
-            throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
+            throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
         }
         else
         {
             int maximumFebruary;
-            if (isLeapYear(year) == true)
+            if (isLeapYear(year))
             {
                 maximumFebruary = MAX_DAY_FEB_LEAP;
             }
@@ -95,21 +112,20 @@ public class Date
                 maximumFebruary = MAX_DAY_FEB_COMMON;
             }
             switch (month) {
-                case 4:
-                case 6:
-                case 9:
-                case 11:
+                case 4, 6, 9, 11:
                     if(day > MAX_DAY_AJSN)
                     {
-                        throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
-                    };
+                        throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
+                    }
                     break;
                 case 2:
                     if(day > maximumFebruary)
                     {
-                        throw new IllegalArgumentException("Invalid day. Value outside of the month's range.");
-                    };
+                        throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
+                    }
                     break;
+                default:
+                    // Do nothing
             }
             this.day = day;
         }
@@ -117,22 +133,39 @@ public class Date
 
     }
 
+    /**
+     * @return year
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * @return month
+     */
     public int getMonth() {
         return month;
     }
 
+    /**
+     * @return day
+     */
     public int getDay() {
         return day;
     }
 
+    /**
+     * @return String date formated as YYYY-MM-DD
+     * e.g. 2022-01-01
+     */
     public String getYyyyMmDd() {
         return String.format("%04d", year) + "-"  + String.format("%02d", month)  + "-" + String.format("%02d", day);
     }
 
+    /**
+     * @return String date as text in the follow format "month DD, YYYY"
+     * e.g. "January 01, 2022"
+     */
     public String getDateAsText() {
         return MONTHS[month-1] + " " + Integer.toString(day) + ", " + Integer.toString(year);
     }
@@ -153,7 +186,7 @@ public class Date
         }
         else
         {
-            // DO nothing
+            // Do nothing
         }
 
         if (month == MONTH_NUM_JANUARY || month == MONTH_NUM_FEBRUARY)
@@ -195,6 +228,10 @@ public class Date
         return (String)Array.get(WEEK_DAYS, numProcessingMod);
     }
 
+    /**
+     * @param year
+     * @return boolean if it's a leap year, it returns true, else false
+     */
     public static boolean isLeapYear(int year)
     {
         boolean isLeap = false;
@@ -222,6 +259,4 @@ public class Date
         }
         return isLeap;
     }
-
-
 }
