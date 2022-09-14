@@ -40,6 +40,7 @@ public class BankAccount
      * @param accountNumber (must be 7 letters, length)
      * @param accountOpened Date when it was opened
      * @param accountClosed Date when it was closed - can be null (not closed yet)
+     * @throws IllegalArgumentException if argument is invalid
      */
     public BankAccount(BankClient client,
                        double balanceUsd,
