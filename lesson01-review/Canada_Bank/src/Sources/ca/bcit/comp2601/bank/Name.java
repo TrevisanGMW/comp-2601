@@ -1,7 +1,22 @@
 package ca.bcit.comp2601.bank;
 
 /**
- * The HelloWorld program implements an application that
+ * Create a public constructor that takes first, last as arguments: they must not be null nor blank; must be fewer than
+ * 45 characters; must not contain the word "admin" (in any letter casing)
+ * IllegalArgumentException is thrown in case an argument is not valid
+ * Create public accessor methods
+ * Create a getInitials() method (e.g. name of "tigER wooDS" would return "T.W.")
+ * Create a getFullName() method (e.g. name of "tigER wooDS" would return "Tiger Woods")
+ * Include JavaDoc comments for classes (@author and @version) and for all non-private methods and constructors
+ * (@param, @return, @throws)
+ *
+ * Instance variables, constructor arguments, accessor methods for:
+ * first
+ * last
+ *
+ * Methods:
+ * getInitials()
+ * getFullName()
  *
  * @author  Guilherme Trevisan
  * @version 0.0.1
@@ -100,6 +115,4 @@ public class Name
             return inputString;
         }
     }
-
-
 }
