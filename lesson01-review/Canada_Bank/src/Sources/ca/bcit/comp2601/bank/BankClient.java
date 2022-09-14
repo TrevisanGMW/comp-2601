@@ -22,9 +22,11 @@ public class BankClient extends Person
     private static final int LENGTH_CLIENT_ID = 5;
 
     /**
-     * @param name
-     * @param birthDate
-     * @param deathDate (can be null)
+     * @param name Name object
+     * @param birthDate Date birthDate
+     * @param deathDate Date deathDate (can be null)
+     * @param dateJoinedBank Date dateJoinedBank
+     * @param clientID String must be 5 digits
      */
     public BankClient(Name name, Date birthDate, Date deathDate, Date dateJoinedBank, String clientID) {
         super(name, birthDate, deathDate);
@@ -42,7 +44,7 @@ public class BankClient extends Person
         {
             throw new IllegalArgumentException("Invalid clientID. Cannot be null");
         }
-        else if (clientID.matches("[0-9]+") == false || clientID.length() != LENGTH_CLIENT_ID)
+        else if (!clientID.matches("\\d+") || clientID.length() != LENGTH_CLIENT_ID)
         {
             throw new IllegalArgumentException("Invalid clientID. Must be 5 digits");
         }
@@ -53,6 +55,7 @@ public class BankClient extends Person
     }
 
     /**
+     * Getter dateJoinedBank
      * @return dateJoinedBank
      */
     public Date getDateJoinedBank() {
@@ -60,6 +63,7 @@ public class BankClient extends Person
     }
 
     /**
+     * Getter clientID
      * @return clientID
      */
     public String getClientID() {
@@ -77,7 +81,7 @@ public class BankClient extends Person
         String result;
         String livingCondition;
 
-        if (isAlive() == true)
+        if (isAlive())
         {
             livingCondition = "(alive)";
         }
