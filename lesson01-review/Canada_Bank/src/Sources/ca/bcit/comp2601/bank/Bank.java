@@ -29,8 +29,8 @@ public class Bank
     private ArrayList<BankAccount> bankAccounts;
 
     /**
-     * @param ceo
-     * @param bankAccounts
+     * @param ceo Person ceo (chief executive officer)
+     * @param bankAccounts ArrayList of bank accounts
      */
     public Bank(Person ceo, ArrayList<BankAccount> bankAccounts) {
         this.ceo = ceo;
@@ -53,7 +53,7 @@ public class Bank
     {
         for (BankAccount account : bankAccounts)
         {
-            if (newAccount.getAccountNumber() == account.getAccountNumber())
+            if (newAccount.getAccountNumber().equalsIgnoreCase(account.getAccountNumber()))
             {
                 throw new IllegalArgumentException("Invalid account. Account number is already present in the bank");
             }
@@ -64,7 +64,7 @@ public class Bank
 
     /**
      * @param accountNumber
-     * @thorw IllegalArgumentException if no account in the accounts' collection match the provided accountNumber
+     * @throws IllegalArgumentException if no account in the accounts' collection match the provided accountNumber
      */
     public void removeAccount(String accountNumber)
     {
@@ -72,14 +72,14 @@ public class Bank
         accountFound = false;
         for (BankAccount account : bankAccounts)
         {
-            if (accountNumber == account.getAccountNumber())
+            if (accountNumber.equalsIgnoreCase(account.getAccountNumber()))
             {
                 bankAccounts.remove(account);
                 accountFound = true;
             }
         }
 
-        if (accountFound != true)
+        if (!accountFound)
         {
             throw new IllegalArgumentException("Invalid account. Unable to find account number in the collection");
         }
@@ -89,7 +89,7 @@ public class Bank
     /**
      * Gets the account with the highest balance
      * @return BankAccount with the highest balance
-     * @thorws IllegalArgumentException if bank has no accounts in it
+     * @throws IllegalArgumentException if bank has no accounts in it
      */
     public BankAccount getMaxAccount()
     {
@@ -115,7 +115,7 @@ public class Bank
     /**
      * @param clientID
      * @return account associated with provided ID
-     * @thorws IllegalArgumentException if no accounts/client matches the provided clientID
+     * @throws IllegalArgumentException if no accounts/client matches the provided clientID
      */
     public BankAccount getAccountFor(String clientID)
     {
@@ -136,8 +136,8 @@ public class Bank
         return foundAccount;
     }
 
-
     /**
+     * Getter CEO
      * @return Person ceo
      */
     public Person getCeo() {
@@ -145,6 +145,7 @@ public class Bank
     }
 
     /**
+     * Get all bank accounts as an array
      * @return Array allBankAccounts
      */
     public BankAccount[] getAllAccounts()
