@@ -1,6 +1,8 @@
 package ca.bcit.comp2601.lab02.guilhermetrevisan;
 
 
+import java.util.Objects;
+
 /**
  * IPad Class - The purpose of this iDevice is “learning”
  *
@@ -87,6 +89,29 @@ public class IPad extends IDevice {
      */
     @Override
     public void printDetails() {
-        System.out.println(this.toString());
+        System.out.println(this);
+    }
+
+    /**
+     * IPads with the operating system version are considered equal; (ignoring casing)
+     * @param o object to compare
+     * @return true if operatingSystemVersion are equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        IPad iPad = (IPad) o;
+        return Objects.equals(operatingSystemVersion.toLowerCase(), iPad.operatingSystemVersion.toLowerCase());
+    }
+
+    /**
+     * Override hashCode
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), operatingSystemVersion);
     }
 }

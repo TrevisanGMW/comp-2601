@@ -1,6 +1,8 @@
 package ca.bcit.comp2601.lab02.guilhermetrevisan;
 
 
+import java.util.Objects;
+
 /**
  * IPhone Class - The purpose of this iDevice is “talking”
  *
@@ -16,6 +18,7 @@ package ca.bcit.comp2601.lab02.guilhermetrevisan;
 public class IPhone extends IDevice {
 
     private static final int MIN_MINUTES_REMAINING = 0;
+    private static final int COMPARISON_THRESHOLD = 10;
     private double minutesRemainingPhonePlan;
     private String carrierName;
 
@@ -98,5 +101,29 @@ public class IPhone extends IDevice {
     @Override
     public void printDetails() {
         System.out.println(this.toString());
+    }
+
+    /**
+     * +/- 10 minutes of each other’s number of minutes remaining on their phone plan are considered equal
+     * @param o object to compare
+     * @return true if difference between minutesRemainingPhonePlan is less than COMPARISON_THRESHOLD
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        IPhone iPhone = (IPhone) o;
+        double doubleDifference = iPhone.minutesRemainingPhonePlan - minutesRemainingPhonePlan;
+        return (Math.abs(doubleDifference) <= COMPARISON_THRESHOLD);
+    }
+
+    /**
+     * Override hashCode
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), minutesRemainingPhonePlan);
     }
 }

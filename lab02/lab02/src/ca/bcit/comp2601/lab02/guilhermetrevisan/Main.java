@@ -8,6 +8,9 @@ public class Main {
         IPod pod1 = new IPod(1,130.0);
         IPhone phone1 = new IPhone(3, "Carrier");
 //        pad1.printDetails();
-        pad1.printDetails();
+//        pad1.printDetails();
+
+
+
     }
 }

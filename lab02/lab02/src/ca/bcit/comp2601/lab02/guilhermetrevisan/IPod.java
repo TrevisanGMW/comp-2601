@@ -1,5 +1,7 @@
 package ca.bcit.comp2601.lab02.guilhermetrevisan;
 
+import java.util.Objects;
+
 /**
  * IPod Class - the purpose of this iDevice is “music”
  *
@@ -80,5 +82,29 @@ public class IPod extends IDevice {
     @Override
     public void printDetails() {
         System.out.println(this.toString());
+    }
+
+
+    /**
+     * IPods with the same number of songs stored are considered equal
+     * @param o object to compare
+     * @return true if same number of numStoredSongs
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        IPod iPod = (IPod) o;
+        return numStoredSongs == iPod.numStoredSongs;
+    }
+
+    /**
+     * hasCode Override
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), numStoredSongs);
     }
 }
