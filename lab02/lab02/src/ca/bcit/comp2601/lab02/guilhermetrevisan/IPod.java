@@ -26,7 +26,7 @@ public class IPod extends IDevice {
      * @param maxVolumeDecibels maxVolumeDecibels
      * @throws IllegalArgumentException if negative number of songsStored
      */
-    public IPod(int numStoredSongs, double maxVolumeDecibels) {
+    public IPod(final int numStoredSongs, final double maxVolumeDecibels) {
         super("music");
 
         // Validate numSongsStored
@@ -59,7 +59,7 @@ public class IPod extends IDevice {
 
     /**
      * Getter maxVolumeDecibels
-     * @return
+     * @return maxVolumeDecibels
      */
     public double getMaxVolumeDecibels() {
         return maxVolumeDecibels;
@@ -81,7 +81,7 @@ public class IPod extends IDevice {
      */
     @Override
     public void printDetails() {
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 
 

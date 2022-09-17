@@ -28,7 +28,7 @@ public class IPhone extends IDevice {
      * @param carrierName name of the carrier
      * @throws IllegalArgumentException invalid arguments are used
      */
-    public IPhone(double minutesRemainingPhonePlan, String carrierName) {
+    public IPhone(final double minutesRemainingPhonePlan, final String carrierName) {
         super("talking");
 
         // Validate minutesRemainingPhonePlan
@@ -54,7 +54,7 @@ public class IPhone extends IDevice {
 
     /**
      * Setter minutesRemainingPhonePlan
-     * @param minutesRemainingPhonePlan
+     * @param minutesRemainingPhonePlan minutesRemainingPhonePlan
      * @throws IllegalArgumentException value is less than MIN_INITIAL_MINUTES_REMAINING (aka negative)
      */
     public void setMinutesRemainingPhonePlan(double minutesRemainingPhonePlan) {
@@ -74,7 +74,7 @@ public class IPhone extends IDevice {
 
     /**
      * Setter carrierName
-     * @param carrierName
+     * @param carrierName carrierName
      * @throws IllegalArgumentException if argument is null or empty
      */
     public void setCarrierName(String carrierName) {
@@ -100,7 +100,7 @@ public class IPhone extends IDevice {
      */
     @Override
     public void printDetails() {
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 
     /**
