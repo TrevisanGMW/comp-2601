@@ -1,0 +1,12 @@
+Classes and objects
+Collections and iteration
+Strings and selected methods
+Exception handling
+Data validation with constructors with exception handling
+Methods, method overloading, accessors and mutators
+Primitive versus reference types
+Design-first principle. Debugging and the IDE debugger. Design, write, and run automated tests.
+Using Scanner to read text files
+Java inheritance, substitution
+Polymorphism, method overriding, dynamic method lookup
+Using APIs with Java, creating documentation with Javadoc
