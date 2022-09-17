@@ -1,0 +1,14 @@
+Review Lab01:
+No variables with number names or javadocs
+isBlank (checks if empty)
+Use primitives instead of wrapper classes
+No data type in javadocs
+No need for else, check for errors THEN store the data
+He likes declare, then initialise (separated)
+Shouldn’t declare strings as “”, null instead
+Unit tests should be hard-coded
+Should be at the top line, keep it up and then move the rest of the line down
+Always remove unused imports or functions (@Before, @After)
+Don’t mention numbers in javadoc or errors (even if referenced)
+
+Declare as a list then instantiate as list type? List -> ArrayList
