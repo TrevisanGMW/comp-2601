@@ -1,0 +1,2 @@
+IPhone class could have been abstract
+purpose should have been a defined static string PURPOSE instead of a magical word
