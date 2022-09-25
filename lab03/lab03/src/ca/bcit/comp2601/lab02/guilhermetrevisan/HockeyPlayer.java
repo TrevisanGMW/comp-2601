@@ -86,7 +86,7 @@ public class HockeyPlayer extends Employee implements Comparable<HockeyPlayer> {
     @Override
     public int compareTo(HockeyPlayer that) {
         if (this.getNumberOfGoals() != that.getNumberOfGoals()) {
-            return (this.getNumberOfGoals() < that.getNumberOfGoals() ? -1 : 1);
+            return (this.getNumberOfGoals() < that.getNumberOfGoals() ? 1 : -1);
         }
 
         return 0;
