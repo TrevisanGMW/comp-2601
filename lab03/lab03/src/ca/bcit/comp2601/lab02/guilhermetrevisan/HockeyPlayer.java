@@ -1,5 +1,7 @@
 package ca.bcit.comp2601.lab02.guilhermetrevisan;
 
+import java.util.Objects;
+
 /**
  * HockeyPlayer (“gretzky”, “jersey”, true, false, “play”);
  * OVERTIME_PAY_RATE: 0.0
@@ -8,7 +10,7 @@ package ca.bcit.comp2601.lab02.guilhermetrevisan;
  * @version 0.0.1
  * @since 2022-09-24
  */
-public class HockeyPlayer extends Employee {
+public class HockeyPlayer extends Employee implements Comparable<HockeyPlayer> {
 
     private static final double OVERTIME_PAY_RATE = 0.0d;
     private static final boolean IS_PAID_SALARY = true;
@@ -53,5 +55,40 @@ public class HockeyPlayer extends Employee {
         return OVERTIME_PAY_RATE;
     }
 
+    /**
+     * Overide equals
+     * @param o object to compare
+     * @return true if the number of goals are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HockeyPlayer that = (HockeyPlayer) o;
+        return numberOfGoals == that.numberOfGoals;
+    }
 
+    /**
+     * Overide hashCode
+     * @return hashCode
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberOfGoals);
+    }
+
+
+    /**
+     * Highest number of goals is greater
+     * @param that the object to be compared.
+     * @return comparison int, positive if getNumberOfGoals is higher
+     */
+    @Override
+    public int compareTo(HockeyPlayer that) {
+        if (this.getNumberOfGoals() != that.getNumberOfGoals()) {
+            return (this.getNumberOfGoals() < that.getNumberOfGoals() ? -1 : 1);
+        }
+
+        return 0;
+    }
 }
