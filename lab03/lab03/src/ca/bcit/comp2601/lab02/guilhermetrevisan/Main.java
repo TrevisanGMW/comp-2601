@@ -4,6 +4,12 @@ public class Main {
 
         Employees employees;
         employees = new Employees();
-        System.out.println(employees.getEmployeesList());
+
+        System.out.println("- Before:");
+        employees.printAllParents();
+
+        System.out.println("- After:");
+        employees.sortAllEmployeeLists();
+        employees.printAllParents();
     }
 }
