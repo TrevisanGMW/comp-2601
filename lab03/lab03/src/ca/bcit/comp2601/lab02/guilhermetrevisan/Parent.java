@@ -107,7 +107,7 @@ public class Parent extends Employee implements Comparable<Parent> {
     @Override
     public int compareTo(Parent that) {
         if (this.getNumberOfHoursSpentPerWeekWithKids() != that.getNumberOfHoursSpentPerWeekWithKids()) {
-            return (this.getNumberOfHoursSpentPerWeekWithKids() < that.getNumberOfHoursSpentPerWeekWithKids() ? -1 : 1);
+            return (this.getNumberOfHoursSpentPerWeekWithKids() < that.getNumberOfHoursSpentPerWeekWithKids() ? 1 : -1);
         }
         return 0;
     }
