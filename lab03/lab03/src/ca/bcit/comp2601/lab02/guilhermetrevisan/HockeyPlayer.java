@@ -81,7 +81,7 @@ public class HockeyPlayer extends Employee implements Comparable<HockeyPlayer> {
     /**
      * Highest number of goals is greater
      * @param that the object to be compared.
-     * @return comparison int, positive if getNumberOfGoals is higher
+     * @return comparison int, move up if getNumberOfGoals is higher
      */
     @Override
     public int compareTo(HockeyPlayer that) {
