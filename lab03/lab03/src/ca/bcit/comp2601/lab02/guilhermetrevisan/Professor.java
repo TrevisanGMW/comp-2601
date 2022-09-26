@@ -17,7 +17,7 @@ public class Professor extends Employee implements Comparable<Professor> {
     private static final boolean IS_POST_SECONDARY_EDUCATION_REQUIRED = true;
     private static final String WORK_VERB = "teach";
     private static final String DRESS_CODE = "fancy";
-    private static final String MOST_PRESTIGIOUS_MAJOR = "Computer Science";
+    private static final String MOST_PRESTIGIOUS_MAJOR = "Computer Systems";
     private String teachingMajor;
 
     /**
@@ -84,7 +84,7 @@ public class Professor extends Employee implements Comparable<Professor> {
     /**
      * Override compareTo
      * @param that the object to be compared.
-     * @return comparison int, positive if major is MOST_PRESTIGIOUS_MAJOR, else it's equal
+     * @return comparison int, move up if major is MOST_PRESTIGIOUS_MAJOR, else it's equal
      */
     @Override
     public int compareTo(Professor that) {
@@ -95,11 +95,7 @@ public class Professor extends Employee implements Comparable<Professor> {
         } else if (that.getTeachingMajor() == null) {
             return 1;
         } else {
-            if (this.getTeachingMajor().equalsIgnoreCase(MOST_PRESTIGIOUS_MAJOR)){
-                return 1;
-            } else {
-                return 0;
-            }
+            return (this.getTeachingMajor().equals(MOST_PRESTIGIOUS_MAJOR) ? -1 : 0);
         }
     }
 }
