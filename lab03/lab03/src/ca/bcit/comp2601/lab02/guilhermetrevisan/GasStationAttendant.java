@@ -83,12 +83,12 @@ public class GasStationAttendant extends Employee implements Comparable<GasStati
     /**
      * Override compareTo
      * @param that the object to be compared.
-     * @return comparison int, positive if getNumberOfDollarsStolenPerDayUSD is higher
+     * @return comparison int, move up if getNumberOfDollarsStolenPerDayUSD is higher
      */
     @Override
     public int compareTo(GasStationAttendant that) {
         if (this.getNumberOfDollarsStolenPerDayUSD() != that.getNumberOfDollarsStolenPerDayUSD()) {
-            return (this.getNumberOfDollarsStolenPerDayUSD() < that.getNumberOfDollarsStolenPerDayUSD() ? -1 : 1);
+            return (this.getNumberOfDollarsStolenPerDayUSD() < that.getNumberOfDollarsStolenPerDayUSD() ? 1 : -1);
         }
         return 0;
     }
