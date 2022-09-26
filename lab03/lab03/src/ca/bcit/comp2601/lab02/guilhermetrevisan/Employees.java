@@ -73,12 +73,40 @@ public class Employees {
     }
 
     /**
-     * sortEmployeeList sorts input list using compareTo
+     * sorts all employee lists using compareTo
      */
     public void sortAllEmployeeLists() {
         Collections.sort(hockeyPlayersList);
         Collections.sort(professorsList);
         Collections.sort(parentsList);
+        Collections.sort(gasStationAttendantsList);
+    }
+
+    /**
+     * sorts hockeyPlayersList using compareTo
+     */
+    public void sortHockeyPlayersList() {
+        Collections.sort(hockeyPlayersList);
+    }
+
+    /**
+     * sorts professorsList using compareTo
+     */
+    public void sortProfessorsList() {
+        Collections.sort(professorsList);
+    }
+
+    /**
+     * sorts parentsList using compareTo
+     */
+    public void sortParentsList() {
+        Collections.sort(parentsList);
+    }
+
+    /**
+     * sorts gasStationAttendantsList using compareTo
+     */
+    public void sortGasStationAttendantsList() {
         Collections.sort(gasStationAttendantsList);
     }
 
@@ -106,10 +134,16 @@ public class Employees {
     /**
      * Prints the name of all employees found in the employeesList
      */
+    public void printAllProfessors(){
+        printEmployeeNames(professorsList);
+    }
+
+    /**
+     * Prints the name of all employees found in the employeesList
+     */
     public void printAllGasStationAttendants(){
         printEmployeeNames(gasStationAttendantsList);
     }
-
 
 //    /**
 //     * Prints/Displays all employees that are equal
