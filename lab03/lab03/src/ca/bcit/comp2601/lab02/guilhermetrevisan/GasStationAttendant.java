@@ -3,8 +3,8 @@ package ca.bcit.comp2601.lab02.guilhermetrevisan;
 import java.util.Objects;
 
 /**
- * Example:
- * GasStationAttendant(“smith”, “uniform”, false, false, “pump”);
+ * GasStationAttendant
+ * Example: GasStationAttendant(“smith”, “uniform”, false, false, “pump”);
  * OVERTIME_PAY_RATE: 1.5
  *
  * @author Guilherme Trevisan
