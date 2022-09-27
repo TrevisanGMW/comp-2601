@@ -3,7 +3,8 @@ package ca.bcit.comp2601.lab02.guilhermetrevisan;
 import java.util.Objects;
 
 /**
- * Professor (“einstein”, “fancy”, true, true, “teach”);
+ * Professor
+ * Example: Professor (“einstein”, “fancy”, true, true, “teach”);
  * OVERTIME_PAY_RATE: 2.0
  *
  * @author Guilherme Trevisan
