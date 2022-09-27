@@ -3,7 +3,8 @@ package ca.bcit.comp2601.lab02.guilhermetrevisan;
 import java.util.Objects;
 
 /**
- * Parent(“mother”, “anything”, false, false, “care”);
+ * Parent
+ * Example: Parent(“mother”, “anything”, false, false, “care”);
  * OVERTIME_PAY_RATE: -2.0
  *
  * @author Guilherme Trevisan
