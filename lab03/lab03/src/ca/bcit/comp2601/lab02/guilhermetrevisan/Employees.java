@@ -56,13 +56,12 @@ public class Employees {
         employeesList.addAll(professorsList);
         employeesList.addAll(parentsList);
         employeesList.addAll(gasStationAttendantsList);
-
     }
 
     /**
      * @param employeesListToPrint employeesList the employable list to print
      */
-    private void printEmployeeNames(final List employeesListToPrint){
+    private void printEmployeeNames(final List<?> employeesListToPrint){
         ArrayList<Employable> employees;
         employees = (ArrayList<Employable>)employeesListToPrint;
         for (Employable employee : employees)
@@ -145,19 +144,102 @@ public class Employees {
         printEmployeeNames(gasStationAttendantsList);
     }
 
-//    /**
-//     * Prints/Displays all employees that are equal
-//     * @param a
-//     */
-//    static public void getMax(final int[] a)    {
-//        int max = a[0];
-//        for(int i: a)        {
-//            if(i > max)            {
-//                max = i;
-//            }
-//        }
-//
-//    }
+
+    /**
+     * Getter employeesList
+     * @return employeesList
+     */
+    public List<Employable> getEmployeesList() {
+        return employeesList;
+    }
+
+    /**
+     * Getter hockeyPlayersList
+     * @return hockeyPlayersList
+     */
+    public List<HockeyPlayer> getHockeyPlayersList() {
+        return hockeyPlayersList;
+    }
+
+    /**
+     * Getter professorsList
+     * @return professorsList
+     */
+    public List<Professor> getProfessorsList() {
+        return professorsList;
+    }
+
+    /**
+     * Getter parentsList
+     * @return parentsList
+     */
+    public List<Parent> getParentsList() {
+        return parentsList;
+    }
+
+    /**
+     * Getter gasStationAttendantsList
+     * @return gasStationAttendantsList
+     */
+    public List<GasStationAttendant> getGasStationAttendantsList() {
+        return gasStationAttendantsList;
+    }
 
 
+    /**
+     * Prints all equal employees using the "getEqualEmployeesList" method
+     */
+    public void printAllEqualEmployees(){
+        List<String> equalEmployees;
+        equalEmployees = getEqualEmployeesList(employeesList);
+        for (String str : equalEmployees){
+            System.out.println(str);
+        }
+    }
+
+    /**
+     * Finds all employees that are equals according to their equal() overrides
+     * @param employableList employableList
+     * @return list of string with objects that are equal to one another. E.g., (A = B)
+     *         Doesn't repeat objects
+     */
+    public static List<String> getEqualEmployeesList(final List<Employable> employableList){
+        List<String> resultList;
+        resultList = new ArrayList<>();
+        for (int i = 0; i < employableList.size(); i++) {
+            for (int j = i + 1; j < employableList.size(); j++) {
+                if (employableList.get(i) != employableList.get(j) &&
+                        employableList.get(i).equals(employableList.get(j))) {
+                    Employee a;
+                    Employee b;
+                    a = (Employee) employableList.get(i);
+                    b = (Employee) employableList.get(j);
+                    resultList.add(a.getName() + " = " + b.getName());
+                }
+            }
+        }
+        return resultList;
+    }
+
+
+    /**
+     * Method to allow for Employees object as input and to do it only with methods
+     * @param employablesObj employablesObj
+     */
+    public static void printEqualEmployeesList(final Employees employablesObj){
+        List<Employable> employableList;
+        employableList = employablesObj.getEmployeesList();
+        for (int i = 0; i < employableList.size(); i++) {
+            for (int j = i + 1; j < employableList.size(); j++) {
+                if (employableList.get(i) != employableList.get(j) &&
+                        employableList.get(i).equals(employableList.get(j))) {
+                    Employee a;
+                    Employee b;
+                    a = (Employee) employableList.get(i);
+                    b = (Employee) employableList.get(j);
+                    System.out.println(a.getName() + " = " + b.getName());
+                }
+            }
+        }
+    }
 }
