@@ -3,7 +3,8 @@ package ca.bcit.comp2601.lab02.guilhermetrevisan;
 import java.util.Objects;
 
 /**
- * HockeyPlayer (“gretzky”, “jersey”, true, false, “play”);
+ * HockeyPlayer
+ * Example: HockeyPlayer (“gretzky”, “jersey”, true, false, “play”);
  * OVERTIME_PAY_RATE: 0.0
  *
  * @author Guilherme Trevisan
