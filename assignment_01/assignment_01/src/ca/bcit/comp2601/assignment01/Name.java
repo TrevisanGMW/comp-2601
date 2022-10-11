@@ -25,7 +25,7 @@ public class Name {
     private static final int SECOND_CHAR_INDEX = 1;
 
     /**
-     *
+     * Constructor Name object
      * @param first first name
      * @param last last name
      * @throws IllegalArgumentException when provided argument is null
@@ -43,7 +43,6 @@ public class Name {
             this.last = last;
         }
     }
-
 
     /**
      * Gets Pretty Name (First and Last name) - Result is capitalized (e.g. fIrSt lAsT -> First Last)
