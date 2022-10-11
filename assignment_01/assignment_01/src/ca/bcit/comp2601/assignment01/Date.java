@@ -250,7 +250,7 @@ public class Date {
      * @param year int year to be tested as leap year
      * @return boolean if it's a leap year, it returns true, else false
      */
-    public static boolean isLeapYear(int year)
+    private static boolean isLeapYear(int year)
     {
         boolean isLeap;
         // if the year is divided by 4
@@ -276,5 +276,14 @@ public class Date {
             isLeap = false;
         }
         return isLeap;
+    }
+
+    /**
+     * Override toString to return getYyyyMmDd
+     * @return
+     */
+    @Override
+    public String toString() {
+        return getYyyyMmDd();
     }
 }
