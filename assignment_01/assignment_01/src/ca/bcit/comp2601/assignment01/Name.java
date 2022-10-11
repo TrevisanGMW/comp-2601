@@ -67,4 +67,19 @@ public class Name {
                 last.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() + ".";
     }
 
+    /**
+     * Getter First Name
+     * @return first
+     */
+    public String getFirst() {
+        return first;
+    }
+
+    /**
+     * Getter Last Name
+     * @return last
+     */
+    public String getLast() {
+        return last;
+    }
 }
