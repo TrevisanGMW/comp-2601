@@ -1,24 +1,23 @@
 package ca.bcit.comp2601.lab04.guilhermetrevisan;
 
 /**
- * o	Fields for the file name and the file size in bytes per second (eg. 320 bps)
- * o	Constructor with parameters for title, artist, filename, file size. File name and file size must be validated
- *      appropriately and an IllegalArgumentException will be thrown if the values are bad.
- * o	Getters, setters toString
- * o	play() method will display a simple message indicating that the file is being played.
- * o	Implements FileManager -  methods need only output a simple message to the console.
- *
- *  @author  Guilherme Trevisan
- *  @version 0.0.1
- *  @since   2022-09-16
+ * AudioFile Class
+ * @author  Guilherme Trevisan
+ * @version 0.0.1
+ * @since   2022-09-16
  */
-public class AudioFile implements FileManager {
+public class AudioFile extends MusicMedia implements FileManager {
 
     private final int sizeBitRatePerSecond;
     private String fileName;
-    private String title;
-    private String artist;
+    private static final int MIN_BIT_RATE_PER_SECOND;
+    private static final String READING_METHOD;
 
+    static{
+        MIN_BIT_RATE_PER_SECOND = 1;
+        READING_METHOD = "decode";
+    }
+    
     /**
      * Audio File Constructor
      * @param fileName name of the file
@@ -26,23 +25,22 @@ public class AudioFile implements FileManager {
      * @param title song title
      * @param artist artist name
      */
-    public AudioFile(final String fileName,
-                     final int sizeBitRatePerSecond,
-                     final String title,
-                     final String artist) {
-        this.fileName = validateAudioString(fileName);
-        this.sizeBitRatePerSecond = sizeBitRatePerSecond;
-        this.title = validateAudioString(title);
-        this.artist = validateAudioString(artist);
+    public AudioFile(final String title,
+                     final String artist,
+                     final String fileName,
+                     final int sizeBitRatePerSecond) {
+        super(title, artist, READING_METHOD);
+        this.fileName = validateFileNameString(fileName);
+        this.sizeBitRatePerSecond = validateSizeBitRatePerSecond(sizeBitRatePerSecond);
     }
 
     /**
      * String must not be null nor blank;
-     * @param inputString string to check (first or last)
-     * @return true if it's valid
+     * @param inputString string to check
+     * @return true if it's valid (not null or blank)
      * @throws IllegalArgumentException when provided a string or provided a blank one
      */
-    private static String validateAudioString(String inputString) {
+    private static String validateFileNameString(String inputString) {
         if(inputString == null || inputString.isBlank()) {
             throw new IllegalArgumentException("Invalid name. It cannot be null or empty.");
         }
@@ -52,7 +50,22 @@ public class AudioFile implements FileManager {
     }
 
     /**
-     * Displays (sout) message saying that the provided audio file is playing
+     * Validates sizeBitRatePerSecond (must be more or equal to MIN_BIT_RATE_PER_SECOND)
+     * @param sizeBitRatePerSecond sizeBitRatePerSecond
+     * @return sizeBitRatePerSecond if valid
+     * @throws IllegalArgumentException if invalid bit rate was provided (less than MIN_BIT_RATE_PER_SECOND)
+     */
+    private static int validateSizeBitRatePerSecond(final int sizeBitRatePerSecond){
+        if (sizeBitRatePerSecond >= MIN_BIT_RATE_PER_SECOND){
+            return sizeBitRatePerSecond;
+        } else {
+            throw new IllegalArgumentException("Invalid sizeBitRatePerSecond. Must be more than " +
+                                                MIN_BIT_RATE_PER_SECOND);
+        }
+    }
+
+    /**
+     * Displays (System.out) message saying that the provided audio file is playing
      * @param audioFile audioFile
      */
     public static void play(final AudioFile audioFile) {
@@ -65,11 +78,10 @@ public class AudioFile implements FileManager {
      */
     @Override
     public String toString() {
-        return artist + " - " + title;
+        return this.getArtist() + " - " + this.getTitle() + " (File Name: \"" + fileName + "\")";
     }
 
     // Getters and Setters
-
     /**
      * Getter fileName
      * @return fileName
@@ -87,43 +99,19 @@ public class AudioFile implements FileManager {
     }
 
     /**
-     * Getter title
-     * @return title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Getter artist
-     * @return artist
-     */
-    public String getArtist() {
-        return artist;
-    }
-
-    /**
-     * Setter Title
-     * @param title title
-     */
-    public void setTitle(String title) {
-        this.title = validateAudioString(title);
-    }
-
-    /**
-     * Setter artist
-     * @param artist artist
-     */
-    public void setArtist(String artist) {
-        this.artist = validateAudioString(artist);
-    }
-
-    /**
      * Setter fileName
      * @param fileName fileName
      */
     public void setFileName(String fileName) {
-        this.fileName = validateAudioString(fileName);
+        this.fileName = validateFileNameString(fileName);
+    }
+
+    /**
+     * Display message about this object playing
+     */
+    @Override
+    public void play() {
+        System.out.println("Playing: " + this.getTitle() + " by " + this.getArtist());
     }
 
     // File manager implementation
@@ -144,4 +132,5 @@ public class AudioFile implements FileManager {
     public void delete(String fileName) {
         System.out.println("Deleting: " + fileName);
     }
+
 }
