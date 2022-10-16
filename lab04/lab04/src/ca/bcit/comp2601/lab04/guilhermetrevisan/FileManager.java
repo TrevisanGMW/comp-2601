@@ -6,4 +6,6 @@ package ca.bcit.comp2601.lab04.guilhermetrevisan;
  * o	more on this later
  */
 public interface FileManager {
+    void save(final String fileName);
+    void delete(final String fileName);
 }
