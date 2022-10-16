@@ -1,14 +1,7 @@
 package ca.bcit.comp2601.lab04.guilhermetrevisan;
 
 /**
- * o	An abstract class with fields for song title and artist.
- * o	Constructor that takes parameters to set both fields. Parameters must be validated appropriately before
- *      they are assigned to the fields. If either parameter is invalid throw an IllegalArgumentException and do
- *      nothing else (let the program terminate).
- * o	Getter and setter for each field
- * o	toString() to display the field values
- * o	Abstract method void play()
- *
+ *  Music Media Abstract Class
  *  @author  Guilherme Trevisan
  *  @version 0.0.1
  *  @since   2022-09-16
@@ -17,6 +10,28 @@ public abstract class MusicMedia {
 
     private String title;
     private String artist;
+    private final String readingMethod;
+    private static final String DEFAULT_READING_METHOD;
+    private static final String DEFAULT_TITLE;
+    private static final String DEFAULT_ARTIST;
+
+    static {
+        DEFAULT_READING_METHOD = "unknown";
+        DEFAULT_TITLE = "Unknown";
+        DEFAULT_ARTIST = "Unknown";
+    }
+
+    {
+        this.title = DEFAULT_TITLE;
+        this.artist = DEFAULT_ARTIST;
+    }
+
+    /**
+     * Empty Music Media Constructor
+     */
+    public MusicMedia() {
+        this.readingMethod = DEFAULT_READING_METHOD;
+    }
 
     /**
      * Music Media Constructor
@@ -26,6 +41,18 @@ public abstract class MusicMedia {
     public MusicMedia(final String title, final String artist) {
         this.title = validateAudioString(title);
         this.artist = validateAudioString(artist);
+        this.readingMethod = DEFAULT_READING_METHOD;
+    }
+
+    /**
+     * Music Media Constructor with readingMethod
+     * @param title title of the media (cannot be empty or null)
+     * @param artist artist who created the media (cannot be empty or null)
+     */
+    public MusicMedia(final String title, final String artist, final String readingMethod) {
+        this.title = validateAudioString(title);
+        this.artist = validateAudioString(artist);
+        this.readingMethod = validateAudioString(readingMethod);
     }
 
     /**
@@ -47,6 +74,15 @@ public abstract class MusicMedia {
      * Abstract method void play()
      */
     public abstract void play();
+
+    /**
+     * Override toString
+     * @return title and artist info
+     */
+    @Override
+    public String toString() {
+        return title + " - " + artist;
+    }
 
     // Getters and Setters
     /**
@@ -79,5 +115,13 @@ public abstract class MusicMedia {
      */
     public void setTitle(String title) {
         this.title = validateAudioString(title);
+    }
+
+    /**
+     * Getter readingMethod
+     * @return readingMethod
+     */
+    public String getReadingMethod() {
+        return readingMethod;
     }
 }
