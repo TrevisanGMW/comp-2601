@@ -1,0 +1,8 @@
+largers/smaller for comparable return
+arguments always final
+overtime pay rate could include USD
+argument as a list instead of ArrayList
+Always declar ArrayLists as Lists instead
+Make sure to add else { //do nothing }
+
+Maybe - Initialize objects first, then put it inside of an array later (Verbose)
