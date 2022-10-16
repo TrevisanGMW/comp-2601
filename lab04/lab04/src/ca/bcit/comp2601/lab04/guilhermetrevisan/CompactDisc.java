@@ -9,7 +9,15 @@ package ca.bcit.comp2601.lab04.guilhermetrevisan;
 public class CompactDisc extends MusicMedia {
 
     private int numOfTracks;
-    private static final String READING_METHOD = "laser";
+    private static final int MIN_NUM_TRACKS;
+    private static final int DEFAULT_NUM_TRACKS;
+    private static final String READING_METHOD;
+
+    static{
+        MIN_NUM_TRACKS = 1;
+        DEFAULT_NUM_TRACKS = 1;
+        READING_METHOD = "laser";
+    }
 
     /**
      * CompactDisc Constructor
@@ -20,8 +28,19 @@ public class CompactDisc extends MusicMedia {
     public CompactDisc(final String title,
                        final String artist,
                        final int numOfTracks) {
-        super(title, artist);
+        super(title, artist, READING_METHOD);
         this.numOfTracks = validateNumOfTracks(numOfTracks);
+    }
+
+    /**
+     * CompactDisc Constructor without numOfTracks (one track)
+     * @param title title
+     * @param artist artist
+     */
+    public CompactDisc(final String title,
+                       final String artist) {
+        super(title, artist);
+        this.numOfTracks = DEFAULT_NUM_TRACKS;
     }
 
     /**
@@ -31,7 +50,7 @@ public class CompactDisc extends MusicMedia {
      * @throws IllegalArgumentException if less than zero
      */
     private static int validateNumOfTracks(final int numOfTracks){
-        if(numOfTracks < 0) { // Zero is ok, a disk might be empty
+        if(numOfTracks < MIN_NUM_TRACKS) {
             throw new IllegalArgumentException("Invalid number of tracks. It cannot be less than zero.");
         }
         else {
@@ -58,7 +77,7 @@ public class CompactDisc extends MusicMedia {
 
     // Misc and Overrides
     /**
-     * method void play()
+     * Display "play" message with information about this object
      */
     @Override
     public void play() {
@@ -66,7 +85,7 @@ public class CompactDisc extends MusicMedia {
     }
 
     /**
-     * display the number of tracks, title, and artist
+     * Display the number of tracks, title, and artist
      * @return string following this pattern "Artist - Title (Number of tracks : #)"
      */
     @Override
