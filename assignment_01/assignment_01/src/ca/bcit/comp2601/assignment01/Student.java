@@ -17,5 +17,5 @@ package ca.bcit.comp2601.assignment01;
  * @since 2022-10-10
  */
 
-public class Student {
+public class Student extends Person{
 }

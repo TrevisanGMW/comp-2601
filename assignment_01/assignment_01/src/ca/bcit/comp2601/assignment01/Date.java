@@ -4,51 +4,19 @@ import java.lang.reflect.Array;
 
 /**
  * Date Class
- *
- * This class implements the Orderable and the Comparable interfaces (details below).
- * This class has final instance variables, constructor arguments, and accessor methods for int day, int month,
- * and int year. It has the following methods:
- * public Date(int day, int month, int year): This constructor throws IllegalArgumentException exceptions if the
- * year is 0, if the month is not 1 – 12 (remember, though, to avoid using magic numbers), or if the day is not
- * appropriate for the month (e.g. February has only 28 days, February has 29 days in leap years, March has 31 days,
- * April has 30 days, etc…).
- *
- * public String getYyyyMmDd(): this method returns a String representation of the Date in "yyyy-mm-dd" format
- * (e.g. Christmas Day 2032 returns "2032-12-25").
- * This class overrides the public String toString() method, which returns the value from its own public
- * String getYyyyMmDd() method.
- *
- * public Date previous() and public Date next(): these two methods satisfy the requirements from implementing the
- * Orderable interface. If the current date were January 1 2000, then previous() must return December 31 1999;
- * next() would return January 2 2000, etc….
- *
- * public int compareTo(Date d): this method satisfies the requirements from implementing the Comparable interface.
- * Later dates are "larger".
- *
- * public String getDayOfTheWeek(): this method determines and returns the day of the week for a given date.
- * It must use the algorithm given here. It could be useful to create some private methods (e.g. private int
- * getNumberOfDaysPerMonth(int month, int year), etc…). Here is the algorithm you must implement:
- *
- * This method returns the day of the week (e.g. "Wednesday") for a specified date (e.g. October 31, 2012).
- * It must make use of a private method private boolean isLeapYear() (See: http://en.wikipedia.org/wiki/Leap_year)
- * This method returns true (e.g. for 2000, 2024, 2028, etc…) or false (e.g. for 1900, 2023, etc…) depending on
- * whether a year is a leap year.
- *
- * See PDF for full algorithm description
- *
  * @author Guilherme Trevisan
  * @version 0.0.1
  * @since 2022-10-10
  */
 
-public class Date {
+public class Date implements Orderable, Comparable{
 
     private final int year;
     private final int month;
     private final int day;
 
     private static final int MIN_YEAR = 1;
-    private static final int MIN_MONTH = 0;
+    private static final int MIN_MONTH = 1;
     private static final int MAX_MONTH = 12;
     private static final int MIN_DAY = 1;
     private static final int MAX_DAY_JMMJAOD = 31;
@@ -64,6 +32,7 @@ public class Date {
     private static final int MONTH_NUM_FEBRUARY = 2;
     private static final int NUM_SIX = 6;
     private static final int NUM_TWO = 2;
+    private static final int MONTH_INDEX_OFFICE = -1;
 
     private static final String[] WEEK_DAYS = {"Saturday",
                                                "Sunday",
@@ -91,11 +60,11 @@ public class Date {
      * The constructor allows only years between 1 - CURRENT_YEAR;
      * months 1-12;
      * and days 1-31 (or 30, or 29, or 28: properly)
-     * @param year int year
-     * @param month int month
      * @param day int day
+     * @param month int month
+     * @param year int year
      */
-    public Date(final int year, final int month, final int day)
+    public Date(final int day, final int month, final int year)
     {
         // Year Validation
         if (year >= MIN_YEAR) {
@@ -181,7 +150,7 @@ public class Date {
      * e.g. "January 01, 2022"
      */
     public String getDateAsText() {
-        return MONTHS[month-1] + " " + day + ", " + year;
+        return MONTHS[month+MONTH_INDEX_OFFICE] + " " + day + ", " + year;
     }
 
     /**
@@ -285,5 +254,94 @@ public class Date {
     @Override
     public String toString() {
         return getYyyyMmDd();
+    }
+
+    /**
+     * Catch error?
+     * @return
+     */
+    private static String validate(){
+        if(day < MIN_DAY || day > MAX_DAY_JMMJAOD) {
+            throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
+        }
+        else {
+            int maximumFebruary;
+            if (isLeapYear(year)) {
+                maximumFebruary = MAX_DAY_FEB_LEAP;
+            }
+            else {
+                maximumFebruary = MAX_DAY_FEB_COMMON;
+            }
+            switch (month) {
+                case 4, 6, 9, 11:
+                    if(day > MAX_DAY_AJSN) {
+                        throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
+                    }
+                    break;
+                case 2:
+                    if(day > maximumFebruary) {
+                        throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
+                    }
+                    break;
+                default:
+                    // Do nothing
+            }
+            this.day = day;
+        }
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Orderable next() {
+        Date newDate;
+        newDate = new Date()
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Orderable previous() {
+        return null;
+    }
+
+    /**
+     * Compares this object with the specified object for order.  Returns a
+     * negative integer, zero, or a positive integer as this object is less
+     * than, equal to, or greater than the specified object.
+     *
+     * <p>The implementor must ensure {@link Integer#signum
+     * signum}{@code (x.compareTo(y)) == -signum(y.compareTo(x))} for
+     * all {@code x} and {@code y}.  (This implies that {@code
+     * x.compareTo(y)} must throw an exception if and only if {@code
+     * y.compareTo(x)} throws an exception.)
+     *
+     * <p>The implementor must also ensure that the relation is transitive:
+     * {@code (x.compareTo(y) > 0 && y.compareTo(z) > 0)} implies
+     * {@code x.compareTo(z) > 0}.
+     *
+     * <p>Finally, the implementor must ensure that {@code
+     * x.compareTo(y)==0} implies that {@code signum(x.compareTo(z))
+     * == signum(y.compareTo(z))}, for all {@code z}.
+     *
+     * @param o the object to be compared.
+     * @return a negative integer, zero, or a positive integer as this object
+     * is less than, equal to, or greater than the specified object.
+     * @throws NullPointerException if the specified object is null
+     * @throws ClassCastException   if the specified object's type prevents it
+     *                              from being compared to this object.
+     * @apiNote It is strongly recommended, but <i>not</i> strictly required that
+     * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any
+     * class that implements the {@code Comparable} interface and violates
+     * this condition should clearly indicate this fact.  The recommended
+     * language is "Note: this class has a natural ordering that is
+     * inconsistent with equals."
+     */
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
