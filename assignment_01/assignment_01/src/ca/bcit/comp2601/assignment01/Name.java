@@ -8,7 +8,6 @@ package ca.bcit.comp2601.assignment01;
  */
 
 public class Name {
-
     private final String first;
     private final String last;
     private static final int FIRST_CHAR_INDEX = 0;
