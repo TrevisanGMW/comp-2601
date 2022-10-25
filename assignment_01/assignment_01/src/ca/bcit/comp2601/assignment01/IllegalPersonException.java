@@ -10,6 +10,11 @@ package ca.bcit.comp2601.assignment01;
  */
 
 public class IllegalPersonException extends RuntimeException {
-
-
+    /**
+     * Passes message to RuntimeException
+     * @param message error message
+     */
+    public IllegalPersonException(String message) {
+        super(message);
+    }
 }
