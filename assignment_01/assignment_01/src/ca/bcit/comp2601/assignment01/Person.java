@@ -2,20 +2,6 @@ package ca.bcit.comp2601.assignment01;
 
 /**
  * Person class
- * This class implements the Comparable interface (details below).
- * This class has instance variables and accessor methods for Date born, Date died, and Name name.
- * It has the following methods:
- * public Person (Date born, Name name): This constructor throws IllegalPersonException exceptions
- *                                       if either born or name is null.
- * public void die(Date dateOfDeath): this method sets the died instance variable to the dateOfDeath provided.
- * public boolean isAlive(): this method returns true if the Person is alive; otherwise returns false.
- * public int compareTo(Person p): this method satisfies the requirements from implementing the Comparable interface.
- * Younger people are "larger". Note: this method must use its born variable's compareTo(Date d) method.
- * This class overrides the public String toString() method, which returns a String in one of these two exact formats:
- * a) Alive people example: "Tiger Woods was born 1975-12-30 and is still alive"
- * b) Dead people example: "Albert Einstein was born 1879-03-14 and died 1955-04-18"
- * Use the name variable's getPrettyName() method, and the born/died getYyyyMmDd() method.
- *
  * @author Guilherme Trevisan
  * @version 0.0.1
  * @since 2022-10-10
@@ -24,33 +10,49 @@ package ca.bcit.comp2601.assignment01;
 public class Person implements Comparable {
     private final Name name;
     private final Date born;
-    private final Date died;
+    private Date died;
+
+    private static final int COMPARABLE_LARGER;
+    private static final int COMPARABLE_EQUAL;
+    private static final int COMPARABLE_SMALLER;
+
+    static {
+        COMPARABLE_LARGER = 1;
+        COMPARABLE_EQUAL = 0;
+        COMPARABLE_SMALLER = -1;
+    }
 
     /**
+     * Default constructor to create a person
      * @param name Name object
-     * @param born Date object for the birth date
-     * @param died (can be null)
-     * @throws IllegalArgumentException if any arguments are invalid
+     * @param born Date object for the birthdate
+     * @throws IllegalPersonException if any arguments are invalid
      */
-    public Person(Name name, Date born, Date died)
-    {
-        if (name != null)
-        {
+    public Person(Date born, Name name) {
+        if (name != null) {
             this.name = name;
         }
-        else
-        {
-            throw new IllegalArgumentException("Invalid argument. Name cannot be null.");
+        else {
+            throw new IllegalPersonException("Invalid argument. Name cannot be null.");
         }
 
-        if (born != null)
-        {
+        if (born != null) {
             this.born = born;
         }
-        else
-        {
-            throw new IllegalArgumentException("Invalid argument. birthDate cannot be null.");
+        else {
+            throw new IllegalPersonException("Invalid argument. birthDate cannot be null.");
         }
+    }
+
+    /**
+     * Dead person constructor
+     * @param born when the person was born
+     * @param name person's name
+     * @param died Date when the person died (can be null in case it hasn't happened)
+     * @throws IllegalPersonException if any arguments are invalid
+     */
+    public Person(Date born, Name name, Date died) {
+        this(born, name);
         this.died = died;
     }
 
@@ -60,17 +62,14 @@ public class Person implements Comparable {
      *  "Albert Einstein (died monday, April 18, 1955) was born on friday, March 14, 1879!”
      * @return String following the format mentioned above
      */
-    public String getDetails()
-    {
+    public String getDetails() {
         String result;
         String livingCondition;
 
-        if (isAlive())
-        {
+        if (isAlive()) {
             livingCondition = "(alive)";
         }
-        else
-        {
+        else {
             livingCondition = "(died " + died.getDayOfTheWeek().toLowerCase() +
                     ", " + died.getDateAsText() +  ")";
         }
@@ -81,10 +80,24 @@ public class Person implements Comparable {
     }
 
     /**
+     * Add a dateOfDeath (Kills the person)
+     * @param dateOfDeath date when the person died
+     * @throws IllegalArgumentException
+     */
+    public void die(Date dateOfDeath){
+        if (name != null) {
+            this.died = dateOfDeath;
+        }
+        else {
+            throw new IllegalPersonException("Invalid date of death. It cannot be null.");
+        }
+    }
+
+    /**
+     * Returns true if the person hasn't died (is still alive)
      * @return true if the person is alive (in case deathDate is not null)
      */
-    public boolean isAlive()
-    {
+    public boolean isAlive() {
         return (this.died == null);
     }
 
@@ -112,40 +125,54 @@ public class Person implements Comparable {
         return died;
     }
 
+    @Override
+    public int compareTo(Person that) {
+        if (this.getBorn() == null && that.getBorn() == null) {
+            // pass
+        } else if (this.getBorn() == null) {
+            return -1;
+        } else if (that.getBorn() == null) {
+            return 1;
+        } else {
+            int bornComparison = this.getBorn().compareTo(that.getBorn());
+            if (bornComparison != 0) {
+                return bornComparison < 0 ? -1 : 1;
+            }
+        }
+
+        if (this.getDied() == null && that.getDied() == null) {
+            return 0;
+        } else if (this.getDied() == null) {
+            return -1;
+        } else if (that.getDied() == null) {
+            return 1;
+        } else {
+            return this.getDied().compareTo(that.getDied());
+        }
+    }
+
+    //public int compareTo(Person p): this method satisfies the requirements from implementing the Comparable interface. Younger people are "larger". Note: this method must use its born variable's compareTo(Date d) method.
     /**
-     * Compares this object with the specified object for order.  Returns a
-     * negative integer, zero, or a positive integer as this object is less
-     * than, equal to, or greater than the specified object.
-     *
-     * <p>The implementor must ensure {@link Integer#signum
-     * signum}{@code (x.compareTo(y)) == -signum(y.compareTo(x))} for
-     * all {@code x} and {@code y}.  (This implies that {@code
-     * x.compareTo(y)} must throw an exception if and only if {@code
-     * y.compareTo(x)} throws an exception.)
-     *
-     * <p>The implementor must also ensure that the relation is transitive:
-     * {@code (x.compareTo(y) > 0 && y.compareTo(z) > 0)} implies
-     * {@code x.compareTo(z) > 0}.
-     *
-     * <p>Finally, the implementor must ensure that {@code
-     * x.compareTo(y)==0} implies that {@code signum(x.compareTo(z))
-     * == signum(y.compareTo(z))}, for all {@code z}.
-     *
+     * Override compareTo
      * @param o the object to be compared.
-     * @return a negative integer, zero, or a positive integer as this object
-     * is less than, equal to, or greater than the specified object.
-     * @throws NullPointerException if the specified object is null
-     * @throws ClassCastException   if the specified object's type prevents it
-     *                              from being compared to this object.
-     * @apiNote It is strongly recommended, but <i>not</i> strictly required that
-     * {@code (x.compareTo(y)==0) == (x.equals(y))}.  Generally speaking, any
-     * class that implements the {@code Comparable} interface and violates
-     * this condition should clearly indicate this fact.  The recommended
-     * language is "Note: this class has a natural ordering that is
-     * inconsistent with equals."
+     * @return
      */
     @Override
     public int compareTo(Object o) {
-        return 0;
+        if (o == null){
+            return COMPARABLE_SMALLER;
+        }
+        else if (this == o){
+            return COMPARABLE_EQUAL;
+        }
+        else if (o instanceof Person){
+            Person p1;
+            p1 = (Person)o;
+            if (this.getBorn().compareTo(p1.getBorn())){
+
+            }
+        }
+        return COMPARABLE_EQUAL;
     }
+
 }
