@@ -20,4 +20,13 @@ package ca.bcit.comp2601.assignment01;
  */
 
 public class Teacher extends Person{
+    /**
+     * @param name Name object
+     * @param born Date object for the birth date
+     * @param died (can be null)
+     * @throws IllegalArgumentException if any arguments are invalid
+     */
+    public Teacher(Name name, Date born, Date died) {
+        super(name, born, died);
+    }
 }
