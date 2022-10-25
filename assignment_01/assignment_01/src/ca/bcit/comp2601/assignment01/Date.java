@@ -13,6 +13,10 @@ import java.util.Arrays;
 
 public class Date implements Orderable, Comparable {
 
+    private final int year;
+    private final int month;
+    private final int day;
+
     private static final int MIN_YEAR;
     private static final int MIN_MONTH;
     private static final int MAX_MONTH;
@@ -21,8 +25,10 @@ public class Date implements Orderable, Comparable {
     private static final int MAX_DAY_AJSN;
     private static final int MAX_DAY_FEB_COMMON;
     private static final int MAX_DAY_FEB_LEAP;
-    private static final int NUM_TWELVE;
-    private static final int NUM_FOUR;
+    private static final int WEEK_DAY_TWELVES_CHECK;
+    private static final int WEEK_DAY_COUNTERS_START;
+    private static final int WEEK_DAY_FOURS_CHECK;
+    private static final int WEEK_DAY_SUBSTRING_EXTRACTION;
     private static final int YEAR_RANGE_NO_MOD;
     private static final int YEAR_RANGE_MOD_SIX;
     private static final int YEAR_RANGE_MOD_TWO;
@@ -38,6 +44,9 @@ public class Date implements Orderable, Comparable {
     private static final int LEAP_NEGATIVE_RESULT;
     private static final int ORDERABLE_NEXT_OFFSET;
     private static final int ORDERABLE_PREVIOUS_OFFSET;
+    private static final int COMPARABLE_LARGER;
+    private static final int COMPARABLE_EQUAL;
+    private static final int COMPARABLE_SMALLER;
     private static final int[] WEEKDAY_MODIFIERS_JFMAMJJASOND;
     private static final int[] MONTHS_LOW_MAX_DAYS;
     private static final String[] WEEK_DAYS;
@@ -52,8 +61,10 @@ public class Date implements Orderable, Comparable {
         MAX_DAY_AJSN = 30;
         MAX_DAY_FEB_COMMON = 28;
         MAX_DAY_FEB_LEAP = MAX_DAY_FEB_COMMON + 1;
-        NUM_TWELVE = 12;
-        NUM_FOUR = 4;
+        WEEK_DAY_TWELVES_CHECK = 12;
+        WEEK_DAY_COUNTERS_START = 0;
+        WEEK_DAY_FOURS_CHECK = 4;
+        WEEK_DAY_SUBSTRING_EXTRACTION = 2;
         YEAR_RANGE_NO_MOD = 1900;
         YEAR_RANGE_MOD_SIX = 2000;
         YEAR_RANGE_MOD_TWO = 1800;
@@ -69,6 +80,9 @@ public class Date implements Orderable, Comparable {
         LEAP_NEGATIVE_RESULT = 0;
         ORDERABLE_NEXT_OFFSET = 1;
         ORDERABLE_PREVIOUS_OFFSET = -1;
+        COMPARABLE_LARGER = 1;
+        COMPARABLE_EQUAL = 0;
+        COMPARABLE_SMALLER = -1;
         WEEK_DAYS = new String[]{"Saturday",
                 "Sunday",
                 "Monday",
@@ -92,10 +106,6 @@ public class Date implements Orderable, Comparable {
         MONTHS_LOW_MAX_DAYS = new int[]{4, 6, 9, 11};
 
     }
-
-    private final int year;
-    private final int month;
-    private final int day;
 
     /**
      * The constructor allows only years between 1 - CURRENT_YEAR;
@@ -214,7 +224,7 @@ public class Date implements Orderable, Comparable {
      * @param year year used to check (leap years are different)
      * @return maximum day for the provided month
      */
-    private static int getMaxDayFromMonth(final int month, final int year) {
+    private static int getNumberOfDaysPerMonth(final int month, final int year) {
 
         int maximumFebruary;
         if (isLeapYear(year)) {
@@ -261,7 +271,8 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * @return String date formatted as YYYY-MM-DD
+     * Get YYYY-MM-DD format
+     * @return String date formatted as YYYY-MM-DD (2022-01-01)
      * e.g. 2022-01-01
      */
     public String getYyyyMmDd() {
@@ -296,25 +307,24 @@ public class Date implements Orderable, Comparable {
             numModifier = numModifier + YEAR_RANGE_MOD_SIX_RESULT;
         }
 
-
-        int lastTwoDigits = Integer.parseInt(Integer.toString(year).substring(2));
+        int lastTwoDigits = Integer.parseInt(Integer.toString(year).substring(WEEK_DAY_SUBSTRING_EXTRACTION));
 
         // step 1: calculate the number of twelves in 77: 6
-        int numberOfTwelves = 0;
+        int numberOfTwelves = WEEK_DAY_COUNTERS_START;
         int lastTwoDigitsCount = lastTwoDigits;
-        while (lastTwoDigitsCount >= NUM_TWELVE) {
-            lastTwoDigitsCount = lastTwoDigitsCount - NUM_TWELVE;
+        while (lastTwoDigitsCount >= WEEK_DAY_TWELVES_CHECK) {
+            lastTwoDigitsCount = lastTwoDigitsCount - WEEK_DAY_TWELVES_CHECK;
             numberOfTwelves++;
         }
 
         // step 2: calculate the remainder from step 1: 77 - 12*6 = 77 - 72 = 5
-        int remainder = lastTwoDigits % NUM_TWELVE;
+        int remainder = lastTwoDigits % WEEK_DAY_TWELVES_CHECK;
 
         // step 3: calculate the number of fours in step 2: 5/4 = 1.25, so 1
-        int numberOfFours = 0;
+        int numberOfFours = WEEK_DAY_COUNTERS_START;
         int remainderCount = remainder;
-        while (remainderCount >= NUM_FOUR) {
-            remainderCount = remainderCount - NUM_FOUR;
+        while (remainderCount >= WEEK_DAY_FOURS_CHECK) {
+            remainderCount = remainderCount - WEEK_DAY_FOURS_CHECK;
             numberOfFours++;
         }
 
@@ -332,8 +342,7 @@ public class Date implements Orderable, Comparable {
 
     /**
      * Override toString to return getYyyyMmDd
-     *
-     * @return
+     * @return String date formatted as YYYY-MM-DD (2022-01-01)
      */
     @Override
     public String toString() {
@@ -341,7 +350,8 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * @return
+     * Next returns the next date, for example 2022-01-02 becomes 2022-01-03
+     * @return the next date
      */
     @Override
     public Date next() {
@@ -359,7 +369,9 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * @return
+     * Previous returns previous date, for example 2022-01-02 becomes 2022-01-01
+     * @return previous date
+     * @throws IllegalArgumentException in case the previous year ends up being less than 0
      */
     @Override
     public Date previous() {
@@ -368,7 +380,7 @@ public class Date implements Orderable, Comparable {
             previousDate = new Date(getDay() + ORDERABLE_PREVIOUS_OFFSET, getMonth(), getYear());
         } catch (Exception eOne) {
             try {
-                previousDate = new Date(getMaxDayFromMonth(getMonth() + ORDERABLE_PREVIOUS_OFFSET, getYear()),
+                previousDate = new Date(getNumberOfDaysPerMonth(getMonth() + ORDERABLE_PREVIOUS_OFFSET, getYear()),
                         getMonth() + ORDERABLE_PREVIOUS_OFFSET, getYear());
             } catch (Exception eTwo) {
                 previousDate = new Date(MAX_DAY_JMMJAOD, MAX_MONTH, getYear() + ORDERABLE_PREVIOUS_OFFSET);
@@ -378,11 +390,42 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * @param o the object to be compared.
-     * @return
+     * Compares dates
+     * @param d (aka "that") another Date object to compare with current (this)
+     * @return later dates are larger
+     */
+    @Override
+    public int compareTo(Date d) {
+        if (this.getYear() != d.getYear()) {
+            return (this.getYear() < d.getYear() ? COMPARABLE_SMALLER : COMPARABLE_LARGER);
+        }
+
+        if (this.getMonth() != d.getMonth()) {
+            return (this.getMonth() < d.getMonth() ? COMPARABLE_SMALLER : COMPARABLE_LARGER);
+        }
+
+        if (this.getDay() != d.getDay()) {
+            return (this.getDay() < d.getDay() ? COMPARABLE_SMALLER : COMPARABLE_LARGER);
+        }
+
+        return COMPARABLE_EQUAL;
+    }
+
+    /**
+     * Default compareTo override
+     * @param o the object to be compared (Date objects)
+     * @return larger if later date, equal if different objects or incompatible
      */
     @Override
     public int compareTo(Object o) {
-        return 0;
+        try{
+            Date d1;
+            d1 = (Date)o;
+            return compareTo(d1);
+        }
+        catch (Exception e){
+            return COMPARABLE_EQUAL;
+        }
+
     }
 }
