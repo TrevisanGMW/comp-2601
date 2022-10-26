@@ -57,6 +57,20 @@ public class Person implements Comparable {
     }
 
     /**
+     * Potentially Dead person constructor
+     * @param born when the person was born
+     * @param name person's name
+     * @param died Date when the person died (can be null in case it hasn't happened)
+     * @throws IllegalPersonException if any arguments are invalid
+     */
+    public Person(Date born, Name name, Object died) {
+        this(born, name);
+        if (died != null && died instanceof Date){
+            this.died = (Date) died;
+        }
+    }
+
+    /**
      *  Returns customized sentence with details about the person
      *  "Tiger Woods (alive) was born on tuesday, December 30, 1975!"
      *  "Albert Einstein (died monday, April 18, 1955) was born on friday, March 14, 1879!”
@@ -113,7 +127,7 @@ public class Person implements Comparable {
      * Getter birthDate
      * @return birthDate
      */
-    public Date getBorn() {
+    public Date getDateOfBirth() {
         return born;
     }
 
@@ -121,41 +135,50 @@ public class Person implements Comparable {
      * Getter deathDate
      * @return deathDate
      */
-    public Date getDied() {
+    public Date getDateOfDeath() {
         return died;
     }
 
+    /**
+     * returns a String in one of these two exact formats:
+     * Alive people example: "Tiger Woods was born 1975-12-30 and is still alive"
+     * Dead people example: "Albert Einstein was born 1879-03-14 and died 1955-04-18"
+     * @return formatted string
+     */
     @Override
-    public int compareTo(Person that) {
-        if (this.getBorn() == null && that.getBorn() == null) {
-            // pass
-        } else if (this.getBorn() == null) {
-            return -1;
-        } else if (that.getBorn() == null) {
-            return 1;
-        } else {
-            int bornComparison = this.getBorn().compareTo(that.getBorn());
-            if (bornComparison != 0) {
-                return bornComparison < 0 ? -1 : 1;
-            }
-        }
-
-        if (this.getDied() == null && that.getDied() == null) {
-            return 0;
-        } else if (this.getDied() == null) {
-            return -1;
-        } else if (that.getDied() == null) {
-            return 1;
-        } else {
-            return this.getDied().compareTo(that.getDied());
-        }
+    public String toString() {
+        return getDetails();
     }
 
-    //public int compareTo(Person p): this method satisfies the requirements from implementing the Comparable interface. Younger people are "larger". Note: this method must use its born variable's compareTo(Date d) method.
+    /**
+     * compareTo for person specifically (not an override)
+     * @param that a person to compare with this
+     * @return positive
+     */
+    public int compareTo(Person that) {
+        if (this.getDateOfBirth() == null && that.getDateOfBirth() == null) {
+            // pass
+        } else if (this.getDateOfBirth() == null) {
+            return COMPARABLE_SMALLER;
+        } else if (that.getDateOfBirth() == null) {
+            return COMPARABLE_LARGER;
+        } else {
+            int bornComparison = this.getDateOfBirth().compareTo(that.getDateOfBirth());
+            if (bornComparison != 0) {
+                return bornComparison < COMPARABLE_EQUAL ? COMPARABLE_SMALLER : COMPARABLE_LARGER;
+            } else {
+                // Do nothing
+            }
+        }
+        return COMPARABLE_EQUAL;
+    }
+
+    //public int compareTo(Person p): this method satisfies the requirements from implementing the Comparable interface.
+    // Younger people are "larger". Note: this method must use its born variable's compareTo(Date d) method.
     /**
      * Override compareTo
      * @param o the object to be compared.
-     * @return
+     * @return larger if younger
      */
     @Override
     public int compareTo(Object o) {
@@ -168,11 +191,10 @@ public class Person implements Comparable {
         else if (o instanceof Person){
             Person p1;
             p1 = (Person)o;
-            if (this.getBorn().compareTo(p1.getBorn())){
-
-            }
+            return this.compareTo(p1);
+        } else {
+            return COMPARABLE_EQUAL;
         }
-        return COMPARABLE_EQUAL;
     }
 
 }
