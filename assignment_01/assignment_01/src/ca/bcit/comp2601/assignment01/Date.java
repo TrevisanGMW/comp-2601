@@ -390,11 +390,10 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * Compares dates
+     * Compares dates (not an override, just a method for the compareTo object)
      * @param d (aka "that") another Date object to compare with current (this)
      * @return later dates are larger
      */
-    @Override
     public int compareTo(Date d) {
         if (this.getYear() != d.getYear()) {
             return (this.getYear() < d.getYear() ? COMPARABLE_SMALLER : COMPARABLE_LARGER);
@@ -407,7 +406,6 @@ public class Date implements Orderable, Comparable {
         if (this.getDay() != d.getDay()) {
             return (this.getDay() < d.getDay() ? COMPARABLE_SMALLER : COMPARABLE_LARGER);
         }
-
         return COMPARABLE_EQUAL;
     }
 
@@ -418,14 +416,18 @@ public class Date implements Orderable, Comparable {
      */
     @Override
     public int compareTo(Object o) {
-        try{
+        if (o == null){
+            return COMPARABLE_SMALLER;
+        }
+        else if (this == o){
+            return COMPARABLE_EQUAL;
+        }
+        if (o instanceof Date){
             Date d1;
             d1 = (Date)o;
             return compareTo(d1);
-        }
-        catch (Exception e){
+        } else {
             return COMPARABLE_EQUAL;
         }
-
     }
 }
