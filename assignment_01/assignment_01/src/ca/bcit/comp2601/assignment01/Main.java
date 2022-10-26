@@ -30,12 +30,16 @@ public class Main {
         dates.add(d2);
         dates.add(d3);
         dates.add(d4);
-        dates.forEach(System.out::println);
+//        dates.forEach(System.out::println);
         System.out.println("______");
 
         Collections.sort(dates);
-        dates.forEach(System.out::println); // TODO, CHECK IF FOLLOWS HIS DESIRED PATTERN
+//        dates.forEach(System.out::println); // TODO, CHECK IF FOLLOWS HIS DESIRED PATTERN
 
+        Teacher s;
+        Date born = new Date(30, 12, 1975);
+        Name name = new Name("tiGer", "woODs");
+        s = new Teacher(born, name, "    ");
 
     }
 }
