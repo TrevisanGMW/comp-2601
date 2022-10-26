@@ -18,13 +18,40 @@ package ca.bcit.comp2601.assignment01;
  */
 
 public class Student extends Person{
-    /**
-     * @param name Name object
-     * @param born Date object for the birth date
-     * @param died (can be null)
-     * @throws IllegalArgumentException if any arguments are invalid
-     */
-    public Student(Date born, Name name, Object died) {
-        super(born, name, died);
+
+    private final String studentNumber;
+    private static final int LENGTH_STUDENT_NUM;
+
+    static {
+        LENGTH_STUDENT_NUM = 9;
     }
+
+    /**
+     *
+     * @param born
+     * @param name person's name
+     * @param studentNumber a student number composed of 9 characters
+     */
+    public Student (Date born, Name name, String studentNumber){
+        super(born, name);
+        if (studentNumber == null || studentNumber.isBlank()){
+            throw new IllegalPersonException("Invalid student number. Cannot be null or blank");
+        } else if (studentNumber.length() != LENGTH_STUDENT_NUM){
+            throw new IllegalPersonException("Invalid student number. Must be composed of 9 characters");
+        } else {
+            this.studentNumber = studentNumber;
+        }
+    }
+
+
+
+
+    /**
+     *
+     * @return
+     */
+    public String getStudentNumber(){
+
+    }
+
 }
