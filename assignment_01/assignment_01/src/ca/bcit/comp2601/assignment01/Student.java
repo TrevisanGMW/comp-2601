@@ -24,7 +24,7 @@ public class Student extends Person{
      * @param died (can be null)
      * @throws IllegalArgumentException if any arguments are invalid
      */
-    public Student(Name name, Date born, Date died) {
-        super(name, born, died);
+    public Student(Date born, Name name, Object died) {
+        super(born, name, died);
     }
 }
