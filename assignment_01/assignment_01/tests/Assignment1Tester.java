@@ -1,5 +1,3 @@
-package ca.bcit.comp2601.assignment01;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
 
 
 public class Assignment1Tester
@@ -582,13 +581,13 @@ public class Assignment1Tester
         {
             String fileContent = Files.readString(Path.of("people.txt"), StandardCharsets.UTF_8);
             //System.out.println("STRING content is " + fileContent);
-            if(!fileContent.equals("Tiger Woods (T.W.) was born on Tuesday 1975-12-30.System.lineSeparator()" +
-                    "Albert Einstein (A.E.) was born on Friday 1879-03-14 and died on Monday 1955-04-18.System.lineSeparator()" +
-                    "Elon Musk (E.M.) was born on Monday 1971-06-28.System.lineSeparator()" +
-                    "Bruce Lee (B.L.) was born on Wednesday 1940-11-27 and died on Friday 1973-07-20.System.lineSeparator()" +
-                    "Oprah Winfrey (O.W.) was born on Friday 1954-01-29.System.lineSeparator()" +
-                    "Srinivasa Ramanujan (S.R.) was born on Thursday 1887-12-22 and died on Monday 1920-04-26.System.lineSeparator()" +
-                    "Wayne Gretzky (W.G.) was born on Thursday 1961-01-26.System.lineSeparator()"))
+            if(!fileContent.equals("Tiger Woods (T.W.) was born on Tuesday 1975-12-30."+System.lineSeparator() +
+                    "Albert Einstein (A.E.) was born on Friday 1879-03-14 and died on Monday 1955-04-18."+System.lineSeparator() +
+                    "Elon Musk (E.M.) was born on Monday 1971-06-28."+System.lineSeparator() +
+                    "Bruce Lee (B.L.) was born on Wednesday 1940-11-27 and died on Friday 1973-07-20."+System.lineSeparator() +
+                    "Oprah Winfrey (O.W.) was born on Friday 1954-01-29."+System.lineSeparator() +
+                    "Srinivasa Ramanujan (S.R.) was born on Thursday 1887-12-22 and died on Monday 1920-04-26."+System.lineSeparator() +
+                    "Wayne Gretzky (W.G.) was born on Thursday 1961-01-26."+System.lineSeparator()))
             {
                 System.out.println("School saveDetails implementation is wrong: code 1");
                 return;
