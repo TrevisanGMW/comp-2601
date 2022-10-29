@@ -81,15 +81,14 @@ public class Person implements Comparable {
         String livingCondition;
 
         if (isAlive()) {
-            livingCondition = "(alive)";
+            livingCondition = "is still alive";
         }
         else {
-            livingCondition = "(died " + died.getDayOfTheWeek().toLowerCase() +
-                    ", " + died.getDateAsText() +  ")";
+            livingCondition = "died " + died.getYyyyMmDd();
         }
 
-        result = name.getPrettyName() + " " + livingCondition + " was born on " +
-                born.getDayOfTheWeek().toLowerCase() + ", " + born.getDateAsText() + "!";
+        result = name.getPrettyName() + " was born " +
+                born.getYyyyMmDd() + " and " + livingCondition;
         return result;
     }
 

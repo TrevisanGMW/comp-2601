@@ -2,21 +2,10 @@ package ca.bcit.comp2601.assignment01;
 
 /**
  * Student class
- * This class extends the Person class. It also has an additional instance variable and its accessor method:
- * String studentNumber and public String getStudentNumber().
- * public Student (Date born, Name name, String studentNumber): This constructor throws IllegalPersonException
- * exceptions if born or name is null; also, it throws IllegalPersonException exceptions if studentNumber is null,
- * blank, or not nine characters long.
- * This class overrides the public String toString() method, which returns a String in one of these two exact formats:
- * a) Alive people example: "Tiger Woods (student number: A12345678) was born 1975-12-30 and is still alive"
- * b) Dead people example: "Albert Einstein (student number: A87654321) was born 1879-03-14 and died 1955-04-18"
- * Use the parent's getName() return value, then its getPrettyName() method, and the born/died getYyyyMmDd() method.
- *
  * @author Guilherme Trevisan
  * @version 0.0.1
  * @since 2022-10-10
  */
-
 public class Student extends Person{
 
     private final String studentNumber;
@@ -27,10 +16,11 @@ public class Student extends Person{
     }
 
     /**
-     *
-     * @param born
+     * Student Constructor
+     * @param born date when the student was born
      * @param name person's name
      * @param studentNumber a student number composed of 9 characters
+     * @throws IllegalPersonException if arguments are invalid (student number must be 9 characters)
      */
     public Student (Date born, Name name, String studentNumber){
         super(born, name);
@@ -43,15 +33,34 @@ public class Student extends Person{
         }
     }
 
-
-
-
     /**
-     *
-     * @return
+     * Getter getStudentNumber
+     * @return getStudentNumber (composed of 9 characters)
      */
-    public String getStudentNumber(){
-
+    public String getStudentNumber() {
+        return studentNumber;
     }
 
+    /**
+     * Alive people example: "Tiger Woods (student number: A12345678) was born 1975-12-30 and is still alive"
+     * Dead people example: "Albert Einstein (student number: A87654321) was born 1879-03-14 and died 1955-04-18"
+     * @return formatted
+     */
+    @Override
+    public String toString() {
+        String result;
+        String livingCondition;
+        String studentInformation;
+        studentInformation = "(student number:" + studentNumber.toUpperCase() + ")";
+        if (isAlive()) {
+            livingCondition = "is still alive";
+        }
+        else {
+            livingCondition = "died " + getDateOfDeath().getYyyyMmDd();
+        }
+
+        result = getName().getPrettyName() + studentInformation + " was born " +
+                getDateOfBirth().getYyyyMmDd() + " and " + livingCondition;
+        return result;
+    }
 }

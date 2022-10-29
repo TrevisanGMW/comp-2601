@@ -18,5 +18,5 @@ public interface Writeable {
      * @param min minimum value
      * @param max maximum value
      */
-    public void printDate(String s, int min, int max);
+    public void printData(String s, int min, int max);
 }
