@@ -5,12 +5,10 @@ import java.util.Arrays;
 
 /**
  * Date Class
- *
  * @author Guilherme Trevisan
  * @version 0.0.1
  * @since 2022-10-10
  */
-
 public class Date implements Orderable, Comparable {
 
     private final int year;
@@ -25,20 +23,26 @@ public class Date implements Orderable, Comparable {
     private static final int MAX_DAY_AJSN;
     private static final int MAX_DAY_FEB_COMMON;
     private static final int MAX_DAY_FEB_LEAP;
-    private static final int WEEK_DAY_TWELVES_CHECK;
-    private static final int WEEK_DAY_COUNTERS_START;
-    private static final int WEEK_DAY_FOURS_CHECK;
-    private static final int WEEK_DAY_SUBSTRING_EXTRACTION;
-    private static final int WEEK_DAY_MOD_VALUE;
-    private static final int YEAR_RANGE_NO_MOD;
-    private static final int YEAR_RANGE_MOD_SIX;
-    private static final int YEAR_RANGE_MOD_TWO;
+    private static final int WEEKDAY_TWELVES_CHECK;
+    private static final int WEEKDAY_COUNTERS_START;
+    private static final int WEEKDAY_FOURS_CHECK;
+    private static final int WEEKDAY_SUBSTRING_EXTRACTION;
+    private static final int WEEKDAY_MOD_OPERATION_VALUE;
+    private static final int SEVENTEENTH_CENTURY_START;
+    private static final int EIGHTEENTH_CENTURY_START;
+    private static final int NINETEENTH_CENTURY_START;
+    private static final int TWENTIETH_CENTURY_START;
+    private static final int TWENTY_FIRST_CENTURY_START;
+    private static final int TWENTY_SECOND_CENTURY_START;
     private static final int MONTH_NUM_JANUARY;
     private static final int MONTH_NUM_FEBRUARY;
-    private static final int YEAR_RANGE_MOD_SIX_RESULT;
-    private static final int YEAR_RANGE_NO_MOD_RESULT;
+    private static final int MODIFIER_SEVENTEENTH_EIGHTEENTH;
+    private static final int MODIFIER_EIGHTEENTH_NINETEENTH;
+    private static final int MODIFIER_NINETEENTH_TWENTIETH;
+    private static final int MODIFIER_TWENTIETH_FIRST_SECOND;
+    private static final int MODIFIER_TWENTY_SECOND_AHEAD;
     private static final int MONTH_INDEX_OFFSET;
-    private static final int WEEKDAY_DEFAULT_MODIFIER;
+    private static final int MODIFIER_DEFAULT_VALUE;
     private static final int LEAP_DIVISIBLE_CONDITION_ONE;
     private static final int LEAP_DIVISIBLE_CONDITION_TWO;
     private static final int LEAP_CENTURY_CHECK;
@@ -62,20 +66,26 @@ public class Date implements Orderable, Comparable {
         MAX_DAY_AJSN = 30;
         MAX_DAY_FEB_COMMON = 28;
         MAX_DAY_FEB_LEAP = MAX_DAY_FEB_COMMON + 1;
-        WEEK_DAY_TWELVES_CHECK = 12;
-        WEEK_DAY_COUNTERS_START = 0;
-        WEEK_DAY_FOURS_CHECK = 4;
-        WEEK_DAY_SUBSTRING_EXTRACTION = 2;
-        WEEK_DAY_MOD_VALUE = 7;
-        YEAR_RANGE_NO_MOD = 1900;
-        YEAR_RANGE_MOD_SIX = 2000;
-        YEAR_RANGE_MOD_TWO = 1800;
+        WEEKDAY_TWELVES_CHECK = 12;
+        WEEKDAY_COUNTERS_START = 0;
+        WEEKDAY_FOURS_CHECK = 4;
+        WEEKDAY_SUBSTRING_EXTRACTION = 2;
+        WEEKDAY_MOD_OPERATION_VALUE = 7;
+        SEVENTEENTH_CENTURY_START = 1600;
+        EIGHTEENTH_CENTURY_START = 1700;
+        NINETEENTH_CENTURY_START = 1800;
+        TWENTIETH_CENTURY_START = 1900;
+        TWENTY_FIRST_CENTURY_START = 2000;
+        TWENTY_SECOND_CENTURY_START = 2100;
         MONTH_NUM_JANUARY = 1;
         MONTH_NUM_FEBRUARY = 2;
-        YEAR_RANGE_MOD_SIX_RESULT = 6;
-        YEAR_RANGE_NO_MOD_RESULT = 2;
+        MODIFIER_SEVENTEENTH_EIGHTEENTH = 6;
+        MODIFIER_EIGHTEENTH_NINETEENTH = 4;
+        MODIFIER_NINETEENTH_TWENTIETH = 2;
+        MODIFIER_TWENTIETH_FIRST_SECOND = 6;
+        MODIFIER_TWENTY_SECOND_AHEAD = 4;
         MONTH_INDEX_OFFSET = -1;
-        WEEKDAY_DEFAULT_MODIFIER = 0;
+        MODIFIER_DEFAULT_VALUE = 0;
         LEAP_DIVISIBLE_CONDITION_ONE = 4;
         LEAP_DIVISIBLE_CONDITION_TWO = 400;
         LEAP_CENTURY_CHECK = 100;
@@ -86,37 +96,35 @@ public class Date implements Orderable, Comparable {
         COMPARABLE_EQUAL = 0;
         COMPARABLE_SMALLER = -1;
         WEEK_DAYS = new String[]{"Saturday",
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday"};
+                                 "Sunday",
+                                 "Monday",
+                                 "Tuesday",
+                                 "Wednesday",
+                                 "Thursday",
+                                 "Friday"};
         MONTHS = new String[]{"January", // 1
-                "February", // 2
-                "March", // 3
-                "April", // 4
-                "May", // 5
-                "June", // 6
-                "July", // 7
-                "August", // 8
-                "September", // 9
-                "October", // 10
-                "November", // 11
-                "December"}; // 12
+                              "February", // 2
+                              "March", // 3
+                              "April", // 4
+                              "May", // 5
+                              "June", // 6
+                              "July", // 7
+                              "August", // 8
+                              "September", // 9
+                              "October", // 10
+                              "November", // 11
+                              "December"}; // 12
         WEEKDAY_MODIFIERS_JFMAMJJASOND = new int[]{0, 1, 4, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6};
         MONTHS_LOW_MAX_DAYS = new int[]{4, 6, 9, 11};
-
     }
 
     /**
-     * The constructor allows only years between 1 - CURRENT_YEAR;
+     * The constructor allows only years above one;
      * months 1-12;
      * and days 1-31 (or 30, or 29, or 28: properly)
-     *
-     * @param day   int day
-     * @param month int month
-     * @param year  int year
+     * @param day   day number
+     * @param month month number
+     * @param year  year number (cannot be zero)
      */
     public Date(final int day, final int month, final int year) {
         // Year Validation
@@ -130,7 +138,8 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * @param year int year to be tested as leap year
+     * Checks if year is a leap year or not
+     * @param year year to be tested as leap year
      * @return boolean if it's a leap year, it returns true, else false
      */
     private static boolean isLeapYear(int year) {
@@ -139,14 +148,12 @@ public class Date implements Orderable, Comparable {
         if (year % LEAP_DIVISIBLE_CONDITION_ONE == LEAP_NEGATIVE_RESULT) {
             // if the year is century
             if (year % LEAP_CENTURY_CHECK == LEAP_NEGATIVE_RESULT) {
-                // if year is divided by 400
-                // then it is a leap year
+                // if year is divided by 400 -> then it is a leap year
                 if (year % LEAP_DIVISIBLE_CONDITION_TWO == LEAP_NEGATIVE_RESULT)
                     isLeap = true;
                 else
                     isLeap = false;
             }
-
             // if the year is not century
             else
                 isLeap = true;
@@ -158,7 +165,6 @@ public class Date implements Orderable, Comparable {
 
     /**
      * Validates year input
-     *
      * @param year year number (needs to be more than zero)
      * @return valid year
      */
@@ -209,10 +215,8 @@ public class Date implements Orderable, Comparable {
                 if (day > MAX_DAY_AJSN) {
                     throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
                 }
-                } else if (MONTH_NUM_FEBRUARY == month) {
-                if (day > maximumFebruary) {
-                    throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
-                }
+            } else if (MONTH_NUM_FEBRUARY == month && day > maximumFebruary) {
+                throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
             }
             return day;
         }
@@ -220,6 +224,7 @@ public class Date implements Orderable, Comparable {
 
     /**
      * Method to check if an int array contains a specified value
+     * (I know this would likely live inside a utility class, but I kept it here to save time)
      * @param arr array to check
      * @param key value to look for
      * @return true if it contains
@@ -295,46 +300,67 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
+     * Gets the modifier necessary to calculate weekday (Separated into another function to reduce complexity)
+     * All dates in the 1600s: add 6
+     * All dates in the 1700s: add 4
+     * All dates in the 1800s: add 2
+     * All dates in the 2000s: add 6
+     * All dates in the 2100s: add 4
+     * @param month month number
+     * @param year year number
+     * @return correct modifier
+     */
+    private static int getWeekdayModifier(final int month, final int year){
+        int numModifier;
+        if (year >= SEVENTEENTH_CENTURY_START && year < EIGHTEENTH_CENTURY_START) { // 1600 to 1700
+            numModifier = MODIFIER_SEVENTEENTH_EIGHTEENTH;
+        } else if (year >= EIGHTEENTH_CENTURY_START && year < NINETEENTH_CENTURY_START) { // 1700 to 1800
+            numModifier = MODIFIER_EIGHTEENTH_NINETEENTH;
+        } else if (year >= NINETEENTH_CENTURY_START && year < TWENTIETH_CENTURY_START) { // 1800 to 1900
+            numModifier = MODIFIER_NINETEENTH_TWENTIETH;
+        } else if (year >= TWENTIETH_CENTURY_START && year < TWENTY_FIRST_CENTURY_START) { // 1900 to 2000
+            numModifier = MODIFIER_DEFAULT_VALUE;
+        } else if (year >= TWENTY_FIRST_CENTURY_START && year < TWENTY_SECOND_CENTURY_START) { // 2000 to 2100
+            numModifier = MODIFIER_TWENTIETH_FIRST_SECOND;
+        } else if (year >= TWENTY_SECOND_CENTURY_START) { // 2100+
+            numModifier = MODIFIER_TWENTY_SECOND_AHEAD;
+        } else {
+            numModifier = MODIFIER_DEFAULT_VALUE;
+        }
+
+        if (isLeapYear(year) && (month == MONTH_NUM_JANUARY || month == MONTH_NUM_FEBRUARY)){
+            numModifier = numModifier + MODIFIER_SEVENTEENTH_EIGHTEENTH;
+        }
+        return numModifier;
+    }
+
+    /**
      * Getter Day of the Week
      * @return day of the week as text
      * e.g. Monday
      */
     public String getDayOfTheWeek() {
-        int numModifier = WEEKDAY_DEFAULT_MODIFIER;
-        if (year >= YEAR_RANGE_NO_MOD && year < YEAR_RANGE_MOD_SIX) {
-            // Do nothing
-        } else if (year >= YEAR_RANGE_MOD_SIX) {
-            numModifier = YEAR_RANGE_MOD_SIX_RESULT;
-        } else if (year >= YEAR_RANGE_MOD_TWO && year < YEAR_RANGE_NO_MOD) {
-            numModifier = YEAR_RANGE_NO_MOD_RESULT;
-        } else {
-            // Do nothing
-        }
+        int numModifier;
+        numModifier = getWeekdayModifier(month, year);
 
-        if (isLeapYear(year)){
-            if (month == MONTH_NUM_JANUARY || month == MONTH_NUM_FEBRUARY) {
-                numModifier = numModifier + YEAR_RANGE_MOD_SIX_RESULT;
-            }
-        }
-
-        int lastTwoDigits = Integer.parseInt(Integer.toString(year).substring(WEEK_DAY_SUBSTRING_EXTRACTION));
+        int lastTwoDigits = Integer.parseInt(Integer.toString(year).substring(WEEKDAY_SUBSTRING_EXTRACTION));
 
         // Step 1: Only look at the last two digits of the year and determine how many twelves fit in it:
-        int numberOfTwelves = WEEK_DAY_COUNTERS_START;
+        int numberOfTwelves = WEEKDAY_COUNTERS_START;
         int lastTwoDigitsCount = lastTwoDigits;
-        while (lastTwoDigitsCount >= WEEK_DAY_TWELVES_CHECK) {
-            lastTwoDigitsCount = lastTwoDigitsCount - WEEK_DAY_TWELVES_CHECK;
+        while (lastTwoDigitsCount >= WEEKDAY_TWELVES_CHECK) {
+            lastTwoDigitsCount = lastTwoDigitsCount - WEEKDAY_TWELVES_CHECK;
             numberOfTwelves++;
         }
 
         // Step 2: Determine the remainder of step 1's result:
-        int remainder = lastTwoDigits % WEEK_DAY_TWELVES_CHECK;
+        int remainder = lastTwoDigits % WEEKDAY_TWELVES_CHECK;
 
         // Step 3: Determine how many fours fit into the remainder (step 2's result):
-        int numberOfFours = WEEK_DAY_COUNTERS_START;
+        int numberOfFours = WEEKDAY_COUNTERS_START;
         int remainderCount = remainder;
-        while (remainderCount >= WEEK_DAY_FOURS_CHECK) {
-            remainderCount = remainderCount - WEEK_DAY_FOURS_CHECK;
+        while (remainderCount >= WEEKDAY_FOURS_CHECK) {
+            remainderCount = remainderCount - WEEKDAY_FOURS_CHECK;
             numberOfFours++;
         }
 
@@ -343,7 +369,7 @@ public class Date implements Orderable, Comparable {
         int numProcessing = numModifier + day + numberOfTwelves +
                 remainder + numberOfFours + getCodeForMonth(month);
 
-        int numProcessingMod = numProcessing % WEEK_DAY_MOD_VALUE;
+        int numProcessingMod = numProcessing % WEEKDAY_MOD_OPERATION_VALUE;
         // Step 6: Add the numbers, and then mod by 7
 
         // step 7: sat sun mon tue wed thu fri is 0 1 2 3 4 5 6; our number 2 means October 31, 1977 was monday
