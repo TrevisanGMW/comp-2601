@@ -24,10 +24,11 @@ public class Student extends Person{
      */
     public Student (Date born, Name name, String studentNumber){
         super(born, name);
+        String invalidArgumentMessage = "bad student number";
         if (studentNumber == null || studentNumber.isBlank()){
-            throw new IllegalPersonException("Invalid student number. Cannot be null or blank");
+            throw new IllegalPersonException(invalidArgumentMessage);
         } else if (studentNumber.length() != LENGTH_STUDENT_NUM){
-            throw new IllegalPersonException("Invalid student number. Must be composed of 9 characters");
+            throw new IllegalPersonException(invalidArgumentMessage);
         } else {
             this.studentNumber = studentNumber;
         }
@@ -51,7 +52,7 @@ public class Student extends Person{
         String result;
         String livingCondition;
         String studentInformation;
-        studentInformation = "(student number:" + studentNumber.toUpperCase() + ")";
+        studentInformation = " (student number: " + studentNumber.toUpperCase() + ")";
         if (isAlive()) {
             livingCondition = "is still alive";
         }
