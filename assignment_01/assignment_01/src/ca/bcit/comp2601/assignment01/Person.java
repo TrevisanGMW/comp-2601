@@ -33,14 +33,14 @@ public class Person implements Comparable {
             this.name = name;
         }
         else {
-            throw new IllegalPersonException("Invalid argument. Name cannot be null.");
+            throw new IllegalPersonException("invalid name");
         }
 
         if (born != null) {
             this.born = born;
         }
         else {
-            throw new IllegalPersonException("Invalid argument. birthDate cannot be null.");
+            throw new IllegalPersonException("invalid date of birth");
         }
     }
 
