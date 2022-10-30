@@ -29,6 +29,7 @@ public class Date implements Orderable, Comparable {
     private static final int WEEK_DAY_COUNTERS_START;
     private static final int WEEK_DAY_FOURS_CHECK;
     private static final int WEEK_DAY_SUBSTRING_EXTRACTION;
+    private static final int WEEK_DAY_MOD_VALUE;
     private static final int YEAR_RANGE_NO_MOD;
     private static final int YEAR_RANGE_MOD_SIX;
     private static final int YEAR_RANGE_MOD_TWO;
@@ -65,6 +66,7 @@ public class Date implements Orderable, Comparable {
         WEEK_DAY_COUNTERS_START = 0;
         WEEK_DAY_FOURS_CHECK = 4;
         WEEK_DAY_SUBSTRING_EXTRACTION = 2;
+        WEEK_DAY_MOD_VALUE = 7;
         YEAR_RANGE_NO_MOD = 1900;
         YEAR_RANGE_MOD_SIX = 2000;
         YEAR_RANGE_MOD_TWO = 1800;
@@ -164,7 +166,7 @@ public class Date implements Orderable, Comparable {
         if (year >= MIN_YEAR) {
             return year;
         } else {
-            throw new IllegalArgumentException("Invalid year. Value needs to be more than zero.");
+            throw new IllegalArgumentException("invalid year");
         }
     }
 
@@ -178,7 +180,7 @@ public class Date implements Orderable, Comparable {
         if (month >= MIN_MONTH && month <= MAX_MONTH) {
             return month;
         } else {
-            throw new IllegalArgumentException("Invalid month. Value needs to be between 1 and 12");
+            throw new IllegalArgumentException("invalid month");
         }
     }
 
@@ -192,7 +194,7 @@ public class Date implements Orderable, Comparable {
      * @throws IllegalArgumentException if provided day doesn't work
      */
     private static int validateDay(final int day, final int month, final int year) {
-        final String DAY_ERROR_MESSAGE = "Invalid day. Value outside of the month's range.";
+        final String DAY_ERROR_MESSAGE = "invalid day of the month";
         if (day < MIN_DAY || day > MAX_DAY_JMMJAOD) {
             throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
         } else {
@@ -203,19 +205,27 @@ public class Date implements Orderable, Comparable {
                 maximumFebruary = MAX_DAY_FEB_COMMON;
             }
 
-            if (Arrays.asList(MONTHS_LOW_MAX_DAYS).contains(month)) {
+            if (intArrayContains(MONTHS_LOW_MAX_DAYS, month)) {
                 if (day > MAX_DAY_AJSN) {
                     throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
+                }
                 } else if (MONTH_NUM_FEBRUARY == month) {
-                    if (day > maximumFebruary) {
-                        throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
-                    }
-                } else {
-                    // Do nothing
+                if (day > maximumFebruary) {
+                    throw new IllegalArgumentException(DAY_ERROR_MESSAGE);
                 }
             }
             return day;
         }
+    }
+
+    /**
+     * Method to check if an int array contains a specified value
+     * @param arr array to check
+     * @param key value to look for
+     * @return true if it contains
+     */
+    public static boolean intArrayContains(final int[] arr, final int key) {
+        return Arrays.stream(arr).anyMatch(i -> i == key);
     }
 
     /**
@@ -233,7 +243,7 @@ public class Date implements Orderable, Comparable {
             maximumFebruary = MAX_DAY_FEB_COMMON;
         }
 
-        if (Arrays.asList(MONTHS_LOW_MAX_DAYS).contains(month)) {
+        if (intArrayContains(MONTHS_LOW_MAX_DAYS, month)) {
             return MAX_DAY_AJSN;
         } else if (MONTH_NUM_FEBRUARY == month) {
             return maximumFebruary;
@@ -242,10 +252,8 @@ public class Date implements Orderable, Comparable {
         }
     }
 
-
     /**
      * Getter year
-     *
      * @return year
      */
     public int getYear() {
@@ -254,7 +262,6 @@ public class Date implements Orderable, Comparable {
 
     /**
      * Getter month
-     *
      * @return month
      */
     public int getMonth() {
@@ -263,7 +270,6 @@ public class Date implements Orderable, Comparable {
 
     /**
      * Getter day
-     *
      * @return day
      */
     public int getDay() {
@@ -280,6 +286,7 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
+     * Getter Date as Text
      * @return String date as text in the follow format "month DD, YYYY"
      * e.g. "January 01, 2022"
      */
@@ -288,7 +295,8 @@ public class Date implements Orderable, Comparable {
     }
 
     /**
-     * @return day of the week as text.
+     * Getter Day of the Week
+     * @return day of the week as text
      * e.g. Monday
      */
     public String getDayOfTheWeek() {
@@ -303,13 +311,15 @@ public class Date implements Orderable, Comparable {
             // Do nothing
         }
 
-        if (month == MONTH_NUM_JANUARY || month == MONTH_NUM_FEBRUARY) {
-            numModifier = numModifier + YEAR_RANGE_MOD_SIX_RESULT;
+        if (isLeapYear(year)){
+            if (month == MONTH_NUM_JANUARY || month == MONTH_NUM_FEBRUARY) {
+                numModifier = numModifier + YEAR_RANGE_MOD_SIX_RESULT;
+            }
         }
 
         int lastTwoDigits = Integer.parseInt(Integer.toString(year).substring(WEEK_DAY_SUBSTRING_EXTRACTION));
 
-        // step 1: calculate the number of twelves in 77: 6
+        // Step 1: Only look at the last two digits of the year and determine how many twelves fit in it:
         int numberOfTwelves = WEEK_DAY_COUNTERS_START;
         int lastTwoDigitsCount = lastTwoDigits;
         while (lastTwoDigitsCount >= WEEK_DAY_TWELVES_CHECK) {
@@ -317,10 +327,10 @@ public class Date implements Orderable, Comparable {
             numberOfTwelves++;
         }
 
-        // step 2: calculate the remainder from step 1: 77 - 12*6 = 77 - 72 = 5
+        // Step 2: Determine the remainder of step 1's result:
         int remainder = lastTwoDigits % WEEK_DAY_TWELVES_CHECK;
 
-        // step 3: calculate the number of fours in step 2: 5/4 = 1.25, so 1
+        // Step 3: Determine how many fours fit into the remainder (step 2's result):
         int numberOfFours = WEEK_DAY_COUNTERS_START;
         int remainderCount = remainder;
         while (remainderCount >= WEEK_DAY_FOURS_CHECK) {
@@ -328,16 +338,25 @@ public class Date implements Orderable, Comparable {
             numberOfFours++;
         }
 
-        // step 4: add the day of the month to each step above: 31 + 6 + 5 + 1 = 43
-        // step 5: add the month code (for jfmamjjasond: 144025036146): for october it is 1: 43 + 1 = 	44
+        // Step 4: Add the day of the month:
+        // Step 5: Add the month code from the table below:
         int numProcessing = numModifier + day + numberOfTwelves +
-                remainder + numberOfFours + (int) Array.get(WEEKDAY_MODIFIERS_JFMAMJJASOND, month);
+                remainder + numberOfFours + getCodeForMonth(month);
 
-        int numProcessingMod = numProcessing % 7;
-        // step 6: add the previous five numbers up: 44; mod that number 44 by 7: 44%7 = 2 (44/7 = 6 remainder 2)
+        int numProcessingMod = numProcessing % WEEK_DAY_MOD_VALUE;
+        // Step 6: Add the numbers, and then mod by 7
 
         // step 7: sat sun mon tue wed thu fri is 0 1 2 3 4 5 6; our number 2 means October 31, 1977 was monday
         return (String) Array.get(WEEK_DAYS, numProcessingMod);
+    }
+
+    /**
+     * Gets Month Code used to determine the weekday
+     * @param month number of the month (only 1 to 12)
+     * @return month code
+     */
+    private static int getCodeForMonth(int month){
+        return (int) Array.get(WEEKDAY_MODIFIERS_JFMAMJJASOND, month);
     }
 
     /**
