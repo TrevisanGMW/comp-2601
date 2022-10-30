@@ -1,7 +1,7 @@
 package ca.bcit.comp2601.assignment01;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +15,13 @@ public class School {
 
     private static final int CURRENT_YEAR;
     private static final int COUNTER_START_VALUE;
+    private static final String OUTPUT_FILE_NAME;
     List people;
 
     static {
         CURRENT_YEAR = 2022;
         COUNTER_START_VALUE = 0;
+        OUTPUT_FILE_NAME = "people.txt";
     }
 
     {
@@ -74,8 +76,14 @@ public class School {
         }
     }
 
+    /**
+     * Saved the school details to a file called "people.txt"
+     */
     public void saveDetails(){
-        try (PrintWriter out = new PrintWriter("people.txt")) {
+        FileWriter writer;
+        try
+        {
+            writer = new FileWriter(OUTPUT_FILE_NAME);
             for (Object object : people) {
                 Person p1;
                 p1 = (Person)object;
@@ -92,12 +100,15 @@ public class School {
                         p1.getName().getInitials() + ") was born on " +
                         p1.getDateOfBirth().getDayOfTheWeek() + " " +
                         p1.getDateOfBirth().getYyyyMmDd() + livingCondition;
-                out.println(result);
+                writer.write(result + System.lineSeparator());
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            writer.close();
+        }
+        catch(IOException e)
+        {
+            System.out.println(e.getMessage());
         } finally {
-            // do thing
+            // Do nothing
         }
     }
 }
