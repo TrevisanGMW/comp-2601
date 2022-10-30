@@ -10,6 +10,12 @@ import java.util.Set;
 
 /**
  * Main Class - Program Entry Point
+ * COMP 2601 - CRN: 48065
+ * Friday evenings, Fall 2022
+ * Lab #6
+ * @author Guilherme Trevisan
+ * @version 0.0.1
+ * @since 2022-10-29
  */
 public class Main {
     private static final int NO_ARGUMENTS_LENGTH;
