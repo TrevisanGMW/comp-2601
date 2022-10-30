@@ -32,7 +32,7 @@ public class School {
      */
     public void register(Person p){
         if (p == null){
-            throw new IllegalPersonException("Invalid person argument. Cannot be null");
+            throw new IllegalPersonException("cannot register a non-person");
         } else {
             people.add(p);
         }
