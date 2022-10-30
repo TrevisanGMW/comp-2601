@@ -6,7 +6,6 @@ package ca.bcit.comp2601.assignment01;
  * @version 0.0.1
  * @since 2022-10-10
  */
-
 public class Person implements Comparable {
     private final Name name;
     private final Date born;
@@ -15,11 +14,13 @@ public class Person implements Comparable {
     private static final int COMPARABLE_LARGER;
     private static final int COMPARABLE_EQUAL;
     private static final int COMPARABLE_SMALLER;
+    private static final int COMPARISON_BORN_THRESHOLD;
 
     static {
         COMPARABLE_LARGER = 1;
         COMPARABLE_EQUAL = 0;
         COMPARABLE_SMALLER = -1;
+        COMPARISON_BORN_THRESHOLD = 0;
     }
 
     /**
@@ -95,7 +96,7 @@ public class Person implements Comparable {
     /**
      * Add a dateOfDeath (Kills the person)
      * @param dateOfDeath date when the person died
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException if name is null
      */
     public void die(Date dateOfDeath){
         if (name != null) {
@@ -163,7 +164,7 @@ public class Person implements Comparable {
             return COMPARABLE_LARGER;
         } else {
             int bornComparison = this.getDateOfBirth().compareTo(that.getDateOfBirth());
-            if (bornComparison != 0) {
+            if (bornComparison != COMPARISON_BORN_THRESHOLD) {
                 return bornComparison < COMPARABLE_EQUAL ? COMPARABLE_SMALLER : COMPARABLE_LARGER;
             } else {
                 // Do nothing
@@ -172,8 +173,6 @@ public class Person implements Comparable {
         return COMPARABLE_EQUAL;
     }
 
-    //public int compareTo(Person p): this method satisfies the requirements from implementing the Comparable interface.
-    // Younger people are "larger". Note: this method must use its born variable's compareTo(Date d) method.
     /**
      * Override compareTo
      * @param o the object to be compared.
@@ -195,5 +194,4 @@ public class Person implements Comparable {
             return COMPARABLE_EQUAL;
         }
     }
-
 }

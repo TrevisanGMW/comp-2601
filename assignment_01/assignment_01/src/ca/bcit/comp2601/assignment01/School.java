@@ -11,14 +11,15 @@ import java.util.List;
  * @version 0.0.1
  * @since 2022-10-10
  */
-
 public class School {
 
-    private final static int CURRENT_YEAR;
+    private static final int CURRENT_YEAR;
+    private static final int COUNTER_START_VALUE;
     List people;
 
     static {
         CURRENT_YEAR = 2022;
+        COUNTER_START_VALUE = 0;
     }
 
     {
@@ -54,7 +55,7 @@ public class School {
 
         w = (fullName, yearBorn, maxYear) -> {
             int counter;
-            counter = 0;
+            counter = COUNTER_START_VALUE;
             for (int i = yearBorn; i <= maxYear; i++){
                 System.out.println(fullName + ": " + i + " (age " + counter + ")");
                 counter++;

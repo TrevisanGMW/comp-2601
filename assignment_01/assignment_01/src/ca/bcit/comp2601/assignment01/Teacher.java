@@ -6,7 +6,6 @@ package ca.bcit.comp2601.assignment01;
  * @version 0.0.1
  * @since 2022-10-10
  */
-
 public class Teacher extends Person{
 
     private final String specialty;
