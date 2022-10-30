@@ -21,13 +21,13 @@ public class Name {
      */
     public Name(final String first, final String last){
         if(first == null || first.isBlank()) {
-            throw new IllegalArgumentException("Invalid name. It cannot be null.");
+            throw new IllegalArgumentException("invalid first name");
         } else {
             this.first = first;
         }
 
         if(last == null || last.isBlank()) {
-            throw new IllegalArgumentException("Invalid name. It cannot be null.");
+            throw new IllegalArgumentException("invalid last name");
         } else {
             this.last = last;
         }
