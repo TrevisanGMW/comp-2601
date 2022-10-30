@@ -20,7 +20,7 @@ public class Teacher extends Person{
     public Teacher(Date born,Name name, String specialty) {
         super(born, name);
         if (specialty.isBlank()){
-            throw new IllegalPersonException("Invalid specialty. Cannot be blank. (Null is ok)");
+            throw new IllegalPersonException("bad specialty");
         } else {
             this.specialty = specialty;
         }
@@ -44,7 +44,7 @@ public class Teacher extends Person{
         String result;
         String livingCondition;
         String specialtyInformation;
-        specialtyInformation = "(specialty: " + getSpecialty() + ")";
+        specialtyInformation = " (specialty: " + getSpecialty() + ")";
         if (isAlive()) {
             livingCondition = "is still alive";
         }
