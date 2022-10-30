@@ -6,7 +6,6 @@ package ca.bcit.comp2601.assignment01;
  * @version 0.0.1
  * @since 2022-10-10
  */
-
 public class Name {
     private final String first;
     private final String last;
