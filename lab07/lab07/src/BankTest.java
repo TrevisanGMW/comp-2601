@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * JUnit test for the class "Bank"
  *
- * TODO:
- * 	Determine how to handle customers without accounts
+ * Assumptions:
+ *  We didn't have to determine a new pattern for the toString function (default is ok)
  */
 class BankTest {
 
@@ -25,12 +25,12 @@ class BankTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		// "Starting the test case"
+		System.out.println("Starting the test case");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
-		// "Ending the test case"
+		System.out.println("Ending the test case");
 	}
 
 	@BeforeEach
@@ -50,7 +50,6 @@ class BankTest {
 	@AfterEach
 	void tearDown() throws Exception {
 		b1 = null;
-
 		System.setOut(standardOut);
 	}
 
@@ -101,7 +100,7 @@ class BankTest {
 	}
 
 	/**
-	 * Test bad customers, if they don't have an account, it expects to catch an IllegalArgumentException
+	 * Test bad customers, if they don't have an account, it expects to get an IllegalArgumentException
 	 * @param badCustomer customer without an account
 	 */
 	void testAddCustomerBadArgument(final Customer badCustomer) {
