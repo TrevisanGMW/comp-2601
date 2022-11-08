@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test for the class "Account"
  *
- * TODO:
- * 	Determine if account can become negative
- * 	Determine if an exception should be thrown when subtracting a value higher than the account balance
- * 	Determine if default constructor should be allowed to have a null account number (should it be default?)
+ * Assumptions:
+ * 	Account doesn't support negative values (debt)
+ * 	Default constructor is allowed follows the same pattern described in the documentation of the other
  */
 class AccountTest {
 	Account a1;
