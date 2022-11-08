@@ -9,10 +9,9 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test for the class "Customer"
  *
- * TODO:
- * 	Determine if default constructor should have nulls or default values (or be allowed at all) - Docs say default?
- * 	Should we determine new validation for first/last names and passcode? (max length, not null, etc..)
- *
+ * Assumptions:
+ * 	Default constructor description states that it sets default values. These were assumed to be "Unknown".
+ * 	In order to create more tests, extra validation requirements were added to firstName, lastName and passcode.
  */
 class CustomerTest {
 	Customer c1;
