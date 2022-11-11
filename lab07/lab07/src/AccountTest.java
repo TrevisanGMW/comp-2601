@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test for the class "Account"
  *
+ * @author Guilherme Trevisan and Monika Szucs
+ * @version 0.0.1
+ * @since 2022-11-07
+ *
  * Assumptions:
  * 	Account doesn't support negative values (debt)
  * 	Default constructor is allowed follows the same pattern described in the documentation of the other
