@@ -12,6 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * JUnit test for the class "Bank"
  *
+ * @author Guilherme Trevisan and Monika Szucs
+ * @version 0.0.1
+ * @since 2022-11-07
+ *
  * Assumptions:
  *  We didn't have to determine a new pattern for the toString function (default is ok)
  */
@@ -83,7 +87,6 @@ class BankTest {
 		b1.closeAccount("54321");
 		Bank.displayAllCustomers();
 		assertEquals(expected, outputStreamCaptor.toString().trim());
-
 	}
 
 	@Test
