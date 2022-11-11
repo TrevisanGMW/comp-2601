@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test for the class "Customer"
  *
+ * @author Guilherme Trevisan and Monika Szucs
+ * @version 0.0.1
+ * @since 2022-11-07
+ *
  * Assumptions:
  * 	Default constructor description states that it sets default values. These were assumed to be "Unknown".
  * 	In order to create more tests, extra validation requirements were added to firstName, lastName and passcode.
@@ -202,7 +206,6 @@ class CustomerTest {
 	 * Method used to help test an overloaded constructor (firstName, lastName, passcode)
 	 * Expects IllegalArgumentException if given an invalid firstName
 	 * @param badPasscode value to test, throws IllegalArgumentException if null, not only 4 digits
-
 	 */
 	void testPasscodeBadValue(final String badPasscode) {
 		IllegalArgumentException ex;
@@ -213,7 +216,6 @@ class CustomerTest {
 	 * Method used to help test an overloaded constructor (firstName, lastName, passcode)
 	 * Expects IllegalArgumentException if given an invalid firstName
 	 * @param badFirstName value to test (if null, blank or invalid throws IllegalArgumentException)
-
 	 */
 	void testFirstNameBadValue(final String badFirstName) {
 		IllegalArgumentException ex;
@@ -224,7 +226,6 @@ class CustomerTest {
 	 * Method used to help test an overloaded constructor (firstName, lastName, passcode)
 	 * Expects IllegalArgumentException if given an invalid firstName
 	 * @param badLastName value to test (if null, blank or invalid throws IllegalArgumentException)
-
 	 */
 	void testLastNameBadValue(final String badLastName) {
 		IllegalArgumentException ex;
