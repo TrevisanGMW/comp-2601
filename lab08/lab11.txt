@@ -1,0 +1,11 @@
+Look at the code from the GUI we built in class.
+
+Build a GUI-based application that does the following:
+
+- reads a CSV file named cars into a list
+- the Car class gets its data from the csv file:
+- make (String), model (String), year (int), electric (boolean)
+- make sure there are 30 cars in the csv file
+- make a GUI application like today, where you can search by (a) make or model (e.g. if a car is "Ford Mustang" then it should be found by searching for "for" or "ford" or MUStaNG" or even "rd mu", or by year, or by whether its electric.
+- make sure the jlist is cleared with each new search
+
