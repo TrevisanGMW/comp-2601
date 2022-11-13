@@ -36,8 +36,7 @@ public class Name {
      * Gets Pretty Name (First and Last name) - Result is capitalized (e.g. fIrSt lAsT -> First Last)
      * @return fullName first and last name
      */
-    public String getPrettyName()
-    {
+    public String getPrettyName() {
         return first.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() +
                 first.substring(SECOND_CHAR_INDEX).toLowerCase() + " " +
                 last.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() +
@@ -48,8 +47,7 @@ public class Name {
      * Get Initials (always uppercase)
      * @return initials in the following format: First Last = "F.L."
      */
-    public String getInitials()
-    {
+    public String getInitials() {
         return first.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() + "." +
                 last.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() + ".";
     }
