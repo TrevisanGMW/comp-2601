@@ -81,8 +81,7 @@ public class School {
      */
     public void saveDetails(){
         FileWriter writer;
-        try
-        {
+        try {
             writer = new FileWriter(OUTPUT_FILE_NAME);
             for (Object object : people) {
                 Person p1;
@@ -104,8 +103,7 @@ public class School {
             }
             writer.close();
         }
-        catch(IOException e)
-        {
+        catch(IOException e) {
             System.out.println(e.getMessage());
         } finally {
             // Do nothing
