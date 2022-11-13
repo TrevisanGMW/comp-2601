@@ -1,0 +1,29 @@
+1,toyota,rav4,2022,FALSE
+2,toyota,corolla,2021,FALSE
+3,toyota,prius,2021,FALSE
+4,toyota,corolla,2020,FALSE
+5,toyota,corolla,2019,FALSE
+6,toyota,prius,2016,FALSE
+7,toyota,rav4,2020,FALSE
+8,volkswagen,jetta,1979,FALSE
+9,volkswagen,tiguan,2009,FALSE
+10,volkswagen,golf,1975,FALSE
+11,volkswagen,golf,1976,FALSE
+12,honda,accord,1982,FALSE
+13,honda,odyssey,2000,FALSE
+14,honda,type r,1997,FALSE
+15,honda,odyssey,2001,FALSE
+16,fiat,500,1975,FALSE
+17,fiat,500L,2000,FALSE
+18,fiat,panda,1989,FALSE
+19,fiat,500X,1979,FALSE
+20,fiat,500X,2001,FALSE
+22,fiat,500L,1975,FALSE
+23,fiat,500,2000,FALSE
+24,fiat,500,2001,FALSE
+25,ford,mustang,1971,FALSE
+26,ford,F-150,2015,FALSE
+27,ford,ranger,1982,FALSE
+28,ford,bronco,1999,FALSE
+29,tesla,model 3,2015,TRUE
+30,tesla,roadster,2014,TRUE
