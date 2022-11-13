@@ -27,7 +27,7 @@ public class CarSearchGUI extends JFrame {
 
     private static final ArrayList<Car> cars = new ArrayList<>(); // Array list of cars (data read from a csv file)
     private final DefaultListModel<Car> jListModel = new DefaultListModel<>(); //JList list model
-    private JList<Car> jList = new JList<>(jListModel); // JList of cars
+    private JList<Car> jListCars = new JList<>(jListModel); // JList of cars
 
     /**
      * Constructs a new car app frame
@@ -37,8 +37,11 @@ public class CarSearchGUI extends JFrame {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setJMenuBar(getAppMenuBar());
-        add(jList);
         setVisible(FRAME_VISIBILITY);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(jListCars);
+        jListCars.setLayoutOrientation(JList.VERTICAL);
+        add(scrollPane);
 
         // Populates JList during first run
         for(Car c : cars) {
