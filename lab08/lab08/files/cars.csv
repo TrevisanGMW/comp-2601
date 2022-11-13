@@ -11,7 +11,7 @@
 11,volkswagen,golf,1976,FALSE
 12,honda,accord,1982,FALSE
 13,honda,odyssey,2000,FALSE
-14,honda,type r,1997,FALSE
+14,honda,type R,1997,FALSE
 15,honda,odyssey,2001,FALSE
 16,fiat,500,1975,FALSE
 17,fiat,500L,2000,FALSE
@@ -27,3 +27,23 @@
 28,ford,bronco,1999,FALSE
 29,tesla,model 3,2015,TRUE
 30,tesla,roadster,2014,TRUE
+31,tesla,model S,2015,TRUE
+32,tesla,model X,2020,TRUE
+33,tesla,model S,2020,TRUE
+34,tesla,model 3,2021,TRUE
+35,nissan,ariya,2015,TRUE
+36,nissan,ariya,2016,TRUE
+37,nissan,ariya,2017,TRUE
+38,nissan,ariya,2018,TRUE
+39,nissan,ariya,2019,TRUE
+40,nissan,ariya,2020,TRUE
+41,audi,A4,2017,FALSE
+42,audi,Q3,2018,FALSE
+43,audi,A3,2019,FALSE
+44,audi,A5,2020,FALSE
+45,cadillac,XT4,2016,FALSE
+46,cadillac,Escalade,2017,FALSE
+47,cadillac,CT4,2018,FALSE
+48,cadillac,XT5,2019,FALSE
+49,cadillac,CT5,2019,FALSE
+50,cadillac,LYRIQ,2019,FALSE
