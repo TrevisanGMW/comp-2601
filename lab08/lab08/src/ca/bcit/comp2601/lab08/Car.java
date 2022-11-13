@@ -53,7 +53,7 @@ public class Car {
      */
     public String getMake() {
         return make.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() +
-                make.substring(SECOND_CHAR_INDEX).toLowerCase();
+                make.substring(SECOND_CHAR_INDEX);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Car {
      */
     public String getModel() {
         return model.substring(FIRST_CHAR_INDEX, SECOND_CHAR_INDEX).toUpperCase() +
-                model.substring(SECOND_CHAR_INDEX).toLowerCase();
+                model.substring(SECOND_CHAR_INDEX);
     }
 
     /**
