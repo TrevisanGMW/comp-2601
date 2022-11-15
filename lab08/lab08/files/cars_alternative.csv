@@ -1,0 +1,49 @@
+toyota,rav4,2022,FALSE
+toyota,corolla,2021,FALSE
+toyota,prius,2021,FALSE
+toyota,corolla,2020,FALSE
+toyota,corolla,2019,FALSE
+toyota,prius,2016,FALSE
+toyota,rav4,2020,FALSE
+volkswagen,jetta,1979,FALSE
+volkswagen,tiguan,2009,FALSE
+volkswagen,golf,1975,FALSE
+volkswagen,golf,1976,FALSE
+honda,accord,1982,FALSE
+honda,odyssey,2000,FALSE
+honda,type R,1997,FALSE
+honda,odyssey,2001,FALSE
+fiat,500,1975,FALSE
+fiat,500L,2000,FALSE
+fiat,panda,1989,FALSE
+fiat,500X,1979,FALSE
+fiat,500X,2001,FALSE
+fiat,500L,1975,FALSE
+fiat,500,2000,FALSE
+fiat,500,2001,FALSE
+ford,mustang,1971,FALSE
+ford,F-150,2015,FALSE
+ford,ranger,1982,FALSE
+ford,bronco,1999,FALSE
+tesla,model 3,2015,TRUE
+tesla,roadster,2014,TRUE
+tesla,model S,2015,TRUE
+tesla,model X,2020,TRUE
+tesla,model S,2020,TRUE
+tesla,model 3,2021,TRUE
+nissan,ariya,2015,TRUE
+nissan,ariya,2016,TRUE
+nissan,ariya,2017,TRUE
+nissan,ariya,2018,TRUE
+nissan,ariya,2019,TRUE
+nissan,ariya,2020,TRUE
+audi,A4,2017,FALSE
+audi,Q3,2018,FALSE
+audi,A3,2019,FALSE
+audi,A5,2020,FALSE
+cadillac,XT4,2016,FALSE
+cadillac,Escalade,2017,FALSE
+cadillac,CT4,2018,FALSE
+cadillac,XT5,2019,FALSE
+cadillac,CT5,2019,FALSE
+cadillac,LYRIQ,2019,FALSE
