@@ -3,11 +3,10 @@ package ca.bcit.comp2601.lab08;
 /**
  * Car Class
  * @author Guilherme Trevisan
- * @version 0.0.1
+ * @version 0.0.2
  * @since 2022-11-12
  */
 public class Car {
-    private String id;
     private String make;
     private String model;
     private int year;
@@ -17,34 +16,16 @@ public class Car {
 
     /**
      * Car Constructor
-     * @param id car id
      * @param make car maker
      * @param model car model
      * @param year year created
      * @param isElectric if the car is electric it's true
      */
-    public Car(String id, String make, String model, int year, boolean isElectric) {
-        this.id = id;
+    public Car(final String make, final String model, final int year, final boolean isElectric) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.isElectric = isElectric;
-    }
-
-    /**
-     * Getter ID
-     * @return id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Setter ID
-     * @param id id
-     */
-    public void setId(final String id) {
-        this.id = id;
     }
 
     /**
