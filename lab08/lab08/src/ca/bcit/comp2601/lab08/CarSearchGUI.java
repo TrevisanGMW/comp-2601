@@ -23,6 +23,10 @@ public class CarSearchGUI extends JFrame {
     private static final String APP_TITLE = "Cars App - Comp 2601 - BCIT";
     private static final int FRAME_WIDTH = 700;
     private static final int FRAME_HEIGHT = 400;
+    private static final int INDEX_MAKE = 0;
+    private static final int INDEX_MODEL = 1;
+    private static final int INDEX_YEAR = 2;
+    private static final int INDEX_ELECTRIC = 3;
     private static final boolean FRAME_VISIBILITY = true;
 
     private static final ArrayList<Car> cars = new ArrayList<>(); // Array list of cars (data read from a csv file)
@@ -258,14 +262,13 @@ public class CarSearchGUI extends JFrame {
             // Split the line string into tokens
             String[] car = line.split(",");
 
-            String id = car[0];
-            String make = car[1];
-            String model = car[2];
-            int year = Integer.parseInt(car[3]);
-            boolean isElectric = Boolean.parseBoolean(car[4]);
+            String make = car[INDEX_MAKE];
+            String model = car[INDEX_MODEL];
+            int year = Integer.parseInt(car[INDEX_YEAR]);
+            boolean isElectric = Boolean.parseBoolean(car[INDEX_ELECTRIC]);
 
             // Create an instance of Course and add to the array list
-            cars.add(new Car(id, make, model, year, isElectric));
+            cars.add(new Car(make, model, year, isElectric));
         }
 
         // Close the file
