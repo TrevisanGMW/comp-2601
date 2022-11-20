@@ -85,40 +85,40 @@ public class BookStore {
 
         //printAllNovels(); // Testing Ingested Data
 
-        System.out.println("Printing all book titles in uppercase:");
-        printAllTitles();
-
-        System.out.println("Printing all book titles that contain the word \"God\" in their title:");
-        printBookTitle("God");
+//        System.out.println("Printing all book titles in uppercase:");
+//        printAllTitles();
+//
+//        System.out.println("Printing all book titles that contain the word \"God\" in their title:");
+//        printBookTitle("God");
 
         System.out.println("Printing all book titles in alphabetical order:");
         printTitlesInAlphaOrder();
-
-        System.out.println("Printing all book titles grouped by decades (between 2000 and 2009)");
-        printGroupByDecade(2000);
-
-        System.out.println("Printing the book with the longest title:");
-        getLongest();
-
-        System.out.println("Checking if any books were written in the year 2000:");
-        boolean isBookFound = isThereABookWrittenBetween(2000);
-        System.out.println("Were books written in the year 2000? : " + isBookFound);
-
-        System.out.println("Checking how many books contain the word \"God\" in their title:");
-        int novelsContainingWord = howManyBooksContain("God");
-        System.out.println(novelsContainingWord + " books contain the word \"God\" in their title." );
-
-        System.out.println("Calculating the percentage of books written in between 2000 and 2009");
-        double percentageWritten = whichPercentWrittenBetween(2000,2009);
-        System.out.println(percentageWritten + "% of the available books were written between 2000 and 2009.");
-
-        System.out.println("Finding the oldest book in the bookstore:");
-        Novel oldestBook = getOldestBook();
-        System.out.println("The oldest book in the bookstore is: " + oldestBook);
-
-        System.out.println("Getting a list of all books whose title is this length of 8:");
-        List booksWithLength = getBooksThisLength(8);
-        booksWithLength.forEach(n-> System.out.println(n.toString()));
+//
+//        System.out.println("Printing all book titles grouped by decades (between 2000 and 2009)");
+//        printGroupByDecade(2000);
+//
+//        System.out.println("Printing the book with the longest title:");
+//        getLongest();
+//
+//        System.out.println("Checking if any books were written in the year 2000:");
+//        boolean isBookFound = isThereABookWrittenBetween(2000);
+//        System.out.println("Were books written in the year 2000? : " + isBookFound);
+//
+//        System.out.println("Checking how many books contain the word \"God\" in their title:");
+//        int novelsContainingWord = howManyBooksContain("God");
+//        System.out.println(novelsContainingWord + " books contain the word \"God\" in their title." );
+//
+//        System.out.println("Calculating the percentage of books written in between 2000 and 2009");
+//        double percentageWritten = whichPercentWrittenBetween(2000,2009);
+//        System.out.println(percentageWritten + "% of the available books were written between 2000 and 2009.");
+//
+//        System.out.println("Finding the oldest book in the bookstore:");
+//        Novel oldestBook = getOldestBook();
+//        System.out.println("The oldest book in the bookstore is: " + oldestBook);
+//
+//        System.out.println("Getting a list of all books whose title is this length of 8:");
+//        List booksWithLength = getBooksThisLength(8);
+//        booksWithLength.forEach(n-> System.out.println(n.toString()));
     }
 
     /**
@@ -144,7 +144,7 @@ public class BookStore {
      */
     private static void printTitlesInAlphaOrder(){
         List<Novel> novelsContaining = novels.stream()
-                .sorted(Comparator.comparing(Novel::getTitle))
+                .sorted(Comparator.comparing(n->n.getTitle().replaceAll("\"","")))
                 .collect(Collectors.toList());
         novelsContaining.forEach(n-> System.out.println(n.getTitle()));
     }
