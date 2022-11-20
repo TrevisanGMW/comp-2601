@@ -1,8 +1,8 @@
 package ca.bcit.comp2601.lab09;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 /**
@@ -243,7 +243,6 @@ public class BookStore {
         List<Novel> filteredNovels = novels.stream()
                 .filter(n->(n.getTitle().length()==titleLength))
                 .collect(Collectors.toList());
-
         return filteredNovels;
     }
 
@@ -263,7 +262,7 @@ public class BookStore {
     /**
      * Parses Line data coming from a CSV file using the default comma as delimiter
      * Assumes that the pattern is bookTitle(string), authorName(string) , yearPublished(int)
-     * Since book title can have commas, the parsing method works its way from the last
+     * Since book title can have commas, the parsing method works its way from the last element
      * @param commaSeparatedLine a line containing bookTitle, authorName, yearPublished
      *                           e.g. "Are You There God? It's Me, Margaret.,Judy Blume,1970"
      * @return a Novel if all necessary parameters are valid. Null if it failed
