@@ -17,6 +17,7 @@ public class BookStore {
     private static List<Novel> novels;
     private static final String INPUT_FILE;
     private static final String DELIMITER_COMMA;
+    private static final String BLANK_STRING;
     private static final int OFFSET_YEAR_PUBLISHED;
     private static final int OFFSET_AUTHOR_NAME;
     private static final int OFFSET_LAST_ELEMENTS;
@@ -27,9 +28,10 @@ public class BookStore {
     private static final double DOUBLE_NORMALIZATION;
 
     static {
-        INPUT_FILE = "files\\data_lab09.csv";
         novels = new ArrayList<>();
+        INPUT_FILE = "files\\data_lab09.csv";
         DELIMITER_COMMA = ",";
+        BLANK_STRING = "";
         OFFSET_YEAR_PUBLISHED = -1;
         OFFSET_AUTHOR_NAME = -2;
         OFFSET_LAST_ELEMENTS = -1;
@@ -144,7 +146,7 @@ public class BookStore {
      */
     private static void printTitlesInAlphaOrder(){
         List<Novel> novelsContaining = novels.stream()
-                .sorted(Comparator.comparing(n->n.getTitle().replaceAll("\"","")))
+                .sorted(Comparator.comparing(n->n.getTitle().replaceAll("\"",BLANK_STRING)))
                 .collect(Collectors.toList());
         novelsContaining.forEach(n-> System.out.println(n.getTitle()));
     }
@@ -164,7 +166,7 @@ public class BookStore {
         {
             System.out.print(yearPublished + " : ");
             String titleList;
-            titleList = "";
+            titleList = BLANK_STRING;
             for (Novel novel: novels) {
                 titleList += ((novel.getTitle() + ", "));
             }
@@ -253,9 +255,9 @@ public class BookStore {
      */
     private static String removeNonPrintableChars(final String inputString){
         String result;
-        result = inputString.replaceAll("[^\\x00-\\x7F]", ""); // strips off all non-ASCII characters
-        result = result.replaceAll("[\\p{Cntrl}&&[^\r\n\t]]", ""); // ASCII control characters
-        result = result.replaceAll("\\p{C}", ""); // removes non-printable characters from Unicode
+        result = inputString.replaceAll("[^\\x00-\\x7F]", BLANK_STRING); // strips off all non-ASCII characters
+        result = result.replaceAll("[\\p{Cntrl}&&[^\r\n\t]]", BLANK_STRING); // ASCII control characters
+        result = result.replaceAll("\\p{C}", BLANK_STRING); // removes non-printable characters from Unicode
         return result.trim();
     }
 
