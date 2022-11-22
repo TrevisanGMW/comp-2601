@@ -235,17 +235,22 @@ public class BookStore {
     }
 
     /**
-     * Method created to check ingested data. It prints all novels and their fields
+     * Returns a List of all books whose title is this length
+     * @param titleLength length of character in book's title
+     * @return a list of novels that match the provided length
      */
-    private static void printAllNovels(){
-        novels.forEach(n-> System.out.println(n.toString()));
-    }
-
     private static List<Novel> getBooksThisLength(final int titleLength){
         List<Novel> filteredNovels = novels.stream()
                 .filter(n->(n.getTitle().length()==titleLength))
                 .collect(Collectors.toList());
         return filteredNovels;
+    }
+
+    /**
+     * Method created to check ingested data. It prints all novels and their fields
+     */
+    private static void printAllNovels(){
+        novels.forEach(n-> System.out.println(n.toString()));
     }
 
     /**
