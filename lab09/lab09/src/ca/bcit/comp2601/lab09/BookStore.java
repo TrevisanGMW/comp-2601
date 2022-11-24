@@ -47,9 +47,14 @@ public class BookStore {
      *
      * @param bookStoreName name of bookstore
      * @throws FileNotFoundException throws exception if provided file is not found
+     * @throws IllegalArgumentException if bookstore name is empty or null
      */
     public BookStore(final String bookStoreName) throws FileNotFoundException {
-        this.bookStoreName = bookStoreName;
+        if (bookStoreName == null && bookStoreName.isBlank()){
+            throw new IllegalArgumentException("Bookstore name cannot be empty or null.");
+        } else {
+            this.bookStoreName = bookStoreName;
+        }
 
         // Charset changed to include French accents
         Scanner scanner = new Scanner(new File(INPUT_FILE), StandardCharsets.ISO_8859_1.toString());
