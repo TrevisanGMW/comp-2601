@@ -1,45 +1,48 @@
 package ca.bcit.comp2601.lab09;
 
-import java.io.*;
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 /**
- * BookStore Class
+ * BookStore Class - Modified for Quiz 4 (use "Ctrl + F" + "Quiz 4" to find methods)
  *
- * @author Guilherme Trevisan, Monika Szucs, Davood Tabrizi Nejad
- * @version 0.0.1
+ * @author Guilherme Trevisan
+ * @version 0.0.2
  * @since 2022-11-18
  */
 public class BookStore {
-    private final String bookStoreName;
     private static List<Novel> novels;
+    private final String        bookStoreName;
     private static final String INPUT_FILE;
-    private static final String DELIMITER_COMMA;
+    private static final String DELIMITER;
     private static final String BLANK_STRING;
-    private static final int OFFSET_YEAR_PUBLISHED;
-    private static final int OFFSET_AUTHOR_NAME;
-    private static final int OFFSET_LAST_ELEMENTS;
-    private static final int OFFSET_DECADE;
-    private static final int INDEX_FIRST_LETTER;
-    private static final int OFFSET_DELIMITER_REMOVAL;
-    private static final int MAX_PERCENTAGE;
+    private static final String SPACE_STRING;
+    private static final int    OFFSET_YEAR_PUBLISHED;
+    private static final int    OFFSET_AUTHOR_NAME;
+    private static final int    OFFSET_LAST_ELEMENTS;
+    private static final int    OFFSET_DECADE;
+    private static final int    INDEX_FIRST_LETTER;
+    private static final int    OFFSET_DELIMITER_REMOVAL;
+    private static final int    MAX_PERCENTAGE;
     private static final double DOUBLE_NORMALIZATION;
 
     static {
         novels = new ArrayList<>();
-        INPUT_FILE = "files\\data_lab09.csv";
-        DELIMITER_COMMA = ",";
-        BLANK_STRING = "";
-        OFFSET_YEAR_PUBLISHED = -1;
-        OFFSET_AUTHOR_NAME = -2;
-        OFFSET_LAST_ELEMENTS = -1;
-        OFFSET_DECADE = 9;
-        INDEX_FIRST_LETTER = 0;
+        INPUT_FILE               = "files\\data_lab09.csv";
+        DELIMITER                = ",";
+        BLANK_STRING             = "";
+        SPACE_STRING             = " ";
+        OFFSET_YEAR_PUBLISHED    = -1;
+        OFFSET_AUTHOR_NAME       = -2;
+        OFFSET_LAST_ELEMENTS     = -1;
+        OFFSET_DECADE            = 9;
+        INDEX_FIRST_LETTER       = 0;
         OFFSET_DELIMITER_REMOVAL = 2;
-        MAX_PERCENTAGE = 100;
-        DOUBLE_NORMALIZATION = 1.0;
+        MAX_PERCENTAGE           = 100;
+        DOUBLE_NORMALIZATION     = 1.0;
     }
 
     /**
@@ -90,49 +93,131 @@ public class BookStore {
         BookStore bs;
         bs = new BookStore("BCIT Books");
 
-        //printAllNovels(); // Testing Ingested Data
+//        //printAllNovels(); // Testing Ingested Data
+//
+//        System.out.println("Printing all book titles in uppercase:");
+//        printAllTitles();
+//
+//        System.out.println("Printing all book titles that contain the word \"God\" in their title:");
+//        printBookTitle("God");
+//
+//        System.out.println("Printing all book titles in alphabetical order:");
+//        printTitlesInAlphaOrder();
+//
+//        System.out.println("Printing all book titles grouped by decades (between 2000 and 2009)");
+//        printGroupByDecade(2000);
+//
+//        System.out.println("Printing the book with the longest title:");
+//        getLongest();
+//
+//        System.out.println("Checking if any books were written in the year 2000:");
+//        boolean isBookFound = isThereABookWrittenBetween(2000);
+//        System.out.println("Were books written in the year 2000? : " + isBookFound);
+//
+//        System.out.println("Checking how many books contain the word \"God\" in their title:");
+//        int novelsContainingWord = howManyBooksContain("God");
+//        System.out.println(novelsContainingWord + " books contain the word \"God\" in their title." );
+//
+//        System.out.println("Calculating the percentage of books written in between 2000 and 2009");
+//        double percentageWritten = whichPercentWrittenBetween(2000,2009);
+//        System.out.println(percentageWritten + "% of the available books were written between 2000 and 2009.");
+//
+//        System.out.println("Finding the oldest book in the bookstore:");
+//        Novel oldestBook = getOldestBook();
+//        System.out.println("The oldest book in the bookstore is: " + oldestBook);
+//
+//        System.out.println("Getting a list of all books whose title is this length of 8:");
+//        List booksWithLength = getBooksThisLength(8);
+//        booksWithLength.forEach(n-> System.out.println(n));
 
-        System.out.println("Printing all book titles in uppercase:");
-        printAllTitles();
+         // New methods (Quiz 4)
+        System.out.println("Printing titles containing \"The\"");
+        printTitlesContaining("The");
 
-        System.out.println("Printing all book titles that contain the word \"God\" in their title:");
-        printBookTitle("God");
+        System.out.println("Printing shortest title containing \"The\"");
+        System.out.println(getShortestTitleStartingWith("The"));
 
-        System.out.println("Printing all book titles in alphabetical order:");
-        printTitlesInAlphaOrder();
+        System.out.println("Printing all novels with space in their titles");
+        List<Novel> novelsWithSpace;
+        novelsWithSpace = getAllNovelsWithSpaceInTitle();
+        novelsWithSpace.forEach(n-> System.out.println(n));
 
-        System.out.println("Printing all book titles grouped by decades (between 2000 and 2009)");
-        printGroupByDecade(2000);
+        System.out.println("Printing authors who published between 2000 and 2009");
+        List<String> authorsWhoPublishedBetween;
+        authorsWhoPublishedBetween = getAllAuthorsWhoPublishedBetween(2000, 2009);
+        authorsWhoPublishedBetween.forEach(a-> System.out.println(a));
+    }
 
-        System.out.println("Printing the book with the longest title:");
-        getLongest();
 
-        System.out.println("Checking if any books were written in the year 2000:");
-        boolean isBookFound = isThereABookWrittenBetween(2000);
-        System.out.println("Were books written in the year 2000? : " + isBookFound);
+    /**
+     * Quiz 4 Method - A
+     * PRINTS all titles containing the substring, but prints that matching list in reverse alphabetical order
+     * @param substring substring used in the search
+     */
+    private static void printTitlesContaining(final String substring){
+        List<Novel> novelsContaining = novels.stream()
+                .filter(n->n.getTitle().contains(substring))
+                .sorted(Comparator.comparing(n->n.getTitle()))
+                .collect(Collectors.toList());
+        Collections.reverse(novelsContaining);
+        novelsContaining.forEach(n-> System.out.println(n.getTitle()));
+    }
 
-        System.out.println("Checking how many books contain the word \"God\" in their title:");
-        int novelsContainingWord = howManyBooksContain("God");
-        System.out.println(novelsContainingWord + " books contain the word \"God\" in their title." );
 
-        System.out.println("Calculating the percentage of books written in between 2000 and 2009");
-        double percentageWritten = whichPercentWrittenBetween(2000,2009);
-        System.out.println(percentageWritten + "% of the available books were written between 2000 and 2009.");
+    /**
+     * Quiz 4 Method - B
+     * returns a STRING: the title of the novel that is the shortest title beginning with substring
+     * @param substring substring used in the search
+     * @returns the title of the novel that is the shortest title beginning with substring
+     */
+    private static String getShortestTitleStartingWith(final String substring){
+        Optional<Novel> shortest = novels.stream()
+                .filter(n->!n.getTitle().isBlank() && n.getTitle() != null && n.getTitle().startsWith(substring))
+                .min(Comparator.comparing(n -> n.getTitle().length()));
+        if (!shortest.isEmpty()){
+            return shortest.get().getTitle();
+        } else {
+            return null;
+        }
+    }
 
-        System.out.println("Finding the oldest book in the bookstore:");
-        Novel oldestBook = getOldestBook();
-        System.out.println("The oldest book in the bookstore is: " + oldestBook);
+    /**
+     * Quiz 4 Method - C
+     * returns an ARRAY OF NOVEL REFERENCES...all titles that contain a space in their title (aka blank space " ")
+     * @returns all titles that contain a space in their title
+     */
+    private static List<Novel> getAllNovelsWithSpaceInTitle(){
 
-        System.out.println("Getting a list of all books whose title is this length of 8:");
-        List booksWithLength = getBooksThisLength(8);
-        booksWithLength.forEach(n-> System.out.println(n.toString()));
+        List<Novel> filteredNovels = novels.stream()
+                .filter(n->!n.getTitle().isBlank() && n.getTitle() != null && n.getTitle().contains(" "))
+                .collect(Collectors.toList());
+        return filteredNovels;
+    }
+
+
+    /**
+     * Quiz 4 Method - D
+     * returns an ARRAYLIST of Strings:
+     * the names of authors who published a novel between firstYear and lastYear (inclusive).
+     * @returns the names of authors who published a novel between firstYear and lastYear (inclusive).
+     */
+    private static List<String> getAllAuthorsWhoPublishedBetween(final int firstYear, final int lastYear){
+        List<String> authorsFiltered = novels.stream()
+                .filter(n->n.getYearPublished() >= firstYear && n.getYearPublished() <= lastYear)
+                .sorted(Comparator.comparing(Novel::getYearPublished))
+                .map(n -> n.getAuthorName())
+                .collect(Collectors.toList());
+        return authorsFiltered;
     }
 
     /**
      * Prints all titles in UPPERCASE
      */
     private static void printAllTitles(){
-        novels.forEach(n-> System.out.println(n.getTitle().toUpperCase()));
+        List<Novel> novelsFiltered = novels.stream()
+                .filter(n->!n.getTitle().isBlank() && n.getTitle() != null)
+                .collect(Collectors.toList());
+        novelsFiltered.forEach(n-> System.out.println(n.getTitle().toUpperCase()));
     }
 
     /**
@@ -167,8 +252,7 @@ public class BookStore {
                 .sorted(Comparator.comparing(Novel::getYearPublished))
                 .collect(Collectors.groupingBy(Novel::getYearPublished));
 ;
-        novFiltered.forEach((yearPublished, novels)->
-        {
+        novFiltered.forEach((yearPublished, novels)-> {
             System.out.print(yearPublished + " : ");
             String titleList;
             titleList = BLANK_STRING;
@@ -285,12 +369,12 @@ public class BookStore {
             String authorName;
             int yearPublished;
             List<String> novelData;
-            novelData = new ArrayList<>(List.of(commaSeparatedLine.split(DELIMITER_COMMA)));
+            novelData = new ArrayList<>(List.of(commaSeparatedLine.split(DELIMITER)));
             yearPublished = Integer.parseInt(novelData.get(novelData.size()+OFFSET_YEAR_PUBLISHED));
             authorName = novelData.get(novelData.size()+OFFSET_AUTHOR_NAME);
             novelData.remove(novelData.size()+OFFSET_LAST_ELEMENTS);
             novelData.remove(novelData.size()+OFFSET_LAST_ELEMENTS);
-            title = removeNonPrintableChars(String.join(DELIMITER_COMMA, novelData));
+            title = removeNonPrintableChars(String.join(DELIMITER, novelData));
             return new Novel(title, authorName, yearPublished);
         } catch(Exception e) {
             return null;
