@@ -1,14 +1,13 @@
 package ca.bcit.comp2601.lab09;
 
 /**
- * Novel Class
+ * Novel Class - Modified for Quiz 4
  *
- * @author Guilherme Trevisan, Monika Szucs, Davood Tabrizi Nejad
- * @version 0.0.1
+ * @author Guilherme Trevisan
+ * @version 0.0.2
  * @since 2022-11-18
  */
 public class Novel {
-
     private final String title;
     private final String authorName;
     private final int yearPublished;
@@ -21,19 +20,14 @@ public class Novel {
      * @param yearPublished : the year of published
      */
     public Novel(final String title, final String authorName, final int yearPublished) {
-        // title
-        if (title == null || title.isBlank()) {
+        if(title == null || title.isBlank()) {
             throw new IllegalArgumentException("Invalid title. Cannot be null or blank");
-        } else {
-            this.title = title;
         }
-        // authorName
-        if (authorName == null || authorName.isBlank()) {
+        if(authorName == null || authorName.isBlank()) {
             throw new IllegalArgumentException("Invalid author. Cannot be null or blank");
-        } else {
-            this.authorName = authorName;
         }
-        // yearPublished
+        this.title = title;
+        this.authorName = authorName;
         this.yearPublished = yearPublished;
     }
 
@@ -65,7 +59,7 @@ public class Novel {
     }
 
     /**
-     * toString override
+     * toString override (I had already overridden before the quiz requirement, so I kept it as it is)
      * @return returns a string containing title author and year published
      */
     @Override
