@@ -50,7 +50,7 @@ public class BookStore {
      * @throws IllegalArgumentException if bookstore name is empty or null
      */
     public BookStore(final String bookStoreName) throws FileNotFoundException {
-        if (bookStoreName == null && bookStoreName.isBlank()){
+        if (bookStoreName == null || bookStoreName.isBlank()){
             throw new IllegalArgumentException("Bookstore name cannot be empty or null.");
         } else {
             this.bookStoreName = bookStoreName;
