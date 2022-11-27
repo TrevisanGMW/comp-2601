@@ -1,10 +1,7 @@
 package ca.bcit.comp2601.lab10;
 
-
 /**
- * Simple Java program to implement Command design pattern.
- * Doesn't
- * @author Guilherme Trevisan
+ * Java program to implement simplified version of the "command" design pattern.
  */
 public class Client {
 

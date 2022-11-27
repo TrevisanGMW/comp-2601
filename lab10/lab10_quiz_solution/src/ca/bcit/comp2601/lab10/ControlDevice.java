@@ -3,16 +3,16 @@ package ca.bcit.comp2601.lab10;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
+/**
  * Invoker class, which holds command object and invokes method
  */
-public class Menu {
+public class ControlDevice {
     private Map menuItems;
 
     /**
      * Default Constructor, initializes the menuItem map
      */
-    public Menu(){
+    public ControlDevice(){
         menuItems = new HashMap();
     }
 

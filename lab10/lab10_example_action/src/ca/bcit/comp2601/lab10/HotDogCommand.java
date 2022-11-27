@@ -1,6 +1,6 @@
 package ca.bcit.comp2601.lab10;
 
-/*
+/**
  * Concrete command to serve hot dogs
  */
 public class HotDogCommand implements Command{
