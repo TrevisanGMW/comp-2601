@@ -18,23 +18,19 @@ public class Main {
 //        Menu m = new Menu();
 //        m.runMenu();
 // Open the courses.csv file
-        Scanner file = new Scanner(new File("files\\countries.txt"));
+//        Scanner file = new Scanner(new File("files\\countries.txt"));
+//
+//        // Read the file
+//        while(file.hasNextLine()) {
+//            // Read a line
+//            String line = file.nextLine();
+//            System.out.println(line);
+//        }
+//
+//        // Close the file
+//        file.close();
 
-        // Read the file
-        while(file.hasNextLine()) {
-            // Read a line
-            String line = file.nextLine();
-
-//            String[] car = line.split(",");
-
-            System.out.println(line);
-        }
-
-        // Close the file
-        file.close();
-
-        // Create an object of CourseSearchGUI
-//        CarSearchGUI app = new CarSearchGUI();
+        CountryProcessor c = new CountryProcessor();
 
     }
 }
