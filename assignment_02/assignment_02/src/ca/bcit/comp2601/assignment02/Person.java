@@ -96,7 +96,7 @@ public class Person implements Comparable {
      */
     public void die(Date dateOfDeath){
         if (dateOfDeath == null) {
-            throw new IllegalPersonException("Invalid date of death");
+            throw new IllegalArgumentException("Invalid date of death");
         }
         this.died = dateOfDeath;
     }
