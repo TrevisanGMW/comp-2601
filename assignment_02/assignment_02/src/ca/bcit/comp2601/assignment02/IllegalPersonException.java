@@ -1,11 +1,11 @@
 package ca.bcit.comp2601.assignment02;
 
 /**
- * IllegalPersonException class
+ * IllegalPersonException class - Copied from Assignment 01 (Used for Unit Testing)
  * This class extends the RuntimeException class. It satisfies its parent's constructor and does nothing else.
  *
- * @author Guilherme Trevisan
- * @version 0.0.1
+ * @author Guilherme Trevisan, Monika Szucs
+ * @version 0.0.2
  * @since 2022-10-10
  */
 
