@@ -4,9 +4,9 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
- * Date Class
- * @author Guilherme Trevisan
- * @version 0.0.1
+ * Date Class - Copied from Assignment 01 (Used for Unit Testing)
+ * @author Guilherme Trevisan, Monika Szucs
+ * @version 0.0.2
  * @since 2022-10-10
  */
 public class Date implements Orderable, Comparable {
