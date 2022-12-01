@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * JUnit test for the class "Person"
  * Dependencies used from assignment 01: Person, Orderable, Name, Date, IllegalPersonException
@@ -54,6 +58,9 @@ class PersonTest {
         p2 = null;
     }
 
+    /**
+     * Test constructor (Date birthDate, Name name)
+     */
     @Test
     void testConstructor() {
         assertEquals("Tiger Woods", p1.getName().getPrettyName());
@@ -65,6 +72,9 @@ class PersonTest {
         assertEquals("invalid date of birth", testBornBadValue(null));
     }
 
+    /**
+     * Test isAlive (dead getter)
+     */
     @Test
     void testIsAlive() {
         assertEquals(true, p1.isAlive());
@@ -72,6 +82,9 @@ class PersonTest {
         assertEquals(false, p1.isAlive());
     }
 
+    /**
+     * Test Date of Birth Getter
+     */
     @Test
     void testDateOfBirthGetter() {
         assertEquals(VALID_DATE_A, p1.getDateOfBirth());
@@ -80,6 +93,9 @@ class PersonTest {
         assertEquals("1989-05-15", p2.getDateOfBirth().getYyyyMmDd());
     }
 
+    /**
+     * Test Date Of Death Getter
+     */
     @Test
     void testDateOfDeathGetter() {
         assertEquals(null, p1.getDateOfDeath());
@@ -92,6 +108,10 @@ class PersonTest {
         assertEquals("1989-05-15", p2.getDateOfDeath().getYyyyMmDd());
     }
 
+    /**
+     * Test die
+     * Null should throw an exception
+     */
     @Test
     void tesDie(){
         assertEquals(null, p1.getDateOfDeath());
@@ -101,6 +121,9 @@ class PersonTest {
         assertEquals("Invalid date of death", testDieBadValue(null));
     }
 
+    /**
+     * Test getName
+     */
     @Test
     void testNameGetter(){
         assertEquals(VALID_NAME_A, p1.getName());
@@ -109,12 +132,44 @@ class PersonTest {
         assertEquals(VALID_NAME_B.getPrettyName(), p2.getName().getPrettyName());
     }
 
+    /**
+     * Test compareTo, younger should be lower than older
+     */
     @Test
     void testCompareTo(){
+        // Basic Tests
         assertEquals(-1, p1.compareTo(p2));
         assertEquals(1, p2.compareTo(p1));
         assertEquals(0, p1.compareTo(p1));
         assertEquals(0, p2.compareTo(p2));
+
+        // Test with Sort
+        Date date1 = new Date(13, 7, 1979);
+        Date date2 = new Date(13, 8, 1979);
+        Date date3 = new Date(13, 7, 1980);
+        Date date4 = new Date(12, 7, 1979);
+
+        Person person1 = new Person(date4, new Name("oldest", "oldest"));
+        Person person2 = new Person(date3, new Name("youngest","youngest"));
+        Person person3 = new Person(date2, new Name("young", "young"));
+        Person person4 = new Person(date1, new Name("older", "older"));
+        person4.die(new Date(31, 10, 2000));
+
+        List<Person> people = new ArrayList<>();
+        people.add(person1);
+        people.add(person2);
+        people.add(person3);
+        people.add(person4);
+
+        List<Person> sorted = new ArrayList<>();
+        sorted.add(person1);
+        sorted.add(person4);
+        sorted.add(person3);
+        sorted.add(person2);
+
+        Collections.sort(people);
+
+        assertEquals(sorted, people);
     }
 
     @Test
@@ -152,11 +207,11 @@ class PersonTest {
     /**
      * Method used to help test constructor (born, name)
      * Expects IllegalArgumentException if name is null
-     * @param badDate value to test (if null IllegalPersonException)
+     * @param badDate value to test (if null IllegalArgumentException)
      */
     String testDieBadValue(final Date badDate) {
-        IllegalPersonException ex;
-        ex = assertThrows(IllegalPersonException.class, () -> {
+        IllegalArgumentException ex;
+        ex = assertThrows(IllegalArgumentException.class, () -> {
             Person p;
             p = new Person(VALID_DATE_A, VALID_NAME_A);
             p.die(badDate);
