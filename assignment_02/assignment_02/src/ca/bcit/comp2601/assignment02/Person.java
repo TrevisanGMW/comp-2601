@@ -1,9 +1,9 @@
 package ca.bcit.comp2601.assignment02;
 
 /**
- * Person class
- * @author Guilherme Trevisan
- * @version 0.0.1
+ * Person class - Copied from Assignment 01 (Used for Unit Testing)
+ * @author Guilherme Trevisan, Monika Szucs
+ * @version 0.0.2
  * @since 2022-10-10
  */
 public class Person implements Comparable {
@@ -30,19 +30,15 @@ public class Person implements Comparable {
      * @throws IllegalPersonException if any arguments are invalid
      */
     public Person(Date born, Name name) {
-        if (name != null) {
-            this.name = name;
+        if(born == null){
+            throw new IllegalPersonException("invalid date of birth");
         }
-        else {
+        if(name == null){
             throw new IllegalPersonException("invalid name");
         }
 
-        if (born != null) {
-            this.born = born;
-        }
-        else {
-            throw new IllegalPersonException("invalid date of birth");
-        }
+        this.born = born;
+        this.name = name;
     }
 
     /**
@@ -99,12 +95,10 @@ public class Person implements Comparable {
      * @throws IllegalArgumentException if name is null
      */
     public void die(Date dateOfDeath){
-        if (name != null) {
-            this.died = dateOfDeath;
+        if (dateOfDeath == null) {
+            throw new IllegalPersonException("Invalid date of death");
         }
-        else {
-            throw new IllegalPersonException("Invalid date of death. It cannot be null.");
-        }
+        this.died = dateOfDeath;
     }
 
     /**
