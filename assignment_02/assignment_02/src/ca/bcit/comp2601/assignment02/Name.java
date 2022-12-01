@@ -1,9 +1,9 @@
 package ca.bcit.comp2601.assignment02;
 
 /**
- * Name Class
- * @author Guilherme Trevisan
- * @version 0.0.1
+ * Name Class - Copied from Assignment 01 (Used for Unit Testing)
+ * @author Guilherme Trevisan, Monika Szucs
+ * @version 0.0.2
  * @since 2022-10-10
  */
 public class Name {
