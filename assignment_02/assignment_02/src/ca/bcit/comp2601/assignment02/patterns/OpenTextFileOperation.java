@@ -25,6 +25,6 @@ public class OpenTextFileOperation implements TextFileOperation {
      */
     @Override
     public String execute() {
-        return textFile.open();
+        return textFile.open() + " (From Concrete Command)";
     }
 }

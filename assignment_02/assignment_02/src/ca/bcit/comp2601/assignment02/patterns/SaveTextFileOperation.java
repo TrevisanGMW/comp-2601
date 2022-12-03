@@ -25,6 +25,6 @@ public class SaveTextFileOperation implements TextFileOperation {
      */
     @Override
     public String execute() {
-        return textFile.save();
+        return textFile.save() + " (From Concrete Command)";
     }
 }
