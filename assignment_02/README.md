@@ -16,5 +16,8 @@
 
 	
 ## Open Questions:
-	- CountryProcessor: Do .max and .min with "Optional<>" can be categorized as "collecting"?
-	- CountryProcessor: printAllCapitalsThatContainLetterIntoASingleStringNoSpaces lists countries in its example. Is the example inaccurate?
+	- CountryProcessor: 
+		- Can .max and .min with "Optional<>" be categorized as "collecting"? 
+		(His requirement "in all cases, before printing, collect the result into a java collection local variable")
+		- printAllCapitalsThatContainLetterIntoASingleStringNoSpaces lists countries in its example. 
+		Is the example inaccurate?
