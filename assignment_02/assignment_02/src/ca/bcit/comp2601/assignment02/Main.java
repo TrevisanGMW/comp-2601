@@ -18,10 +18,9 @@ public class Main {
 //        Menu m = new Menu();
 //        m.runMenu();
 
-
-
-        CountryProcessor c = new CountryProcessor();
-//        CountryList c = new CountryList();
+        CountryList cl = new CountryList();
+        CountryProcessor cp = new CountryProcessor();
+        cp.processCountries();
 
     }
 }
