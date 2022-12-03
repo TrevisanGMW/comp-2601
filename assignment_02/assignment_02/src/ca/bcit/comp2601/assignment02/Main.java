@@ -17,20 +17,11 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 //        Menu m = new Menu();
 //        m.runMenu();
-// Open the courses.csv file
-//        Scanner file = new Scanner(new File("files\\countries.txt"));
-//
-//        // Read the file
-//        while(file.hasNextLine()) {
-//            // Read a line
-//            String line = file.nextLine();
-//            System.out.println(line);
-//        }
-//
-//        // Close the file
-//        file.close();
 
-        CountryProcessor c = new CountryProcessor();
+
+
+//        CountryProcessor c = new CountryProcessor();
+        CountryList c = new CountryList();
 
     }
 }
