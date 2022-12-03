@@ -10,11 +10,10 @@
 - [X] Lesson 7: Unit Testing
 - [X] Lesson 8: GUI
 - [X] Lesson 9: Streams and Filters
-- [ ] Lesson 10: Design Patterns
+- [X] Lesson 10: Design Patterns
 - [ ] Lesson 11: Concurrency
 - [ ] Final Checklist
 
-	# Check if GUI array really needs to be static
 	
 ## Open Questions:
 	- CountryProcessor: Do .max and .min with "Optional<>" can be categorized as "collecting"?
