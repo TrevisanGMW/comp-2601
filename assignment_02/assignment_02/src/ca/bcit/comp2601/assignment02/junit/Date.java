@@ -1,4 +1,4 @@
-package ca.bcit.comp2601.assignment02;
+package ca.bcit.comp2601.assignment02.junit;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package ca.bcit.comp2601.assignment02;
+package ca.bcit.comp2601.assignment02.junit;
 
 /**
  * IllegalPersonException class - Copied from Assignment 01 (Used for Unit Testing)

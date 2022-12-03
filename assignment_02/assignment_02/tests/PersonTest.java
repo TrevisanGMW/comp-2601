@@ -1,15 +1,14 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import ca.bcit.comp2601.assignment02.Date;
-import ca.bcit.comp2601.assignment02.IllegalPersonException;
-import ca.bcit.comp2601.assignment02.Name;
-import ca.bcit.comp2601.assignment02.Person;
+import ca.bcit.comp2601.assignment02.junit.Date;
+import ca.bcit.comp2601.assignment02.junit.IllegalPersonException;
+import ca.bcit.comp2601.assignment02.junit.Name;
+import ca.bcit.comp2601.assignment02.junit.Person;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
