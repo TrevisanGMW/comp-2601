@@ -1,8 +1,8 @@
-##Checklist:
+## Checklist:
 	- all classes with @author tags?
 	- any magic numbers?
 	
-##Tracking:
+## Tracking:
 - [ ] Menu
 - [X] Lesson 7: Unit Testing
 - [ ] Lesson 8: GUI
