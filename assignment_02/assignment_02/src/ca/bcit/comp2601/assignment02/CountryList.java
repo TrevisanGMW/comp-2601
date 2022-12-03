@@ -9,13 +9,7 @@ import java.util.*;
 
 /**
  * CountryList class
- * In a class called CountryList, displays all countries and their capitals in a JList (e.g. Canada: Ottawa),
- * in alphabetical order by country name. Use the data from the countries.txt file. When the user closes the window,
- * show the Main.main() menu.
- *
- * Clarification 1:
- *      As clarified in an email, "countries-and-capitals.txt" should be used instead of "countries.txt"
- *      This class was created with that data set pattern in mind (Country, Capital)
+ * Displays all countries and their capitals in a JList (e.g. Canada: Ottawa), in alphabetical order by country name.
  *
  * @author Guilherme Trevisan, Monika Szucs
  * @version 0.0.1
@@ -31,7 +25,7 @@ public class CountryList extends JFrame {
     private static final int                 OFFSET_COUNTRY;
     private static final int                 OFFSET_LAST_ELEMENT;
     private static final boolean             FRAME_VISIBILITY;
-    private static final List<String>        countriesCapitals;
+    private final List<String>               countriesCapitals;
 
     static {
         INPUT_FILE          = "files\\countries-and-capitals.txt";
@@ -43,7 +37,6 @@ public class CountryList extends JFrame {
         OFFSET_COUNTRY      = -1;
         OFFSET_LAST_ELEMENT = -1;
         FRAME_VISIBILITY    = true;
-        countriesCapitals   = new ArrayList<>();
     }
 
     private final DefaultListModel<String> jListModel = new DefaultListModel<>();
@@ -64,6 +57,7 @@ public class CountryList extends JFrame {
         jListCountryCapitals.setLayoutOrientation(JList.VERTICAL);
         add(scrollPane);
 
+        countriesCapitals   = new ArrayList<>();
         // Populate countriesCapitals with clean data
         Scanner file = new Scanner(new File(INPUT_FILE));
         while(file.hasNextLine()) {
@@ -94,7 +88,6 @@ public class CountryList extends JFrame {
         try{
             String country;
             String capital;
-            int yearPublished;
             List<String> countryCapitalData;
             countryCapitalData = new ArrayList<>(List.of(commaSeparatedLine.split(DELIMITER)));
             capital = countryCapitalData.get(countryCapitalData.size()+OFFSET_COUNTRY);
@@ -102,6 +95,7 @@ public class CountryList extends JFrame {
             country = String.join(DELIMITER, countryCapitalData);
             return country + SEPARATOR_CAPITAL + capital;
         } catch(Exception e) {
+            e.printStackTrace();
             return null;
         } finally {
             // Do nothing
