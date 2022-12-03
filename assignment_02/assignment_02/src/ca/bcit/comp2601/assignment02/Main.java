@@ -20,8 +20,8 @@ public class Main {
 
 
 
-//        CountryProcessor c = new CountryProcessor();
-        CountryList c = new CountryList();
+        CountryProcessor c = new CountryProcessor();
+//        CountryList c = new CountryList();
 
     }
 }
