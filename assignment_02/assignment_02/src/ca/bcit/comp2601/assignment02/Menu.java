@@ -2,6 +2,13 @@ package ca.bcit.comp2601.assignment02;
 
 import java.util.Scanner;
 
+/**
+ * Menu Class
+ *
+ * @author Guilherme Trevisan, Monika Szucs
+ * @version 0.0.1
+ * @since 2022-12-03
+ */
 public class Menu {
 
     private boolean exit = false;
