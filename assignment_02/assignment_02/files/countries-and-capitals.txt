@@ -36,8 +36,8 @@ Chile,Santiago
 China,Beijing
 Colombia,Bogota
 Comoros,Moroni
-Congo, Democratic Republic of the,Kinshasa
-Congo, Republic of the,Brazzaville
+Congo... Democratic Republic of the,Kinshasa
+Congo... Republic of the,Brazzaville
 Costa Rica,San Jose
 Cote d'Ivoire (Ivory Coast),Yamoussoukro
 Croatia,Zagreb
