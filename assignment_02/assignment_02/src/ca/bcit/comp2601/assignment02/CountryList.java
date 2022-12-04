@@ -5,7 +5,10 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * CountryList class
@@ -49,7 +52,7 @@ public class CountryList extends JFrame {
     public CountryList() throws FileNotFoundException {
         super(APP_TITLE);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setJMenuBar(getAppMenuBar());
         setVisible(FRAME_VISIBILITY);
         JScrollPane scrollPane = new JScrollPane();
@@ -57,9 +60,12 @@ public class CountryList extends JFrame {
         jListCountryCapitals.setLayoutOrientation(JList.VERTICAL);
         add(scrollPane);
 
-        countriesCapitals   = new ArrayList<>();
+        countriesCapitals = new ArrayList<>();
+
         // Populate countriesCapitals with clean data
-        Scanner file = new Scanner(new File(INPUT_FILE));
+        Scanner file;
+        file = new Scanner(new File(INPUT_FILE));
+
         while(file.hasNextLine()) {
             String line = file.nextLine();
             String countryCapitalFormatter = parseCountryCapitalLine(line);
@@ -74,6 +80,10 @@ public class CountryList extends JFrame {
         for(String c : countriesCapitals) {
             jListModel.addElement(c);
         }
+
+        System.out.println("GUI Opened in another window and populated with " + jListModel.size() + " countries");
+        requestFocus();
+        toFront();
     }
 
     /**
@@ -117,7 +127,7 @@ public class CountryList extends JFrame {
 
         JMenuItem exitMenuItem = new JMenuItem("Exit");
         exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
-        exitMenuItem.addActionListener((event) -> System.exit(0)); // 0 means no errors
+        exitMenuItem.addActionListener((event) -> dispose()); // Not exit, it needs to go back to previous menu
         fileMenu.add(exitMenuItem);
 
         JMenu helpMenu = new JMenu("Help");
