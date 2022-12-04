@@ -8,11 +8,11 @@ package ca.bcit.comp2601.assignment02.patterns;
  * @since 2022-12-03
  */
 public class MovableAdapterImpl implements MovableAdapter {
-    private final static double MPH_KMPH_CONVERSION_VALUE;
+    private final static double MPH_KMPH_CONVERSION_MULTIPLIER;
     private Movable luxuryCar;
 
     static {
-        MPH_KMPH_CONVERSION_VALUE = 1.60934;
+        MPH_KMPH_CONVERSION_MULTIPLIER = 1.60934;
     }
 
     /**
@@ -38,6 +38,6 @@ public class MovableAdapterImpl implements MovableAdapter {
      * @return converted value in KMPH
      */
     private double convertMPHtoKMPH(final double mph) {
-        return mph * MPH_KMPH_CONVERSION_VALUE;
+        return mph * MPH_KMPH_CONVERSION_MULTIPLIER;
     }
 }
