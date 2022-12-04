@@ -10,21 +10,13 @@ import java.io.FileNotFoundException;
  * @since 2022-11-28
  */
 public class Main {
-
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-//        Menu m = new Menu();
-//        m.runMenu();
-
-//        CountryList cl = new CountryList();
-//        CountryProcessor cp = new CountryProcessor();
-//        cp.processCountries();
-
-//        Tester tester = new Tester();
-//        tester.test();
-
-        DivideAndConquerSum d = new DivideAndConquerSum();
-        d.concurrentMain();
+    private static boolean exit = false;
+    /**
+     * Main - Program entry point
+     * @param args commandline parameters
+     */
+    public static void main(final String[] args) throws FileNotFoundException, InterruptedException {
+        Menu m = new Menu();
+        m.runMenu();
     }
-
-
 }
