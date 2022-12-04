@@ -127,7 +127,7 @@ public class CountryList extends JFrame {
 
         JMenuItem exitMenuItem = new JMenuItem("Exit");
         exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
-        exitMenuItem.addActionListener((event) -> dispose()); // Not exit, it needs to go back to previous menu
+        exitMenuItem.addActionListener(event -> dispose()); // Not exit, it needs to go back to previous menu
         fileMenu.add(exitMenuItem);
 
         JMenu helpMenu = new JMenu("Help");
@@ -135,7 +135,7 @@ public class CountryList extends JFrame {
         menuBar.add(helpMenu);
 
         JMenuItem aboutMenuItem = new JMenuItem("About");
-        aboutMenuItem.addActionListener((event) -> JOptionPane.showMessageDialog(CountryList.this,
+        aboutMenuItem.addActionListener(event -> JOptionPane.showMessageDialog(CountryList.this,
                 "This is the Country:Capitals App created for COMP2601 - Assignment 02",
                 "About",
                 JOptionPane.INFORMATION_MESSAGE));
