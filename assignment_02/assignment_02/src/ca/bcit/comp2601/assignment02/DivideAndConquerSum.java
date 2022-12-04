@@ -46,30 +46,30 @@ public class DivideAndConquerSum {
      * @throws InterruptedException is thrown when a thread is interrupted while it's waiting, sleeping...
      */
     public static void concurrentMain() throws InterruptedException {
-        try (Scanner input = new Scanner(System.in)) {
-            int rangeStart;
-            int rangeEnd;
-            int numberOfThreads;
-            do {
-                System.out.print("Enter the range start: ");
-                rangeStart = input.nextInt();
+        Scanner input;
+        input = new Scanner(System.in);
+        int rangeStart;
+        int rangeEnd;
+        int numberOfThreads;
+        do {
+            System.out.print("Enter the range start: ");
+            rangeStart = input.nextInt();
 
-                System.out.print("Enter the range end: ");
-                rangeEnd = input.nextInt();
+            System.out.print("Enter the range end: ");
+            rangeEnd = input.nextInt();
 
-                System.out.print("Enter the number of threads: ");
-                numberOfThreads = input.nextInt();
+            System.out.print("Enter the number of threads: ");
+            numberOfThreads = input.nextInt();
 
-                if (rangeStart >= rangeEnd || numberOfThreads < MIN_NUM_THREAD) {
-                    System.out.println("Warning: range start should be less then range end." +
-                            " Also number of threads should not be less then 1.");
-                }
-            } while (rangeStart >= rangeEnd || numberOfThreads < MIN_NUM_THREAD);
+            if (rangeStart >= rangeEnd || numberOfThreads < MIN_NUM_THREAD) {
+                System.out.println("Warning: range start should be less then range end." +
+                        " Also number of threads should not be less then 1.");
+            }
+        } while (rangeStart >= rangeEnd || numberOfThreads < MIN_NUM_THREAD);
 
-            int sum = DivideAndConquerSum.sum(rangeStart, rangeEnd, numberOfThreads);
+        int sum = DivideAndConquerSum.sum(rangeStart, rangeEnd, numberOfThreads);
 
-            System.out.println(String.format("Sum of numbers in the range [%s, %s] found in %s threads is %s",
-                    rangeStart, rangeEnd, numberOfThreads, sum));
-        }
+        System.out.println(String.format("Sum of numbers in the range [%s, %s] found in %s threads is %s",
+                rangeStart, rangeEnd, numberOfThreads, sum));
     }
 }
