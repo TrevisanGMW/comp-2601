@@ -52,11 +52,11 @@ public class CountryList extends JFrame {
     public CountryList() throws FileNotFoundException {
         super(APP_TITLE);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setJMenuBar(getAppMenuBar());
         setVisible(FRAME_VISIBILITY);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(jListCountryCapitals);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jListCountryCapitals.setLayoutOrientation(JList.VERTICAL);
         add(scrollPane);
 
@@ -84,6 +84,13 @@ public class CountryList extends JFrame {
         System.out.println("GUI Opened in another window and populated with " + jListModel.size() + " countries");
         requestFocus();
         toFront();
+        while (isVisible()) { // Wait for window to close before going back to text-based menu
+            try {
+                Thread.sleep(200);
+            } catch (Exception e) {
+                // Do nothing
+            }
+        }
     }
 
     /**
