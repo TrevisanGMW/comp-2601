@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
  * @since 2022-11-28
  */
 public class Main {
-    private static boolean exit = false;
     /**
      * Main - Program entry point
      * @param args commandline parameters
