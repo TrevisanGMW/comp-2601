@@ -11,8 +11,8 @@ import ca.bcit.comp2601.assignment02.patterns.*;
  */
 public class Tester {
 
-    private static final double MPH_SPEED_TEST = 268d;
-    private static final double KMPH_EXCEPTED_SPEED = 431.30312d;
+    private static final double MPH_SPEED_TEST       = 268d;
+    private static final double KMPH_EXCEPTED_SPEED  = 431.30312d;
     private static final double CONVERSION_THRESHOLD = 0.00001d;
 
     /**

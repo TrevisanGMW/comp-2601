@@ -23,13 +23,13 @@ public class Menu {
 
     static {
         CHOICE_INITIALIZER = -1;
-        NUM_GUI = 1;
-        NUM_STREAMS = 2;
-        NUM_PATTERNS = 3;
-        NUM_CONCURRENCY = 4;
-        NUM_EXIT = 5;
-        MIN_CHOICE = NUM_GUI;
-        MAX_CHOICE = NUM_EXIT;
+        NUM_GUI            = 1;
+        NUM_STREAMS        = 2;
+        NUM_PATTERNS       = 3;
+        NUM_CONCURRENCY    = 4;
+        NUM_EXIT           = 5;
+        MIN_CHOICE         = NUM_GUI;
+        MAX_CHOICE         = NUM_EXIT;
     }
 
     /**
@@ -72,7 +72,6 @@ public class Menu {
                 System.out.println("Selected " + NUM_EXIT + ", exiting...");
             }
         }while(!exit);
-
     }
 
     /**
