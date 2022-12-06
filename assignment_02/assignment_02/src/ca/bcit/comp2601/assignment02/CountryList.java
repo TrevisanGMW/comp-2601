@@ -27,19 +27,21 @@ public class CountryList extends JFrame {
     private static final int                 FRAME_HEIGHT;
     private static final int                 OFFSET_COUNTRY;
     private static final int                 OFFSET_LAST_ELEMENT;
+    private static final int                 EXEC_BLOCK_SLEEP_TIME;
     private static final boolean             FRAME_VISIBILITY;
     private final List<String>               countriesCapitals;
 
     static {
-        INPUT_FILE          = "files\\countries-and-capitals.txt";
-        APP_TITLE           = "Countries And Capitals";
-        DELIMITER           = ",";
-        SEPARATOR_CAPITAL   = ": ";
-        FRAME_WIDTH         = 700;
-        FRAME_HEIGHT        = 400;
-        OFFSET_COUNTRY      = -1;
-        OFFSET_LAST_ELEMENT = -1;
-        FRAME_VISIBILITY    = true;
+        INPUT_FILE            = "files\\countries-and-capitals.txt";
+        APP_TITLE             = "Countries And Capitals";
+        DELIMITER             = ",";
+        SEPARATOR_CAPITAL     = ": ";
+        FRAME_WIDTH           = 700;
+        FRAME_HEIGHT          = 400;
+        OFFSET_COUNTRY        = -1;
+        OFFSET_LAST_ELEMENT   = -1;
+        EXEC_BLOCK_SLEEP_TIME = 200;
+        FRAME_VISIBILITY      = true;
     }
 
     private final DefaultListModel<String> jListModel = new DefaultListModel<>();
@@ -86,7 +88,7 @@ public class CountryList extends JFrame {
         toFront();
         while (isVisible()) { // Wait for window to close before going back to text-based menu
             try {
-                Thread.sleep(200);
+                Thread.sleep(EXEC_BLOCK_SLEEP_TIME);
             } catch (Exception e) {
                 // Do nothing
             }
