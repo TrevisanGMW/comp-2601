@@ -81,7 +81,7 @@ public class CountryList extends JFrame {
             jListModel.addElement(c);
         }
 
-        System.out.println("GUI Opened in another window and populated with " + jListModel.size() + " countries");
+        System.out.println("JFrame GUI opened in another window and populated with " + jListModel.size() + " countries");
         requestFocus();
         toFront();
         while (isVisible()) { // Wait for window to close before going back to text-based menu
