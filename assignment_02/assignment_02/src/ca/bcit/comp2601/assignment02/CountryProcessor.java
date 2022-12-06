@@ -97,7 +97,7 @@ public class CountryProcessor {
      */
     public void printLongestCapitalCity(){
         Optional<String> longest = countriesCapitals.values().stream()
-                .filter(s -> !s.isBlank())
+                .filter(s -> s != null && !s.isBlank())
                 .max(Comparator.comparing(String::length));
 
         longest.ifPresent(s-> System.out.println("Longest capital city is \"" + s + "\"."));
@@ -109,7 +109,7 @@ public class CountryProcessor {
      */
     public void printShortestCountryName(){
         Optional<String> shortest = countriesCapitals.entrySet().stream()
-                .filter(m -> !m.getKey().isBlank() && m.getKey() != null)
+                .filter(m -> m.getKey() != null && !m.getKey().isBlank())
                 .map(Map.Entry::getKey)
                 .min(Comparator.comparing(String::length));
 
@@ -122,7 +122,8 @@ public class CountryProcessor {
      */
     public void printAllCountriesStartingWith(final String substring){
         List containingString = countriesCapitals.entrySet().stream()
-                .filter(m->!m.getKey().isBlank() && m.getKey() != null && m.getKey().startsWith(substring))
+                .filter(m->m.getKey() != null && !m.getKey().isBlank() &&
+                        m.getKey().toLowerCase().startsWith(substring.toLowerCase()))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
         System.out.println("Printing all countries starting with \"" + substring + "\".");
@@ -147,7 +148,7 @@ public class CountryProcessor {
      */
     public void printHowManyLettersInCountries(){
         String result = countriesCapitals.entrySet().stream()
-                .filter(m -> !m.getKey().isBlank() && m.getKey() != null)
+                .filter(m -> m.getKey() != null && !m.getKey().isBlank())
                 .map(map -> map.getValue())
                 .collect(Collectors.joining());
         System.out.println("Number of letters in all the country names put together: " + result.length());
@@ -173,7 +174,7 @@ public class CountryProcessor {
      */
     public void printAllCountriesThatDoNotEndWith(final char letter){
         List containingString = countriesCapitals.entrySet().stream()
-                .filter(m->!m.getKey().isBlank() && m.getKey() != null && !m.getKey().endsWith(String.valueOf(letter)))
+                .filter(m->m.getKey() != null && !m.getKey().isBlank() && !m.getKey().endsWith(String.valueOf(letter)))
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
         System.out.println("Printing all countries that do not end with \"" + letter + "\".");
@@ -188,7 +189,7 @@ public class CountryProcessor {
      */
     public void printAllCountriesThatContainLetterIntoASingleStringNoSpaces(char letter){
         String containingString = countriesCapitals.keySet().stream()
-                .filter(s->!s.isBlank() && s != null && s.contains(String.valueOf(letter)))
+                .filter(s->s != null && !s.isBlank() && s.contains(String.valueOf(letter)))
                 .sorted(Comparator.comparing(String::toString))
                 .map(s->s.replaceAll(" ", ""))
                 .collect(Collectors.joining());
