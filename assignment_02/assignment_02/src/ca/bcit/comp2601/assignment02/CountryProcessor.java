@@ -175,9 +175,10 @@ public class CountryProcessor {
      * (Even though this example shows countries, I'm assuming these were supposed to be capitals)
      * @param letter substring to find (should contain)
      */
-    public void printAllCapitalsThatContainLetterIntoASingleStringNoSpaces(char letter){
-        String containingString = countriesCapitals.values().stream()
+    public void printAllCountriesThatContainLetterIntoASingleStringNoSpaces(char letter){
+        String containingString = countriesCapitals.keySet().stream()
                 .filter(s->!s.isBlank() && s != null && s.contains(String.valueOf(letter)))
+                .sorted(Comparator.comparing(String::toString))
                 .map(s->s.replaceAll(" ", ""))
                 .collect(Collectors.joining());
         System.out.println("Printing all capitals that contain the letter \"" + letter + "\" combined.");
@@ -195,7 +196,7 @@ public class CountryProcessor {
         printHowManyLettersInCountries();
         printCapitalsWithThisManyLetters(4, 6);
         printAllCountriesThatDoNotEndWith('a');
-        printAllCapitalsThatContainLetterIntoASingleStringNoSpaces('y');
+        printAllCountriesThatContainLetterIntoASingleStringNoSpaces('y');
     }
 
 }
