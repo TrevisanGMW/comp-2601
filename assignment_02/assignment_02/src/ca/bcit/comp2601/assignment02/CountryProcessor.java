@@ -21,19 +21,30 @@ import java.util.stream.Collectors;
 public class CountryProcessor {
     private static final String              INPUT_FILE;
     private static final String              DELIMITER;
+    private static final String              SAMPLE_COUNTRIES_START_WITH;
     private static final int                 OFFSET_COUNTRY;
     private static final int                 OFFSET_LAST_ELEMENT;
     private static final int                 INDEX_COUNTRY;
     private static final int                 INDEX_CAPITAL;
+    private static final int                 SAMPLE_CAPITALS_LENGTH_MIN;
+    private static final int                 SAMPLE_CAPITALS_LENGTH_MAX;
+    private static final char                SAMPLE_COUNTRIES_END_WITH;
+    private static final char                SAMPLE_COUNTRIES_CONTAIN;
     private final Map<String, String>        countriesCapitals;
 
     static {
-        INPUT_FILE          = "files\\countries-and-capitals.txt";
-        DELIMITER           = ",";
-        OFFSET_COUNTRY      = -1;
-        OFFSET_LAST_ELEMENT = -1;
-        INDEX_COUNTRY       = 0;
-        INDEX_CAPITAL       = 1;
+        INPUT_FILE                      = "files\\countries-and-capitals.txt";
+        DELIMITER                       = ",";
+        OFFSET_COUNTRY                  = -1;
+        OFFSET_LAST_ELEMENT             = -1;
+        INDEX_COUNTRY                   = 0;
+        INDEX_CAPITAL                   = 1;
+        // Sample values for "processCountries"
+        SAMPLE_COUNTRIES_START_WITH     = "Co"; // printAllCountriesStartingWith
+        SAMPLE_CAPITALS_LENGTH_MIN      = 4; // printCapitalsWithThisManyLetters
+        SAMPLE_CAPITALS_LENGTH_MAX      = 6;
+        SAMPLE_COUNTRIES_END_WITH       = 'a'; // printAllCountriesThatDoNotEndWith
+        SAMPLE_COUNTRIES_CONTAIN        = 'y'; // printAllCountriesThatContainLetterIntoASingleStringNoSpaces
     }
 
     /**
@@ -191,12 +202,12 @@ public class CountryProcessor {
     public void processCountries(){
         printLongestCapitalCity();
         printShortestCountryName();
-        printAllCountriesStartingWith("Co");
+        printAllCountriesStartingWith(SAMPLE_COUNTRIES_START_WITH);
         printLongestCombination();
         printHowManyLettersInCountries();
-        printCapitalsWithThisManyLetters(4, 6);
-        printAllCountriesThatDoNotEndWith('a');
-        printAllCountriesThatContainLetterIntoASingleStringNoSpaces('y');
+        printCapitalsWithThisManyLetters(SAMPLE_CAPITALS_LENGTH_MIN, SAMPLE_CAPITALS_LENGTH_MAX);
+        printAllCountriesThatDoNotEndWith(SAMPLE_COUNTRIES_END_WITH);
+        printAllCountriesThatContainLetterIntoASingleStringNoSpaces(SAMPLE_COUNTRIES_CONTAIN);
     }
 
 }
