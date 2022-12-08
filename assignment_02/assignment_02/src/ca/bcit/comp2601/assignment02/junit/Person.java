@@ -17,9 +17,9 @@ public class Person implements Comparable {
     private static final int COMPARISON_BORN_THRESHOLD;
 
     static {
-        COMPARABLE_LARGER = 1;
-        COMPARABLE_EQUAL = 0;
-        COMPARABLE_SMALLER = -1;
+        COMPARABLE_LARGER         = 1;
+        COMPARABLE_EQUAL          = 0;
+        COMPARABLE_SMALLER        = -1;
         COMPARISON_BORN_THRESHOLD = 0;
     }
 
