@@ -20,7 +20,7 @@ public class PrimeMinister{
      * @param name name of the prime minister
      */
     private PrimeMinister(final String name){
-        if (name == null){
+        if (name == null || name.isBlank()){
             throw new IllegalArgumentException("Invalid name. Cannot be null or blank.");
         }
         this.name = name;
