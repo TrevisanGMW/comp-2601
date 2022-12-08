@@ -59,9 +59,10 @@ class PersonTest {
 
     /**
      * Test constructor (Date birthDate, Name name)
+     * I'd normally name this one "testConstructor" but name it "testPerson" instead to match assignment description
      */
     @Test
-    void testConstructor() {
+    void testPerson() {
         assertEquals("Tiger Woods", p1.getName().getPrettyName());
         assertEquals("1975-12-30", p1.getDateOfBirth().toString());
         assertEquals("Elon Musk", p2.getName().getPrettyName());
