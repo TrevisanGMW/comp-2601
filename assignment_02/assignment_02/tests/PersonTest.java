@@ -59,7 +59,8 @@ class PersonTest {
 
     /**
      * Test constructor (Date birthDate, Name name)
-     * I'd normally name this one "testConstructor" but name it "testPerson" instead to match assignment description
+     * I'd normally name this one "testConstructor" or "testDefaultConstructor"
+     * but named it "testPerson" instead to match assignment description
      */
     @Test
     void testPerson() {
