@@ -9,8 +9,13 @@ package ca.bcit.comp2601.assignment02.junit;
 public class Name {
     private final String first;
     private final String last;
-    private static final int FIRST_CHAR_INDEX = 0;
-    private static final int SECOND_CHAR_INDEX = 1;
+    private static final int FIRST_CHAR_INDEX;
+    private static final int SECOND_CHAR_INDEX;
+
+    static {
+        FIRST_CHAR_INDEX = 0;
+        SECOND_CHAR_INDEX = 1;
+    }
 
     /**
      * Constructor Name object
