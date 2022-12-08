@@ -147,11 +147,11 @@ public class CountryProcessor {
      * Print the total number of letters in all the country names put together
      */
     public void printHowManyLettersInCountries(){
-        String result = countriesCapitals.entrySet().stream()
-                .filter(m -> m.getKey() != null && !m.getKey().isBlank())
-                .map(map -> map.getValue())
-                .collect(Collectors.joining());
-        System.out.println("Number of letters in all the country names put together: " + result.length());
+        int resultWithSpaces = countriesCapitals.keySet().stream()
+                .filter(c -> c != null && !c.isBlank())
+                .mapToInt(c -> c.length())
+                .sum();
+        System.out.println("Number of letters in all the country names put together: " + resultWithSpaces);
     }
 
     /**
@@ -190,7 +190,6 @@ public class CountryProcessor {
     public void printAllCountriesThatContainLetterIntoASingleStringNoSpaces(char letter){
         String containingString = countriesCapitals.keySet().stream()
                 .filter(s->s != null && !s.isBlank() && s.contains(String.valueOf(letter)))
-                .sorted(Comparator.comparing(String::toString))
                 .map(s->s.replaceAll(" ", ""))
                 .collect(Collectors.joining());
         System.out.println("Printing all capitals that contain the letter \"" + letter + "\" combined.");
@@ -210,5 +209,4 @@ public class CountryProcessor {
         printAllCountriesThatDoNotEndWith(SAMPLE_COUNTRIES_END_WITH);
         printAllCountriesThatContainLetterIntoASingleStringNoSpaces(SAMPLE_COUNTRIES_CONTAIN);
     }
-
 }
